@@ -12,6 +12,7 @@ public class Pais {
     private int idPais;
     private String descripcion;
     
+// constructor parametrizado    
     public Pais (int idPais, String descripcion){
         this.idPais = idPais;
         this.descripcion = descripcion;
