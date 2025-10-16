@@ -4,18 +4,21 @@ public class Persona {
     private String dni;
     private String nombre;
     private String apellido;
+    private Pais pais;
 
     // CONSTRUCTORES.
     public Persona() {
         dni = "";
         nombre = "";
         apellido = "";
+        pais = null;
     }
 
-    public Persona(String dni, String nombre, String apellido) {
+    public Persona(String dni, String nombre, String apellido, Pais pais) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.pais = pais;
     }
 
     // GETTERS & SETTERS.
@@ -41,5 +44,18 @@ public class Persona {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", pais=" + pais + "]";
     }
 }
