@@ -1,4 +1,5 @@
 package clases;
+import java.util.*;
 
 import java.util.ArrayList;
 
@@ -55,6 +56,16 @@ public class Piloto extends Persona {
     }
 
     // GETTERS & SETTERS.
+    public void agregarAutos(Auto a){
+        autos.add(a);
+    }
+
+    public void setEscuderiaActual(Escuderia escuderiaActual ){
+        escuderiaActual = escuderiaActual ;
+    }
+    public void agregarEscuderiaActual(Escuderia a){
+        Historialescuderias.add(a);
+    }
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }

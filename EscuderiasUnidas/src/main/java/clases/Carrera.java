@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package clases;
-
+import java.util.*;
 /**
  *
  * @author Gaston PC
@@ -12,15 +12,38 @@ public class Carrera {
     private String fechaRealizacion;
     private String horaRealizacion;
     private int numeroVueltas;
+    private Circuito circuito;
+    private Pais pais;
+    private ArrayList<AutoPiloto> autoPiloto;
+    private ArrayList<Resultados> resultados;
     
 // constructor parametrizado    
-    public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas){
+    public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas, Circuito circuito, Pais pais ){
         this.fechaRealizacion = fechaRealizacion;
         this.horaRealizacion = horaRealizacion;
         this.numeroVueltas= numeroVueltas;
+        this.circuito = circuito;
+        this.pais = pais;
+        autoPiloto = new ArrayList<>();
+        resultados = new ArrayList<>();
+    }
+ //metodos agregar
+  public void agregarAutoPilotoParticipante(AutoPiloto a){
+      autoPiloto.add(a);
+  }  
+
+  public void agregarResultados(Resultados a){
+      resultados.add(a);
+  }
+   
+//metodos sett
+    public void setCircuito(Circuito circuito){
+        this.circuito = circuito;
+    }
+    public void setPais(Pais pais){
+        this.pais = pais;
     }
     
-//metodos sett
     public void setFechaRealizacion(String fechaRealizacion){
         this.fechaRealizacion = fechaRealizacion;
     }
@@ -33,6 +56,12 @@ public class Carrera {
     
     
 // metodos gett    
+     public Circuito getCircuito(){
+         return circuito;
+     }
+     public Pais getPais(){
+         return pais;
+     }
     public int getNumeroVueltas(){
         return numeroVueltas;
     }

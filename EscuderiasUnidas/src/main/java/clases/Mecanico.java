@@ -32,6 +32,11 @@ public class Mecanico extends Persona {
     }
 
     // GETTERS & SETTERS.
+    public void agregarEscuderia(Escuderia a){
+        escuderia.add(a);
+    }
+
+    
     public Especialidad getEspecialidad() {
         return especialidad;
     }

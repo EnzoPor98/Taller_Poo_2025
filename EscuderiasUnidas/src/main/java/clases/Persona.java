@@ -25,7 +25,13 @@ public class Persona {
     public String getDni() {
         return dni;
     }
+    public void setPais(Pais pais){
+        this.pais = pais;
+    }
 
+    public Pais getPais(){
+        return pais;
+    }
     public void setDni(String dni) {
         this.dni = dni;
     }
