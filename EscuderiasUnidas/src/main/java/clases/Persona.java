@@ -11,6 +11,7 @@ public class Persona {
         dni = "";
         nombre = "";
         apellido = "";
+        pais = null;
     }
 
     public Persona(String dni, String nombre, String apellido, Pais pais) {
@@ -49,5 +50,18 @@ public class Persona {
 
     public void setApellido(String apellido) {
         this.apellido = apellido;
+    }
+
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", pais=" + pais + "]";
     }
 }
