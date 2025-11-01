@@ -1,4 +1,5 @@
 package clases;
+import java.util.*;
 
 public class Piloto extends Persona {
     private int numeroCompetencia;
@@ -6,6 +7,9 @@ public class Piloto extends Persona {
     private int polePosition;
     private int vueltasRapidas;
     private int podios;
+    private Escuderia escuderiaActual;
+    private ArrayList<Escuderia> Historialescuderias;
+    private ArrayList<Auto> autos;
 
     // CONSTRUCTORES.
     public Piloto() {
@@ -15,20 +19,34 @@ public class Piloto extends Persona {
         polePosition = 0;
         vueltasRapidas = 0;
         podios = 0;
+
     }
 
     public Piloto(String dni, String nombre, String apellido,
             int numeroCompetencia, int victorias, int polePosition,
-            int vueltasRapidas, int podios) {
-        super(dni, nombre, apellido);
+            int vueltasRapidas, int podios,Escuderia escuderiaActual, Pais pais) {
+        super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;
         this.victorias = victorias;
         this.polePosition = polePosition;
         this.vueltasRapidas = vueltasRapidas;
         this.podios = podios;
+        escuderiaActual = escuderiaActual;
+        Historialescuderias = new ArrayList<>();
+        autos = new ArrayList<>();
     }
 
     // GETTERS & SETTERS.
+    public void agregarAutos(Auto a){
+        autos.add(a);
+    }
+
+    public void setEscuderiaActual(Escuderia escuderiaActual ){
+        escuderiaActual = escuderiaActual ;
+    }
+    public void agregarEscuderiaActual(Escuderia a){
+        Historialescuderias.add(a);
+    }
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }

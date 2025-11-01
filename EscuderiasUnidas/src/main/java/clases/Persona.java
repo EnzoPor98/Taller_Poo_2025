@@ -4,6 +4,7 @@ public class Persona {
     private String dni;
     private String nombre;
     private String apellido;
+    private Pais pais;
 
     // CONSTRUCTORES.
     public Persona() {
@@ -12,17 +13,24 @@ public class Persona {
         apellido = "";
     }
 
-    public Persona(String dni, String nombre, String apellido) {
+    public Persona(String dni, String nombre, String apellido, Pais pais) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.pais = pais;
     }
 
     // GETTERS & SETTERS.
     public String getDni() {
         return dni;
     }
+    public void setPais(Pais pais){
+        this.pais = pais;
+    }
 
+    public Pais getPais(){
+        return pais;
+    }
     public void setDni(String dni) {
         this.dni = dni;
     }
