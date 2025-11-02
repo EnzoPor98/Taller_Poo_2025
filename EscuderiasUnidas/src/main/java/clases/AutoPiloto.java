@@ -3,6 +3,7 @@ package clases;
 import java.util.ArrayList;
 
 public class AutoPiloto {
+
     private String fechaAsignacion;
     private Auto auto;
     private Piloto piloto;
@@ -16,14 +17,14 @@ public class AutoPiloto {
         carreras = new ArrayList<Carrera>();
     }
 
-    public AutoPiloto(String fechaAsignacion, Auto auto, Piloto piloto, ArrayList<Carrera> carreras) {
+    public AutoPiloto(String fechaAsignacion, Auto auto, Piloto piloto) {
         this.fechaAsignacion = fechaAsignacion;
         this.auto = auto;
         this.piloto = piloto;
-        this.carreras = carreras;
+        this.carreras = new ArrayList<Carrera>();
     }
 
-    // LISTA CARRERAS.
+    // LISTA DE CARRERAS.
     public void agregarCarrera(Carrera c) {
         carreras.add(c);
     }
@@ -55,5 +56,13 @@ public class AutoPiloto {
 
     public void setPiloto(Piloto piloto) {
         this.piloto = piloto;
+    }
+
+    public ArrayList<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public void setCarreras(ArrayList<Carrera> carreras) {
+        this.carreras = carreras;
     }
 }

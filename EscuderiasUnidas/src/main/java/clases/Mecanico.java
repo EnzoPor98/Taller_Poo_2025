@@ -3,6 +3,7 @@ package clases;
 import java.util.ArrayList;
 
 public class Mecanico extends Persona {
+
     private Especialidad especialidad;
     private int añosExperiencia;
     private ArrayList<Escuderia> escuderias;
@@ -16,13 +17,14 @@ public class Mecanico extends Persona {
     }
 
     public Mecanico(String dni, String nombre, String apellido, Pais pais, Especialidad especialidad,
-            int añosExperiencia, ArrayList<Escuderia> escuderias) {
+            int añosExperiencia) {
         super(dni, nombre, apellido, pais);
         this.especialidad = especialidad;
         this.añosExperiencia = añosExperiencia;
-        this.escuderias = escuderias;
+        escuderias = new ArrayList<Escuderia>();
     }
 
+    // LISTA DE ESCUDERIAS.
     public void agregarEscuderia(Escuderia e) {
         escuderias.add(e);
     }
@@ -32,11 +34,6 @@ public class Mecanico extends Persona {
     }
 
     // GETTERS & SETTERS.
-    public void agregarEscuderia(Escuderia a){
-        escuderia.add(a);
-    }
-
-    
     public Especialidad getEspecialidad() {
         return especialidad;
     }
@@ -51,5 +48,13 @@ public class Mecanico extends Persona {
 
     public void setAñosExperiencia(int añosExperiencia) {
         this.añosExperiencia = añosExperiencia;
+    }
+
+    public ArrayList<Escuderia> getEscuderias() {
+        return escuderias;
+    }
+
+    public void setEscuderias(ArrayList<Escuderia> escuderias) {
+        this.escuderias = escuderias;
     }
 }

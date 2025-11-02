@@ -1,9 +1,9 @@
 package clases;
-import java.util.*;
 
 import java.util.ArrayList;
 
 public class Piloto extends Persona {
+
     private int numeroCompetencia;
     private int victorias;
     private int polePosition;
@@ -25,25 +25,24 @@ public class Piloto extends Persona {
     }
 
     public Piloto(String dni, String nombre, String apellido, Pais pais, int numeroCompetencia, int victorias,
-            int polePosition, int vueltasRapidas, int podios, ArrayList<PilotoEscuderia> escuderias,
-            ArrayList<AutoPiloto> autos) {
+            int polePosition, int vueltasRapidas, int podios) {
         super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;
         this.victorias = victorias;
         this.polePosition = polePosition;
         this.vueltasRapidas = vueltasRapidas;
         this.podios = podios;
-        this.escuderias = escuderias;
-        this.autos = autos;
+        escuderias = new ArrayList<PilotoEscuderia>();
+        autos = new ArrayList<AutoPiloto>();
     }
 
     // LISTA DE ESCUDERIAS.
-    public void agregarEscuderia(PilotoEscuderia e) {
-        escuderias.add(e);
+    public void agregarEscuderia(PilotoEscuderia pe) {
+        escuderias.add(pe);
     }
 
-    public void borrarEscuderia(PilotoEscuderia e) {
-        escuderias.remove(e);
+    public void borrarEscuderia(PilotoEscuderia pe) {
+        escuderias.remove(pe);
     }
 
     // LISTA DE AUTOS.
@@ -56,16 +55,6 @@ public class Piloto extends Persona {
     }
 
     // GETTERS & SETTERS.
-    public void agregarAutos(Auto a){
-        autos.add(a);
-    }
-
-    public void setEscuderiaActual(Escuderia escuderiaActual ){
-        escuderiaActual = escuderiaActual ;
-    }
-    public void agregarEscuderiaActual(Escuderia a){
-        Historialescuderias.add(a);
-    }
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }
@@ -104,5 +93,21 @@ public class Piloto extends Persona {
 
     public void setPodios(int podios) {
         this.podios = podios;
+    }
+
+    public ArrayList<PilotoEscuderia> getEscuderias() {
+        return escuderias;
+    }
+
+    public void setEscuderias(ArrayList<PilotoEscuderia> escuderias) {
+        this.escuderias = escuderias;
+    }
+
+    public ArrayList<AutoPiloto> getAutos() {
+        return autos;
+    }
+
+    public void setAutos(ArrayList<AutoPiloto> autos) {
+        this.autos = autos;
     }
 }
