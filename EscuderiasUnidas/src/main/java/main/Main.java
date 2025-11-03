@@ -1,8 +1,13 @@
 package main;
 
+import gui.Inicio;
+import logica.GestorDeClases;
+
 public class Main {
 
     public static void main(String args[]) {
-        System.out.println("Hello World!");
+        GestorDeClases gc = new GestorDeClases();
+
+        Inicio ventana = new Inicio(gc);
     }
 }

@@ -1,7 +1,6 @@
 package logica;
 
 import java.util.ArrayList;
-import clases.*;
 
 public class GestorDeClases {
     private ArrayList<Auto> autos;

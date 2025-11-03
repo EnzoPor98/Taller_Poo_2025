@@ -1,4 +1,4 @@
-package clases;
+package logica;
 
 public class PilotoEscuderia {
     private String desdeFecha;
