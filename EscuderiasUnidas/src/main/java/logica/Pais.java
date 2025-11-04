@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class Pais {
     private int idPais;
+    private String nombre;
     private String descripcion;
     private ArrayList<Circuito> circuitos;
     private ArrayList<Escuderia> escuderias;
@@ -17,8 +18,9 @@ public class Pais {
     private ArrayList<Persona> personas;
 
 // constructor parametrizado    
-    public Pais (int idPais, String descripcion){
+    public Pais (int idPais, String nombre, String descripcion){
         this.idPais = idPais;
+        this.nombre = nombre;
         this.descripcion = descripcion;
         circuitos = new ArrayList<>();
         escuderias = new ArrayList<>();
@@ -46,6 +48,9 @@ public void agregarEscuderia(Escuderia a){
     public void setDescripcion(String descripcion){
         this.descripcion = descripcion;
     }
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
     
     
 // metodos gett    
@@ -54,6 +59,9 @@ public void agregarEscuderia(Escuderia a){
     }
     public String getDescripcion(){
         return descripcion;
+    }
+    public String getNombre(){
+        return nombre;
     }
     
     @Override 

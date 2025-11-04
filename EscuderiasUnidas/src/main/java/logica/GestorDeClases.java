@@ -31,6 +31,19 @@ public class GestorDeClases {
         autos.remove(a);
     }
 
+    public Auto buscarAuto(String variable) {
+        Auto a = null;
+
+        for (Auto x : autos) {
+            if (a.getVariable().equals(variable)) {
+                a = x;
+                break;
+            }
+        }
+
+        return a;
+    }
+
     public void agregarCarrera(Carrera c) {
         carreras.add(c);
     }
