@@ -1,6 +1,7 @@
 package gui;
-
+import logica.*;
 import logica.GestorDeClases;
+import javax.swing.JOptionPane;
 
 public class VentanaMecanico extends javax.swing.JFrame {
 
@@ -20,17 +21,17 @@ public class VentanaMecanico extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField1 = new javax.swing.JTextField();
+        nombreTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        apellidoTxt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        dniTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        añosExperienciaTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -39,9 +40,9 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        agregarMecanico = new javax.swing.JButton();
+        eliminarMecanico = new javax.swing.JButton();
+        buscarMecanico = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana De Mecanicos");
@@ -49,6 +50,11 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 25));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -58,17 +64,17 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("APELLIDO:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 25));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 25));
+        getContentPane().add(apellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("DNI:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 25));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 150, 25));
+        getContentPane().add(dniTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 150, 25));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,7 +115,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("AÑOS EXPERIENCIA:");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, 25));
-        getContentPane().add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 25));
+        getContentPane().add(añosExperienciaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 25));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRE:");
@@ -142,29 +148,86 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 10, 140));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setText("AGREGAR");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        agregarMecanico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarMecanico.setText("AGREGAR");
+        agregarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarMecanicoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setText("ELIMINAR");
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        eliminarMecanico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarMecanico.setText("ELIMINAR");
+        eliminarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarMecanicoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setText("BUSCAR");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        buscarMecanico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buscarMecanico.setText("BUSCAR");
+        buscarMecanico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarMecanicoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarMecanicoActionPerformed
+        Mecanico  m = new Mecanico();
+
+        String nombre = nombreTxt.getText();
+        String apellido = apellidoTxt.getText();
+        String dni = dniTxt.getText();
+        String añosExp = añosExperienciaTxt.getText();
+        int añosExperiencia = Integer.parseInt(añosExp);
+        
+        m.setNombre(nombre);
+        m.setApellido(apellido);
+        m.setDni(dni);
+        m.setAñosExperiencia(añosExperiencia);
+        
+        gc.agregarMecanico(m);
+       
+    }//GEN-LAST:event_agregarMecanicoActionPerformed
+
+    private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
+        Mecanico m = gc.buscarMecanico(dni);
+        gc.eliminarMecanico(m);
+    }//GEN-LAST:event_eliminarMecanicoActionPerformed
+
+    private void buscarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMecanicoActionPerformed
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
+        Piloto m = gc.buscarPiloto(dni);
+
+        if (m != null) {
+            JOptionPane.showMessageDialog(null, "Mecanico buscado: \n" + m.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+        }
+    }//GEN-LAST:event_buscarMecanicoActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VentanaInicio inicio = new VentanaInicio(gc);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarMecanico;
+    private javax.swing.JTextField apellidoTxt;
+    private javax.swing.JTextField añosExperienciaTxt;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton buscarMecanico;
+    private javax.swing.JTextField dniTxt;
+    private javax.swing.JButton eliminarMecanico;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -179,9 +242,6 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField nombreTxt;
     // End of variables declaration//GEN-END:variables
 }
