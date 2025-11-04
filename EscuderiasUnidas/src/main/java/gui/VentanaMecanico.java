@@ -1,11 +1,16 @@
 package gui;
 
-public class Mecanico extends javax.swing.JFrame {
+import logica.GestorDeClases;
 
-    public Mecanico() {
+public class VentanaMecanico extends javax.swing.JFrame {
+
+    private GestorDeClases gc;
+
+    public VentanaMecanico(GestorDeClases gc) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        this.gc = gc;
     }
 
     @SuppressWarnings("unchecked")
@@ -151,14 +156,6 @@ public class Mecanico extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Mecanico().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVolver;
