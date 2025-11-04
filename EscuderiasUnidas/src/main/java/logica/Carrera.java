@@ -71,6 +71,10 @@ public class Carrera {
      public String getFechaRealizacion(){
         return fechaRealizacion;
     }
+     
+     public ArrayList<AutoPiloto> getAutoPiloto(){
+         return autoPiloto;
+     } 
     
     @Override 
     public String toString(){

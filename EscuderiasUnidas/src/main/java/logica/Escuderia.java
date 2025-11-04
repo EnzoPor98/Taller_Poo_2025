@@ -52,7 +52,7 @@ public class Escuderia {
         return nombre;
     }
     
-    private Pais getPais(){
+    public Pais getPais(){
         return pais; 
     }
     
