@@ -100,6 +100,23 @@ public class GestorDeClases {
 
         return p;
     }
+    
+    public Mecanico buscarMecanico(String dni) {
+        Mecanico m = null;
+        for (Mecanico  i : mecanicos) {
+            if (i.getDni().equals(dni)) {
+                m = i;
+                break;
+            }
+        }
+        return m;
+    }
+    
+    
+    
+    
+    
+    
 
     public void eliminarPiloto(Piloto p) {
         pilotos.remove(p);
