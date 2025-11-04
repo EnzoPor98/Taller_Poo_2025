@@ -2,11 +2,11 @@ package gui;
 
 import logica.GestorDeClases;
 
-public class Inicio extends javax.swing.JFrame {
+public class VentanaInicio extends javax.swing.JFrame {
 
     private GestorDeClases gc;
 
-    public Inicio(GestorDeClases gc) {
+    public VentanaInicio(GestorDeClases gc) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

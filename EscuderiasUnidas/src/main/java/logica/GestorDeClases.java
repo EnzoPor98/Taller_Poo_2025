@@ -3,6 +3,7 @@ package logica;
 import java.util.ArrayList;
 
 public class GestorDeClases {
+
     private ArrayList<Auto> autos;
     private ArrayList<Carrera> carreras;
     private ArrayList<Circuito> circuitos;
@@ -72,6 +73,19 @@ public class GestorDeClases {
 
     public void agregarPiloto(Piloto p) {
         pilotos.add(p);
+    }
+
+    public Piloto buscarPiloto(String dni) {
+        Piloto p = null;
+
+        for (Piloto x : pilotos) {
+            if (x.getDni().equals(dni)) {
+                p = x;
+                break;
+            }
+        }
+
+        return p;
     }
 
     public void eliminarPiloto(Piloto p) {
