@@ -1,6 +1,6 @@
 package gui;
 
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
 
 public class VentanaInicio extends javax.swing.JFrame {
 

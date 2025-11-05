@@ -1,16 +1,46 @@
 package gui;
 
-import logica.GestorDeClases;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import logica.Escuderia;
+import logica.Pais;
+import servicie.GestorDeClases;
 
 public class VentanaEscuderia extends javax.swing.JFrame {
 
     private GestorDeClases gc;
+    private DefaultTableModel modelo;
 
     public VentanaEscuderia(GestorDeClases gc) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        setVisible(true);
+        cargarPaises();
+        cargarTabla();
         this.gc = gc;
+    }
+
+    private void cargarPaises() {
+        for (Pais p : gc.getPaises()) {
+            paisBox.addItem(p.getNombre());
+        }
+    }
+
+    private void cargarTabla() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE", "PAIS"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Escuderia e : gc.getEscuderias()) {
+            fila[0] = e.getNombre();
+            fila[1] = e.getPais().getNombre();
+            modelo.addRow(fila);
+        }
+
+        escuderiasTabla.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,15 +52,15 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        agregarEscuderiaBtn = new javax.swing.JButton();
+        eliminarEscuderiaBtn = new javax.swing.JButton();
+        buscarEscuderiaBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        escuderiasTabla = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombreTxt = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        paisBox = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -49,6 +79,11 @@ public class VentanaEscuderia extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 25));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -68,19 +103,34 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         jLabel11.setText("GESTION ESCUDERIAS");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 25));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setText("AGREGAR");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        agregarEscuderiaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarEscuderiaBtn.setText("AGREGAR");
+        agregarEscuderiaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarEscuderiaBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarEscuderiaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setText("ELIMINAR");
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        eliminarEscuderiaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarEscuderiaBtn.setText("ELIMINAR");
+        eliminarEscuderiaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarEscuderiaBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarEscuderiaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setText("BUSCAR");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        buscarEscuderiaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buscarEscuderiaBtn.setText("BUSCAR");
+        buscarEscuderiaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEscuderiaBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscarEscuderiaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        escuderiasTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -105,21 +155,21 @@ public class VentanaEscuderia extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(escuderiasTabla);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 780, 390));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRE:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 25));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 150, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 150, 25));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("PAIS:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 25));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 180, 25));
+        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
+        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 180, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -175,8 +225,52 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VentanaInicio inicio = new VentanaInicio(gc);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void agregarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaBtnActionPerformed
+        Escuderia e = new Escuderia();
+
+        String nombre = nombreTxt.getText();
+        Pais pais = gc.getPaises().get(paisBox.getItemCount());
+
+        e.setNombre(nombre);
+        e.setPais(pais);
+
+        gc.agregarEscuderia(e);
+        cargarTabla();
+    }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
+
+    private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        Escuderia e = gc.buscarEscuderia(nombre);
+
+        if (e != null) {
+            gc.eliminarEscuderia(e);
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
+        }
+    }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
+
+    private void buscarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEscuderiaBtnActionPerformed
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        Escuderia e = gc.buscarEscuderia(nombre);
+
+        if (e != null) {
+            JOptionPane.showMessageDialog(null, "Escuderia buscada: \n" + e.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
+        }
+    }//GEN-LAST:event_buscarEscuderiaBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarEscuderiaBtn;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton buscarEscuderiaBtn;
+    private javax.swing.JButton eliminarEscuderiaBtn;
+    private javax.swing.JTable escuderiasTabla;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -184,12 +278,8 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -200,7 +290,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nombreTxt;
+    private javax.swing.JComboBox<String> paisBox;
     // End of variables declaration//GEN-END:variables
 }

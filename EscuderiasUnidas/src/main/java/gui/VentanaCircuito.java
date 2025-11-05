@@ -1,16 +1,47 @@
 package gui;
 
-import logica.GestorDeClases;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import logica.Pais;
+import logica.Circuito;
+import servicie.GestorDeClases;
 
 public class VentanaCircuito extends javax.swing.JFrame {
 
     private GestorDeClases gc;
+    private DefaultTableModel modelo;
 
     public VentanaCircuito(GestorDeClases gc) {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        setVisible(true);
+        cargarPaises();
+        cargarTabla();
         this.gc = gc;
+    }
+
+    private void cargarPaises() {
+        for (Pais p : gc.getPaises()) {
+            paisBox.addItem(p.getNombre());
+        }
+    }
+
+    private void cargarTabla() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE", "LONGITUD", "PAIS"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Circuito c : gc.getCircuitos()) {
+            fila[0] = c.getNombre();
+            fila[1] = c.getLongitud();
+            fila[2] = c.getPais().getNombre();
+            modelo.addRow(fila);
+        }
+
+        circuitosTabla.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,17 +52,17 @@ public class VentanaCircuito extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombreTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        longitudTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        circuitosTabla = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        agregarCircuitoBtn = new javax.swing.JButton();
+        eliminarCircuitoBtn = new javax.swing.JButton();
+        buscarCircuitoBtn = new javax.swing.JButton();
+        paisBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
@@ -41,6 +72,11 @@ public class VentanaCircuito extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 25));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -54,14 +90,14 @@ public class VentanaCircuito extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRE:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, 25));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("LONGITUD:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 25));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 150, 25));
+        getContentPane().add(longitudTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 150, 25));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        circuitosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -86,7 +122,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(circuitosTabla);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 780, 390));
 
@@ -99,20 +135,35 @@ public class VentanaCircuito extends javax.swing.JFrame {
         jLabel11.setText("GESTION CIRCUITOS");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 25));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setText("AGREGAR");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        agregarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarCircuitoBtn.setText("AGREGAR");
+        agregarCircuitoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarCircuitoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton7.setText("ELIMINAR");
-        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        eliminarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarCircuitoBtn.setText("ELIMINAR");
+        eliminarCircuitoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarCircuitoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton5.setText("BUSCAR");
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        buscarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        buscarCircuitoBtn.setText("BUSCAR");
+        buscarCircuitoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarCircuitoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buscarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, 25));
+        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
+        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("PAIS:");
@@ -130,13 +181,54 @@ public class VentanaCircuito extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VentanaInicio inicio = new VentanaInicio(gc);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
+        Circuito c = new Circuito();
+
+        String nombre = nombreTxt.getText();
+        int longitud = Integer.parseInt(longitudTxt.getText());
+        Pais pais = gc.getPaises().get(paisBox.getItemCount());
+
+        c.setNombre(nombre);
+        c.setLongitud(longitud);
+        c.setPais(pais);
+
+        gc.agregarCircuito(c);
+    }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
+
+    private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
+        Circuito c = gc.buscarCircuito(nombre);
+
+        if (c != null) {
+            gc.eliminarCircuito(c);
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
+        }
+    }//GEN-LAST:event_eliminarCircuitoBtnActionPerformed
+
+    private void buscarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCircuitoBtnActionPerformed
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
+        Circuito c = gc.buscarCircuito(nombre);
+
+        if (c != null) {
+            JOptionPane.showMessageDialog(null, "Circuito buscado: \n" + c.toString());
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
+        }
+    }//GEN-LAST:event_buscarCircuitoBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarCircuitoBtn;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton buscarCircuitoBtn;
+    private javax.swing.JTable circuitosTabla;
+    private javax.swing.JButton eliminarCircuitoBtn;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -146,8 +238,8 @@ public class VentanaCircuito extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField longitudTxt;
+    private javax.swing.JTextField nombreTxt;
+    private javax.swing.JComboBox<String> paisBox;
     // End of variables declaration//GEN-END:variables
 }

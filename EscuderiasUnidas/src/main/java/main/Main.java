@@ -1,7 +1,7 @@
 package main;
 
 import gui.VentanaInicio;
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
 
 public class Main {
 

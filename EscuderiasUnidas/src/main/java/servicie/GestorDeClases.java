@@ -1,6 +1,13 @@
-package logica;
+package servicie;
 
 import java.util.ArrayList;
+import logica.Auto;
+import logica.Carrera;
+import logica.Circuito;
+import logica.Escuderia;
+import logica.Mecanico;
+import logica.Pais;
+import logica.Piloto;
 
 public class GestorDeClases {
 
@@ -31,11 +38,11 @@ public class GestorDeClases {
         autos.remove(a);
     }
 
-    public Auto buscarAuto(String variable) {
+    public Auto buscarAuto(String modelo) {
         Auto a = null;
 
         for (Auto x : autos) {
-            if (a.getVariable().equals(variable)) {
+            if (a.getModelo().equals(modelo)) {
                 a = x;
                 break;
             }
@@ -60,12 +67,38 @@ public class GestorDeClases {
         circuitos.remove(c);
     }
 
+    public Circuito buscarCircuito(String nombre) {
+        Circuito c = null;
+
+        for (Circuito x : circuitos) {
+            if (x.getNombre().equals(nombre)) {
+                c = x;
+                break;
+            }
+        }
+
+        return c;
+    }
+
     public void agregarEscuderia(Escuderia e) {
         escuderias.add(e);
     }
 
     public void eliminarEscuderia(Escuderia e) {
         escuderias.remove(e);
+    }
+
+    public Escuderia buscarEscuderia(String nombre) {
+        Escuderia e = null;
+
+        for (Escuderia x : escuderias) {
+            if (x.getNombre().equals(nombre)) {
+                e = x;
+                break;
+            }
+        }
+
+        return e;
     }
 
     public void agregarMecanico(Mecanico m) {
@@ -100,10 +133,10 @@ public class GestorDeClases {
 
         return p;
     }
-    
+
     public Mecanico buscarMecanico(String dni) {
         Mecanico m = null;
-        for (Mecanico  i : mecanicos) {
+        for (Mecanico i : mecanicos) {
             if (i.getDni().equals(dni)) {
                 m = i;
                 break;
@@ -111,12 +144,6 @@ public class GestorDeClases {
         }
         return m;
     }
-    
-    
-    
-    
-    
-    
 
     public void eliminarPiloto(Piloto p) {
         pilotos.remove(p);

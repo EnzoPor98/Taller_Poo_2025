@@ -3,7 +3,7 @@ package gui;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
 
 public class VentanaAuto extends javax.swing.JFrame {
 
@@ -220,25 +220,25 @@ public class VentanaAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
-        String variable = JOptionPane.showInputDialog("Ingrese VARIABLE del auto:");
+        String variable = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
         Auto a = gc.buscarAuto(variable);
 
         if (a != null) {
             gc.eliminarAuto(a);
             cargarTabla();
         } else {
-            JOptionPane.showMessageDialog(null, "El auto con VARIABLE ingresado no existe.");
+            JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
         }
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 
     private void buscarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAutoBtnActionPerformed
-        String variable = JOptionPane.showInputDialog("Ingrese VARIABLE del auto:");
-        Auto a = gc.buscarAuto(variable);
+        String modelo = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+        Auto a = gc.buscarAuto(modelo);
 
         if (a != null) {
             JOptionPane.showMessageDialog(null, "Auto buscado: \n" + a.toString());
         } else {
-            JOptionPane.showMessageDialog(null, "El auto con VARIABLE ingresado no existe.");
+            JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
         }
     }//GEN-LAST:event_buscarAutoBtnActionPerformed
 
