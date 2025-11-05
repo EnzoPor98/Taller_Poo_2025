@@ -14,6 +14,14 @@ public class Circuito {
     private ArrayList<Carrera> carreras;
     private Pais pais;
     
+    public Circuito ( ){
+        this.nombre = "x";
+        this.longitud = 0;
+        carreras = new ArrayList<>();
+        this.pais = null;
+    }
+    
+    
 // constructor parametrizado    
     public Circuito ( String nombre , int longitud, Pais pais){
         this.nombre = nombre;

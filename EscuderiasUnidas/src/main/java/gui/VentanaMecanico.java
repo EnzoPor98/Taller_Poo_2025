@@ -129,6 +129,11 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         borrarEscuderia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         borrarEscuderia.setText("BORRAR");
+        borrarEscuderia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                borrarEscuderiaActionPerformed(evt);
+            }
+        });
         getContentPane().add(borrarEscuderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 100, 25));
 
         verEscuderias.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -234,6 +239,19 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private void verEscuderiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEscuderiasActionPerformed
          String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
            Mecanico m = gc.buscarMecanico(dni);
+           if(m != null){
+               if (m.getEscuderias().isEmpty()){
+                   JOptionPane.showMessageDialog(null,"Este mecanico no tiene  escuderias asignadas");
+               } else {
+                   String lista ="Escuderias del mecanico:" + m.getNombre();
+                   for(Escuderia e : m.getEscuderias()){
+                       lista = lista + "-" + e.getNombre();
+                   }
+                   JOptionPane.showMessageDialog(null,lista);
+               }
+           } else {
+               JOptionPane.showMessageDialog(null,"No se encontro un mecanico con ese dni ");
+           }
     }//GEN-LAST:event_verEscuderiasActionPerformed
 
     private void agregarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaActionPerformed
@@ -257,6 +275,26 @@ public class VentanaMecanico extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
     }
     }//GEN-LAST:event_agregarEscuderiaActionPerformed
+
+    private void borrarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarEscuderiaActionPerformed
+
+        String dni = JOptionPane.showInputDialog("Ingrese el dni del mecanico");
+        Mecanico m =  gc.buscarMecanico(dni);
+        
+        if(m != null){
+            String nombreEscuderia = JOptionPane.showInputDialog("Ingrese nombre de la escuderia a eliminar");
+            Escuderia e = gc.buscarEscuderia(nombreEscuderia);
+            if(e != null && m.getEscuderias().contains(e)){
+                m.getEscuderias().remove(e);
+                e.getMecanicos().remove(m);
+                JOptionPane.showMessageDialog(null,"Escuderia eliminada del mecanico correctamente ");
+            } else {
+                JOptionPane.showMessageDialog(null,"El mecanico no tiene esa escuderia asignada");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro un mecanico con ese dni");
+        }
+    }//GEN-LAST:event_borrarEscuderiaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarEscuderia;
