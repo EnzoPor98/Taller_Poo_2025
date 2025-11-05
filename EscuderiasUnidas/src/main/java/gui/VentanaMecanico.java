@@ -1,6 +1,6 @@
 package gui;
 import logica.*;
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
 import javax.swing.JOptionPane;
 
 public class VentanaMecanico extends javax.swing.JFrame {

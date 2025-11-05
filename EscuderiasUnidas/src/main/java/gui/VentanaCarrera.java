@@ -1,6 +1,7 @@
 package gui;
 import logica.*;
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
+
 
 public class VentanaCarrera extends javax.swing.JFrame {
 

@@ -2,7 +2,7 @@ package gui;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import logica.GestorDeClases;
+import servicie.GestorDeClases;
 import logica.Pais;
 import logica.Piloto;
 
