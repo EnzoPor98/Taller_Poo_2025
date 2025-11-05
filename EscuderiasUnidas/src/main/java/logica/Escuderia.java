@@ -67,6 +67,9 @@ public class Escuderia {
         return pais; 
     }
     
+    public ArrayList<Mecanico> getMecanicos(){
+        return mecanicos;
+    }
     
     
     @Override 

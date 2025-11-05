@@ -12,6 +12,12 @@ public class Resultados {
     private Piloto piloto;
     private int posicion;
     private double tiempoVueltaRapida;
+    
+    public Resultados (){
+        this.piloto = null;
+        this.posicion = 0;
+        this. tiempoVueltaRapida =  0.0;
+    }
 
     public Resultados (Piloto piloto, int posicion ,double tiempoVueltaRapida){
         this.piloto = piloto;

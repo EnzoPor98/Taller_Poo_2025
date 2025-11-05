@@ -13,7 +13,7 @@ public class VentanaResultado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
-        cargarTabla();
+        //cargarTabla();
         this.gc = gc;
     }
 

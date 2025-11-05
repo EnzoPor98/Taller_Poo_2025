@@ -17,6 +17,19 @@ public class Pais {
     private ArrayList<Carrera> carreras;
     private ArrayList<Persona> personas;
 
+    public Pais (){
+        this.idPais = 0;
+        this.nombre = "x";
+        this.descripcion = "X";
+        circuitos = new ArrayList<>();
+        escuderias = new ArrayList<>();
+        carreras= new ArrayList<>();
+        personas= new ArrayList<>();
+    }
+    
+    
+    
+    
 // constructor parametrizado    
     public Pais (int idPais, String nombre, String descripcion){
         this.idPais = idPais;
