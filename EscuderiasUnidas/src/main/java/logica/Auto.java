@@ -15,6 +15,15 @@ public class Auto {
     private Escuderia escuderia;
     private  ArrayList<Piloto> pilotos;
     
+    public Auto() {
+        modelo = "x";
+        motor = "x";
+        escuderia = null;
+        pilotos = new ArrayList<Piloto>();
+
+    }
+    
+    
 // constructor parametrizado    
     public Auto (String modelo, String motor , Escuderia escuderia){
         this.modelo = modelo;
