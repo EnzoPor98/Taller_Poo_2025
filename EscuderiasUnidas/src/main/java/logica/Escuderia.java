@@ -53,7 +53,7 @@ public class Escuderia {
         this.nombre = nombre;
     }
     
-    private void setPais(Pais pais){
+    public void setPais(Pais pais){
         this.pais = pais;
     }
     
