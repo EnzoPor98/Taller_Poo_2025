@@ -11,6 +11,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         this.gc = gc;
+        setVisible(true);
     }
 
     @SuppressWarnings("unchecked")

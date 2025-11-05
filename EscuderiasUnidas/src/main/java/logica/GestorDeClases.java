@@ -31,17 +31,17 @@ public class GestorDeClases {
         autos.remove(a);
     }
 
-    public Auto buscarAuto(String variable) {
-        Auto a = null;
-
+    public  Auto buscarAuto(String variable) {
+       Auto a = null;
+/*
         for (Auto x : autos) {
             if (a.getVariable().equals(variable)) {
                 a = x;
                 break;
             }
         }
-
-        return a;
+*/
+        return a; 
     }
 
     public void agregarCarrera(Carrera c) {
@@ -162,7 +162,17 @@ public class GestorDeClases {
     public void setMecanicos(ArrayList<Mecanico> mecanicos) {
         this.mecanicos = mecanicos;
     }
+    
+    public Escuderia buscarEscuderia(String n) {
+    for (Escuderia e : escuderias) {
+        if (e.getNombre().equalsIgnoreCase(n)) {
+            return e;
+        }
+    }
+    return null;
+}
 
+    
     public ArrayList<Pais> getPaises() {
         return paises;
     }

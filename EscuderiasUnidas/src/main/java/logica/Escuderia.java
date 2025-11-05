@@ -15,6 +15,17 @@ public class Escuderia {
     private ArrayList<Mecanico> mecanicos;
     private Pais pais;
     
+    public Escuderia (){
+        this.nombre = "x";
+        pilotos = new ArrayList<>();
+        autos = new ArrayList<>();
+        mecanicos = new ArrayList<>();
+        this.pais = null;
+    }
+    
+    
+    
+    
 // constructor parametrizado
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
@@ -38,7 +49,7 @@ public class Escuderia {
     
     
 //metodos sett
-    public void setNomber(String nombre){
+    public void setNombre(String nombre){
         this.nombre = nombre;
     }
     

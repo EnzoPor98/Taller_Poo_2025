@@ -17,6 +17,16 @@ public class Carrera {
     private ArrayList<AutoPiloto> autoPiloto;
     private ArrayList<Resultados> resultados;
     
+     public Carrera (){
+        this.fechaRealizacion = "x";
+        this.horaRealizacion = "x";
+        this.numeroVueltas= 0;
+        this.circuito = null;
+        this.pais = null;
+        autoPiloto = new ArrayList<>();
+        resultados = new ArrayList<>();
+    }
+    
 // constructor parametrizado    
     public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas, Circuito circuito, Pais pais ){
         this.fechaRealizacion = fechaRealizacion;
