@@ -117,6 +117,19 @@ public class GestorDeClases {
         paises.remove(p);
     }
 
+    public Pais buscarPais(int id) {
+        Pais p = null;
+
+        for (Pais x : paises) {
+            if (x.getIdPais() == id) {
+                p = x;
+                break;
+            }
+        }
+
+        return p;
+    }
+
     public void agregarPiloto(Piloto p) {
         pilotos.add(p);
     }
