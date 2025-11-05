@@ -9,6 +9,7 @@ import logica.Mecanico;
 import logica.Pais;
 import logica.Piloto;
 
+
 public class GestorDeClases {
 
     private ArrayList<Auto> autos;
@@ -47,8 +48,7 @@ public class GestorDeClases {
                 break;
             }
         }
-
-        return a;
+        return a; 
     }
 
     public void agregarCarrera(Carrera c) {
@@ -202,7 +202,8 @@ public class GestorDeClases {
     public void setMecanicos(ArrayList<Mecanico> mecanicos) {
         this.mecanicos = mecanicos;
     }
-
+    
+    
     public ArrayList<Pais> getPaises() {
         return paises;
     }

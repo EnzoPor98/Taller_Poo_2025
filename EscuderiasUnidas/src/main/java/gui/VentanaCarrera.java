@@ -1,6 +1,7 @@
 package gui;
-
+import logica.*;
 import servicie.GestorDeClases;
+
 
 public class VentanaCarrera extends javax.swing.JFrame {
 
@@ -11,6 +12,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         this.gc = gc;
+        setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,17 +24,17 @@ public class VentanaCarrera extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel11 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        agregarCarrera = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        fechaTxt = new javax.swing.JTextField();
+        horaTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        vueltasTxt = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
@@ -50,7 +52,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("INGRESA LOS DATOS DE LAS ESCUDERIAS");
+        jLabel2.setText("INGRESA LOS DATOS DE LA CARRERA");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 700, 25));
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -69,9 +71,14 @@ public class VentanaCarrera extends javax.swing.JFrame {
         jLabel11.setText("GESTION CARRERAS");
         getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 25));
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton6.setText("AGREGAR");
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        agregarCarrera.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarCarrera.setText("AGREGAR");
+        agregarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarCarreraActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarCarrera, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton7.setText("ELIMINAR");
@@ -113,8 +120,8 @@ public class VentanaCarrera extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("FECHA:");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 25));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, 25));
+        getContentPane().add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
+        getContentPane().add(horaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("HORA:");
@@ -123,7 +130,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("VUELTAS:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 25));
-        getContentPane().add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 150, 25));
+        getContentPane().add(vueltasTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 150, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -176,15 +183,31 @@ public class VentanaCarrera extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void agregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCarreraActionPerformed
+       Carrera c = new Carrera();
+       
+        String fecha = fechaTxt.getText();
+        String hora = horaTxt.getText();
+        String v = vueltasTxt.getText();
+        int vueltas = Integer.parseInt(v);
+        
+        c.setFechaRealizacion(fecha);
+        c. sethoraRealizacion(hora);
+        c.setNumeroVueltas(vueltas);
+        gc.agregarCarrera(c);
+    }//GEN-LAST:event_agregarCarreraActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarCarrera;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JTextField fechaTxt;
+    private javax.swing.JTextField horaTxt;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
@@ -201,8 +224,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField vueltasTxt;
     // End of variables declaration//GEN-END:variables
 }

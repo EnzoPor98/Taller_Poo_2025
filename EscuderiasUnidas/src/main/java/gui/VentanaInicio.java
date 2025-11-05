@@ -27,7 +27,6 @@ public class VentanaInicio extends javax.swing.JFrame {
         mecanicosBtn = new javax.swing.JButton();
         escuderiasBtn = new javax.swing.JButton();
         circuitosBtn = new javax.swing.JButton();
-        carrerasBtn1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -47,12 +46,22 @@ public class VentanaInicio extends javax.swing.JFrame {
         carrerasBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         carrerasBtn.setText("CARRERAS");
         carrerasBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(carrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 50));
+        carrerasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carrerasBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(carrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 200, 50));
 
         paisesBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         paisesBtn.setText("PAISES");
         paisesBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         paisesBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        paisesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paisesBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(paisesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 120, 80));
 
         autosBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -92,18 +101,23 @@ public class VentanaInicio extends javax.swing.JFrame {
         escuderiasBtn.setText("ESCUDERIAS");
         escuderiasBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         escuderiasBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        escuderiasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escuderiasBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(escuderiasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 120, 80));
 
         circuitosBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         circuitosBtn.setText("CIRCUITOS");
         circuitosBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         circuitosBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        circuitosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                circuitosBtnActionPerformed(evt);
+            }
+        });
         getContentPane().add(circuitosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 120, 80));
-
-        carrerasBtn1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        carrerasBtn1.setText("INFORMES");
-        carrerasBtn1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(carrerasBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 120, 50));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();
@@ -121,10 +135,25 @@ public class VentanaInicio extends javax.swing.JFrame {
         VentanaMecanico ventanaMecanico = new VentanaMecanico(gc);
     }//GEN-LAST:event_mecanicosBtnActionPerformed
 
+    private void carrerasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerasBtnActionPerformed
+        VentanaCarrera ventanaCarrera = new VentanaCarrera(gc);
+    }//GEN-LAST:event_carrerasBtnActionPerformed
+
+    private void escuderiasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escuderiasBtnActionPerformed
+        VentanaEscuderia ventanaEscuderia = new VentanaEscuderia(gc);
+    }//GEN-LAST:event_escuderiasBtnActionPerformed
+
+    private void circuitosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_circuitosBtnActionPerformed
+        VentanaCircuito  ventanaCircuito = new VentanaCircuito(gc);
+    }//GEN-LAST:event_circuitosBtnActionPerformed
+
+    private void paisesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paisesBtnActionPerformed
+        //VentanaPaises ventanaPaises = new VentanaPaises(gc);
+    }//GEN-LAST:event_paisesBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton autosBtn;
     private javax.swing.JButton carrerasBtn;
-    private javax.swing.JButton carrerasBtn1;
     private javax.swing.JButton circuitosBtn;
     private javax.swing.JButton escuderiasBtn;
     private javax.swing.JLabel jLabel1;

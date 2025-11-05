@@ -19,6 +19,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         cargarPaises();
         cargarTabla();
         this.gc = gc;
+        setVisible(true);
     }
 
     private void cargarPaises() {

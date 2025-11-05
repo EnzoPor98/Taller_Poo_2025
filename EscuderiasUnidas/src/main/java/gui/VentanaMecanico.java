@@ -12,6 +12,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         this.gc = gc;
+        setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,14 +30,14 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        especialidadTxt = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         añosExperienciaTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        borrarEscuderia = new javax.swing.JButton();
+        verEscuderias = new javax.swing.JButton();
+        agregarEscuderia = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -109,8 +110,8 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel7.setText("ESPECIALIDAD:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, 25));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ELECTRONICA" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, 25));
+        especialidadTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOTOR", "NEUMUMATICOS", "CHASIS", "ELECTRONICA" }));
+        getContentPane().add(especialidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, 25));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("AÑOS EXPERIENCIA:");
@@ -126,17 +127,27 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel12.setText("ESCUDERIAS");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 100, 25));
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("BORRAR");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 100, 25));
+        borrarEscuderia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        borrarEscuderia.setText("BORRAR");
+        getContentPane().add(borrarEscuderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 100, 25));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("VER LISTA");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 100, 25));
+        verEscuderias.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        verEscuderias.setText("VER LISTA");
+        verEscuderias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verEscuderiasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(verEscuderias, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 100, 25));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setText("AGREGAR");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 100, 25));
+        agregarEscuderia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarEscuderia.setText("AGREGAR");
+        agregarEscuderia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarEscuderiaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarEscuderia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 100, 25));
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 800, 390));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -186,11 +197,14 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String dni = dniTxt.getText();
         String añosExp = añosExperienciaTxt.getText();
         int añosExperiencia = Integer.parseInt(añosExp);
+        String ed = especialidadTxt.getSelectedItem().toString();
+        Especialidad especialidadEnum = Especialidad.valueOf(ed.toUpperCase());
         
         m.setNombre(nombre);
         m.setApellido(apellido);
         m.setDni(dni);
         m.setAñosExperiencia(añosExperiencia);
+        m.setEspecialidad(especialidadEnum );
         
         gc.agregarMecanico(m);
        
@@ -204,7 +218,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
     private void buscarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMecanicoActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        Piloto m = gc.buscarPiloto(dni);
+        Mecanico m = gc.buscarMecanico(dni);
 
         if (m != null) {
             JOptionPane.showMessageDialog(null, "Mecanico buscado: \n" + m.toString());
@@ -217,18 +231,44 @@ public class VentanaMecanico extends javax.swing.JFrame {
         VentanaInicio inicio = new VentanaInicio(gc);
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void verEscuderiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEscuderiasActionPerformed
+         String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
+           Mecanico m = gc.buscarMecanico(dni);
+    }//GEN-LAST:event_verEscuderiasActionPerformed
+
+    private void agregarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaActionPerformed
+         String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
+         Mecanico m = gc.buscarMecanico(dni);
+
+        if (m != null) {
+            String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
+            Escuderia e = gc.buscarEscuderia(nombreEscuderia);
+            
+            if (e == null) {
+               e = new Escuderia();
+               e.setNombre(nombreEscuderia);
+               gc.agregarEscuderia(e);
+        }
+        m.agregarEscuderia(e);
+        e.agregarMecanico(m);
+        
+        JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
+    } else {
+        JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
+    }
+    }//GEN-LAST:event_agregarEscuderiaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregarEscuderia;
     private javax.swing.JButton agregarMecanico;
     private javax.swing.JTextField apellidoTxt;
     private javax.swing.JTextField añosExperienciaTxt;
+    private javax.swing.JButton borrarEscuderia;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton buscarMecanico;
     private javax.swing.JTextField dniTxt;
     private javax.swing.JButton eliminarMecanico;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> especialidadTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -243,5 +283,6 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nombreTxt;
+    private javax.swing.JButton verEscuderias;
     // End of variables declaration//GEN-END:variables
 }
