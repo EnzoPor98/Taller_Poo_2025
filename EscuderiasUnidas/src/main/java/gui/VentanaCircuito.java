@@ -162,7 +162,6 @@ public class VentanaCircuito extends javax.swing.JFrame {
         });
         getContentPane().add(buscarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
-        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
         getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

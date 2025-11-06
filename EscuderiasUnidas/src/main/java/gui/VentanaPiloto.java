@@ -218,7 +218,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
         jButton5.setText("VER LISTA");
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 80, 100, 25));
 
-        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
         getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 150, 150, 25));
 
         pack();
@@ -235,7 +234,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
         String nombre = nombreTxt.getText();
         String apellido = apellidoTxt.getText();
         String dni = dniTxt.getText();
-        Pais pais = gc.getPaises().get(paisBox.getItemCount());
+        Pais pais = gc.getPaises().get(paisBox.getSelectedIndex());
 
         p.setNombre(nombre);
         p.setApellido(apellido);
