@@ -12,14 +12,13 @@ public class VentanaCircuito extends javax.swing.JFrame {
     private DefaultTableModel modelo;
 
     public VentanaCircuito(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         cargarPaises();
         cargarTabla();
-        this.gc = gc;
-        setVisible(true);
     }
 
     private void cargarPaises() {
@@ -184,6 +183,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed

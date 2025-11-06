@@ -8,11 +8,19 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private GestorDeClases gc;
 
     public VentanaMecanico(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.gc = gc;
         setVisible(true);
+        cargarPaises();
+        //cargarTabla();
+    }
+    
+    private void cargarPaises() {
+        for (Pais p : gc.getPaises()) {
+            paisBox.addItem(p.getNombre());
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -44,6 +52,8 @@ public class VentanaMecanico extends javax.swing.JFrame {
         agregarMecanico = new javax.swing.JButton();
         eliminarMecanico = new javax.swing.JButton();
         buscarMecanico = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        paisBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana De Mecanicos");
@@ -65,17 +75,17 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, -1));
-        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("APELLIDO:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 25));
-        getContentPane().add(apellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 25));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 25));
+        getContentPane().add(apellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("DNI:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 25));
-        getContentPane().add(dniTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 150, 25));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 25));
+        getContentPane().add(dniTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 150, 25));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -108,19 +118,19 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("ESPECIALIDAD:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, 25));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, 25));
 
         especialidadTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MOTOR", "NEUMUMATICOS", "CHASIS", "ELECTRONICA" }));
-        getContentPane().add(especialidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 130, 25));
+        getContentPane().add(especialidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 130, 25));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("AÑOS EXPERIENCIA:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, -1, 25));
-        getContentPane().add(añosExperienciaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 25));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, 25));
+        getContentPane().add(añosExperienciaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 100, 25));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRE:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, 25));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -191,6 +201,13 @@ public class VentanaMecanico extends javax.swing.JFrame {
         });
         getContentPane().add(buscarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("PAIS:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, 25));
+
+        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
+        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 180, 25));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,6 +251,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void verEscuderiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEscuderiasActionPerformed
@@ -313,6 +331,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -321,6 +340,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField nombreTxt;
+    private javax.swing.JComboBox<String> paisBox;
     private javax.swing.JButton verEscuderias;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,28 +11,30 @@ public class VentanaAuto extends javax.swing.JFrame {
     private DefaultTableModel modelo;
 
     public VentanaAuto(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         cargarTabla();
-        this.gc = gc;
     }
 
     private void cargarTabla() {
-        modelo = new DefaultTableModel();
-        String[] columnas = {"MODELO", "MOTOR"};
-        modelo.setColumnIdentifiers(columnas);
-        Object[] fila = new Object[modelo.getColumnCount()];
+        if (!gc.getAutos().isEmpty()) {
+            modelo = new DefaultTableModel();
+            String[] columnas = {"MODELO", "MOTOR"};
+            modelo.setColumnIdentifiers(columnas);
+            Object[] fila = new Object[modelo.getColumnCount()];
 
-        modelo.setRowCount(0);
-        for (Auto a : gc.getAutos()) {
-            fila[0] = a.getModelo();
-            fila[1] = a.getMotor();
-            modelo.addRow(fila);
+            modelo.setRowCount(0);
+            for (Auto a : gc.getAutos()) {
+                fila[0] = a.getModelo();
+                fila[1] = a.getMotor();
+                modelo.addRow(fila);
+            }
+
+            autosTabla.setModel(modelo);
         }
-
-        autosTabla.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -204,6 +206,7 @@ public class VentanaAuto extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoBtnActionPerformed

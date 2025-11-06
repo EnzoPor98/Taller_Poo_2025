@@ -9,12 +9,12 @@ public class VentanaResultado extends javax.swing.JFrame {
     private DefaultTableModel modelo;
 
     public VentanaResultado(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         //cargarTabla();
-        this.gc = gc;
     }
 
     @SuppressWarnings("unchecked")
@@ -161,6 +161,7 @@ public class VentanaResultado extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
