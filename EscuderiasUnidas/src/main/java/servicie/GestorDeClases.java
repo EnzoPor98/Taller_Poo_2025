@@ -9,7 +9,6 @@ import logica.Mecanico;
 import logica.Pais;
 import logica.Piloto;
 
-
 public class GestorDeClases {
 
     private ArrayList<Auto> autos;
@@ -21,13 +20,13 @@ public class GestorDeClases {
     private ArrayList<Piloto> pilotos;
 
     public GestorDeClases() {
-        autos = new ArrayList<Auto>();
-        carreras = new ArrayList<Carrera>();
-        circuitos = new ArrayList<Circuito>();
-        escuderias = new ArrayList<Escuderia>();
-        mecanicos = new ArrayList<Mecanico>();
-        paises = new ArrayList<Pais>();
-        pilotos = new ArrayList<Piloto>();
+        autos = new ArrayList<>();
+        carreras = new ArrayList<>();
+        circuitos = new ArrayList<>();
+        escuderias = new ArrayList<>();
+        mecanicos = new ArrayList<>();
+        paises = new ArrayList<>();
+        pilotos = new ArrayList<>();
     }
 
     // METODOS DE LISTAS.
@@ -43,12 +42,12 @@ public class GestorDeClases {
         Auto a = null;
 
         for (Auto x : autos) {
-            if (a.getModelo().equals(modelo)) {
+            if (x.getModelo().equals(modelo)) {
                 a = x;
                 break;
             }
         }
-        return a; 
+        return a;
     }
 
     public void agregarCarrera(Carrera c) {
@@ -202,8 +201,7 @@ public class GestorDeClases {
     public void setMecanicos(ArrayList<Mecanico> mecanicos) {
         this.mecanicos = mecanicos;
     }
-    
-    
+
     public ArrayList<Pais> getPaises() {
         return paises;
     }

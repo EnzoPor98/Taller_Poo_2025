@@ -1,18 +1,19 @@
 package gui;
+
 import logica.*;
 import servicie.GestorDeClases;
-
 
 public class VentanaCarrera extends javax.swing.JFrame {
 
     private GestorDeClases gc;
 
     public VentanaCarrera(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
-        this.gc = gc;
         setVisible(true);
+        //cargarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -57,6 +58,11 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnVolver.setText("VOLVER");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 25));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -184,18 +190,23 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCarreraActionPerformed
-       Carrera c = new Carrera();
-       
+        Carrera c = new Carrera();
+
         String fecha = fechaTxt.getText();
         String hora = horaTxt.getText();
         String v = vueltasTxt.getText();
         int vueltas = Integer.parseInt(v);
-        
+
         c.setFechaRealizacion(fecha);
-        c. sethoraRealizacion(hora);
+        c.sethoraRealizacion(hora);
         c.setNumeroVueltas(vueltas);
         gc.agregarCarrera(c);
     }//GEN-LAST:event_agregarCarreraActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCarrera;

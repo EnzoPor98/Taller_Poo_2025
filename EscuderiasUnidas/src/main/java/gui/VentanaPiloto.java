@@ -12,13 +12,13 @@ public class VentanaPiloto extends javax.swing.JFrame {
     private DefaultTableModel modelo;
 
     public VentanaPiloto(GestorDeClases gc) {
+        this.gc = gc;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         cargarPaises();
         cargarTabla();
-        this.gc = gc;
     }
 
     private void cargarPaises() {
@@ -226,6 +226,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         VentanaInicio inicio = new VentanaInicio(gc);
+        this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
