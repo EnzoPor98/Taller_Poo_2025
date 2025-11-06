@@ -168,7 +168,6 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         jLabel7.setText("PAIS:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 25));
 
-        paisBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ESTADOS UNIDOS" }));
         getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 180, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
