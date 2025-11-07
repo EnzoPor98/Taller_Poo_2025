@@ -64,8 +64,6 @@ public class VentanaCircuito extends javax.swing.JFrame {
         buscarCircuitoBtn = new javax.swing.JButton();
         paisBox = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -89,13 +87,13 @@ public class VentanaCircuito extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("NOMBRE:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, 25));
-        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, 150, 25));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("LONGITUD:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, 25));
-        getContentPane().add(longitudTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 150, 25));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, 25));
+        getContentPane().add(longitudTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 150, 25));
 
         circuitosTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,20 +160,11 @@ public class VentanaCircuito extends javax.swing.JFrame {
         });
         getContentPane().add(buscarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
-        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 180, 25));
+        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, 180, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("PAIS:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, 25));
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("CARRERAS");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 100, 25));
-
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("VER LISTA");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 100, 25));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 150, -1, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,9 +217,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
     private javax.swing.JButton buscarCircuitoBtn;
     private javax.swing.JTable circuitosTabla;
     private javax.swing.JButton eliminarCircuitoBtn;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

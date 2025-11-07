@@ -126,7 +126,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         mostrarEscuderiasBtn = new javax.swing.JButton();
         paisBox = new javax.swing.JComboBox<>();
-        limpiarBtn = new javax.swing.JButton();
+        reiniciarBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -298,14 +298,14 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
         getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 150, 25));
 
-        limpiarBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        limpiarBtn.setText("REINICIAR");
-        limpiarBtn.addActionListener(new java.awt.event.ActionListener() {
+        reiniciarBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        reiniciarBtn.setText("REINICIAR");
+        reiniciarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                limpiarBtnActionPerformed(evt);
+                reiniciarBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(limpiarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -360,9 +360,9 @@ public class VentanaPiloto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarPilotoBtnActionPerformed
 
-    private void limpiarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarBtnActionPerformed
+    private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
         limpiarCampos();
-    }//GEN-LAST:event_limpiarBtnActionPerformed
+    }//GEN-LAST:event_reiniciarBtnActionPerformed
 
     // ********** RELACION PILOTO-ESCUDERIA  ********** //
 
@@ -468,11 +468,11 @@ public class VentanaPiloto extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JButton limpiarBtn;
     private javax.swing.JButton mostrarAutosBtn;
     private javax.swing.JButton mostrarEscuderiasBtn;
     private javax.swing.JTextField nombreTxt;
     private javax.swing.JComboBox<String> paisBox;
     private javax.swing.JTable pilotosTabla;
+    private javax.swing.JButton reiniciarBtn;
     // End of variables declaration//GEN-END:variables
 }

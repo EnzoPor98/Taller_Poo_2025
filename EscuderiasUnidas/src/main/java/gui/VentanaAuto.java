@@ -3,15 +3,20 @@ package gui;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
+import logica.AutoPiloto;
+import logica.Escuderia;
+import logica.Piloto;
 import servicie.GestorDeClases;
 
 public class VentanaAuto extends javax.swing.JFrame {
 
     private GestorDeClases gc;
+    private Auto auto;
     private DefaultTableModel modelo;
 
     public VentanaAuto(GestorDeClases gc) {
         this.gc = gc;
+        this.auto = null;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -19,22 +24,49 @@ public class VentanaAuto extends javax.swing.JFrame {
         cargarTabla();
     }
 
+    public void reiniciarCampos() {
+        auto = null;
+        modeloTxt.setText("");
+        motorTxt.setText("");
+        escuderiaEtiq.setText("ESCUDERIA:");
+    }
+
     private void cargarTabla() {
-        if (!gc.getAutos().isEmpty()) {
-            modelo = new DefaultTableModel();
-            String[] columnas = {"MODELO", "MOTOR"};
-            modelo.setColumnIdentifiers(columnas);
-            Object[] fila = new Object[modelo.getColumnCount()];
+        modelo = new DefaultTableModel();
+        String[] columnas = {"MODELO", "MOTOR"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
 
-            modelo.setRowCount(0);
-            for (Auto a : gc.getAutos()) {
-                fila[0] = a.getModelo();
-                fila[1] = a.getMotor();
-                modelo.addRow(fila);
-            }
-
-            autosTabla.setModel(modelo);
+        modelo.setRowCount(0);
+        for (Auto a : gc.getAutos()) {
+            fila[0] = a.getModelo();
+            fila[1] = a.getMotor();
+            modelo.addRow(fila);
         }
+
+        autosTabla.setModel(modelo);
+    }
+
+    private void mostrarPilotos() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE", "APELLIDO", "DNI", "PAIS"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Piloto p : gc.getPilotos()) {
+            fila[0] = p.getNombre();
+            fila[1] = p.getApellido();
+            fila[2] = p.getDni();
+            fila[3] = p.getPais().getNombre();
+            fila[4] = p.getNumeroCompetencia();
+            fila[5] = p.getVictorias();
+            fila[6] = p.getVueltasRapidas();
+            fila[7] = p.getPodios();
+            modelo.addRow(fila);
+        }
+
+        autosTabla.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -51,20 +83,18 @@ public class VentanaAuto extends javax.swing.JFrame {
         buscarAutoBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         autosTabla = new javax.swing.JTable();
-        jLabel9 = new javax.swing.JLabel();
-        idTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         motorTxt = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        escuderiaEtiq = new javax.swing.JLabel();
+        agregarEscuderiaBtn = new javax.swing.JButton();
+        eliminarEscuderiaBtn = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        reiniciarBtn = new javax.swing.JButton();
+        agregarPilotosBtn = new javax.swing.JButton();
+        eliminarPilotoBtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         modeloTxt = new javax.swing.JTextField();
+        mostrarPilotosBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana de Autos");
@@ -82,7 +112,7 @@ public class VentanaAuto extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("INGRESA LOS DATOS DE LOS AUTOS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 700, 25));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 780, 25));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, -1));
@@ -94,7 +124,7 @@ public class VentanaAuto extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 10, 140));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 10, 180));
 
         agregarAutoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarAutoBtn.setText("AGREGAR");
@@ -150,56 +180,81 @@ public class VentanaAuto extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(autosTabla);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 780, 390));
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setText("ID:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, 25));
-        getContentPane().add(idTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 150, 25));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 780, 350));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("MOTOR:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, 25));
-        getContentPane().add(motorTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 150, 25));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, -1, 25));
+        getContentPane().add(motorTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 150, 25));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("ESCUDERIAS");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, 100, 25));
+        escuderiaEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        escuderiaEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        escuderiaEtiq.setText("ESCUDERIA:");
+        getContentPane().add(escuderiaEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 220, 25));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("VER LISTA");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, 100, 25));
+        agregarEscuderiaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarEscuderiaBtn.setText("ASIGNAR");
+        agregarEscuderiaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarEscuderiaBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarEscuderiaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 100, 25));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setText("AGREGAR");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 100, 25));
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("BORRAR");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 100, 25));
+        eliminarEscuderiaBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarEscuderiaBtn.setText("ELIMINAR");
+        eliminarEscuderiaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarEscuderiaBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarEscuderiaBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 100, 25));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("PILOTOS");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 100, 25));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 100, 25));
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setText("VER LISTA");
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 100, 25));
+        reiniciarBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        reiniciarBtn.setText("REINICIAR");
+        reiniciarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reiniciarBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton9.setText("AGREGAR");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 100, 25));
+        agregarPilotosBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarPilotosBtn.setText("AGREGAR");
+        agregarPilotosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarPilotosBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarPilotosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 100, 25));
 
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setText("BORRAR");
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 100, 25));
+        eliminarPilotoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarPilotoBtn.setText("ELIMINAR");
+        eliminarPilotoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarPilotoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 100, 25));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("MODELO:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 25));
-        getContentPane().add(modeloTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 150, 25));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, 25));
+        getContentPane().add(modeloTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 150, 25));
+
+        mostrarPilotosBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mostrarPilotosBtn.setText("MOSTRAR");
+        mostrarPilotosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarPilotosBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrarPilotosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 100, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,24 +265,24 @@ public class VentanaAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoBtnActionPerformed
-        Auto a = new Auto();
+        auto = new Auto();
 
-        String modelo = modeloTxt.getText();
+        String modeloAuto = modeloTxt.getText();
         String motor = motorTxt.getText();
 
-        a.setModelo(modelo);
-        a.setMotor(motor);
+        auto.setModelo(modeloAuto);
+        auto.setMotor(motor);
 
-        gc.agregarAuto(a);
+        gc.agregarAuto(auto);
         cargarTabla();
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
         String variable = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-        Auto a = gc.buscarAuto(variable);
+        auto = gc.buscarAuto(variable);
 
-        if (a != null) {
-            gc.eliminarAuto(a);
+        if (auto != null) {
+            gc.eliminarAuto(auto);
             cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
@@ -235,40 +290,101 @@ public class VentanaAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 
     private void buscarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAutoBtnActionPerformed
-        String modelo = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-        Auto a = gc.buscarAuto(modelo);
+        String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+        auto = gc.buscarAuto(modeloAuto);
 
-        if (a != null) {
-            JOptionPane.showMessageDialog(null, "Auto buscado: \n" + a.toString());
+        if (auto != null) {
+            modeloTxt.setText(auto.getModelo());
+            motorTxt.setText(auto.getMotor());
         } else {
             JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
         }
     }//GEN-LAST:event_buscarAutoBtnActionPerformed
 
+    private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
+        reiniciarCampos();
+    }//GEN-LAST:event_reiniciarBtnActionPerformed
+
+    // ********** RELACION AUTO-ESCUDERIA  ********** //
+
+    private void agregarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaBtnActionPerformed
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
+        Escuderia e = gc.buscarEscuderia(nombre);
+
+        if (e != null) {
+            auto.setEscuderia(e);
+            escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
+        } else {
+            JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
+        }
+    }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
+
+    private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
+        auto.setEscuderia(null);
+    }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
+
+    // ********** RELACION AUTO-PILOTO  ********** //
+
+    private void agregarPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotosBtnActionPerformed
+        AutoPiloto ap = new AutoPiloto();
+
+        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
+
+        String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
+        Piloto piloto = gc.buscarPiloto(dni);
+
+        ap.setAuto(auto);
+        ap.setPiloto(piloto);
+        ap.setFechaAsignacion(fecha);
+
+        auto.agregarPilotos(ap);
+        piloto.agregarAuto(ap);
+    }//GEN-LAST:event_agregarPilotosBtnActionPerformed
+
+    private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
+        String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
+        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
+
+        for (AutoPiloto ap : auto.getPilotos()) {
+            if (ap.getPiloto().getDni().equalsIgnoreCase(dni)
+                    && ap.getFechaAsignacion().equals(fecha)) {
+                auto.borrarPiloto(ap);
+                ap.getPiloto().borrarAuto(ap);
+                break;
+            }
+        }
+    }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
+
+    private void mostrarPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPilotosBtnActionPerformed
+        if (modelo.getColumnCount() == 4) {
+            mostrarPilotos();
+        } else {
+            cargarTabla();
+        }
+    }//GEN-LAST:event_mostrarPilotosBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarAutoBtn;
+    private javax.swing.JButton agregarEscuderiaBtn;
+    private javax.swing.JButton agregarPilotosBtn;
     private javax.swing.JTable autosTabla;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton buscarAutoBtn;
     private javax.swing.JButton eliminarAutoBtn;
-    private javax.swing.JTextField idTxt;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton eliminarEscuderiaBtn;
+    private javax.swing.JButton eliminarPilotoBtn;
+    private javax.swing.JLabel escuderiaEtiq;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField modeloTxt;
+    private javax.swing.JButton mostrarPilotosBtn;
     private javax.swing.JTextField motorTxt;
+    private javax.swing.JButton reiniciarBtn;
     // End of variables declaration//GEN-END:variables
 }

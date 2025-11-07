@@ -165,7 +165,7 @@ public class VentanaPais extends javax.swing.JFrame {
     private void agregarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPaisBtnActionPerformed
         Pais p = new Pais();
 
-        int id = gc.getPaises().getLast().getIdPais();
+        int id = gc.getPaises().getLast().getIdPais() + 1;
         String descripcion = descripcionTxt.getText();
 
         gc.agregarPais(p);
