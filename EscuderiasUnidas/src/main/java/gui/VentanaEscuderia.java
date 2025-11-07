@@ -89,7 +89,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("INGRESA LOS DATOS DE LAS ESCUDERIAS");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 700, 25));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 780, 25));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 800, -1));
@@ -176,16 +176,16 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 100, 25));
 
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("VER LISTA");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, 25));
+        jButton3.setText("MOSTRAR");
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 100, 25));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton4.setText("AGREGAR");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 100, 25));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, 25));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("BORRAR");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 100, 25));
+        jButton2.setText("ELIMINAR");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 100, 25));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -193,16 +193,16 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 100, 25));
 
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setText("VER LISTA");
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 100, 25));
+        jButton8.setText("MOSTRAR");
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 100, 25));
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton9.setText("AGREGAR");
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 25));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 100, 25));
 
         jButton10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton10.setText("BORRAR");
-        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 100, 25));
+        jButton10.setText("ELIMINAR");
+        getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 100, 25));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,16 +210,16 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 100, 25));
 
         jButton11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton11.setText("VER LISTA");
-        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 100, 25));
+        jButton11.setText("MOSTRAR");
+        getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 100, 25));
 
         jButton12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton12.setText("AGREGAR");
-        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 100, 25));
+        getContentPane().add(jButton12, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 100, 25));
 
         jButton13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton13.setText("BORRAR");
-        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 100, 25));
+        jButton13.setText("ELIMINAR");
+        getContentPane().add(jButton13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 100, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
