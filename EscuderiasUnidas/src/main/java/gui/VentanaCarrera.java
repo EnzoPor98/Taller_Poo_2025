@@ -340,10 +340,11 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarParticipanteBtnActionPerformed
 
     private void eliminarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarParticipanteBtnActionPerformed
-        int valor = JOptionPane.showInputDialog(
+        String v = JOptionPane.showInputDialog(
                 "Lista de participantes:" + carrera.mostrarParticipantes() + "\n"
                 + "Ingresa el indice del participante que deseas eliminar."
         );
+        int valor = Integer.parseInt(v);
         valor--;
         carrera.getAutoPiloto().remove(valor);
     }//GEN-LAST:event_eliminarParticipanteBtnActionPerformed
@@ -359,11 +360,19 @@ public class VentanaCarrera extends javax.swing.JFrame {
     // ********** RELACION CARRERA-RESULTADO ********** //
 
     private void asignarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarResultadoBtnActionPerformed
-        VentanaResultado ventana = new VentanaResultado(carrera);
+        if (carrera != null) {
+        VentanaResultado ventana = new VentanaResultado(gc, carrera);
+    } else {
+        JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
+    }
     }//GEN-LAST:event_asignarResultadoBtnActionPerformed
 
     private void mostrarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarResultadoBtnActionPerformed
-        VentanaResultado ventana = new VentanaResultado(carrera);
+        if (carrera != null) {
+        VentanaResultado ventana = new VentanaResultado(gc, carrera);
+    } else {
+        JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
+    }
     }//GEN-LAST:event_mostrarResultadoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

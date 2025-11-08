@@ -85,7 +85,30 @@ public class Carrera {
      public ArrayList<AutoPiloto> getAutoPiloto(){
          return autoPiloto;
      } 
+
+     public String mostrarParticipantes() {
+    if (autoPiloto == null || autoPiloto.isEmpty()) {
+        return "No hay participantes";
+    }
+
+    String lista = "\n";
     
+    int i = 1;
+    for (AutoPiloto ap : autoPiloto) {
+        lista = lista 
+                      + i 
+                      + ". " 
+                      + ap.getPiloto().getNombre() 
+                      + " " 
+                      + ap.getPiloto().getApellido()
+                      + " - Auto: " 
+                      + ap.getAuto().getModelo() 
+                      + "\n";
+        i++;
+    }
+    return lista;
+}
+     
     @Override 
     public String toString(){
         return fechaRealizacion + horaRealizacion + numeroVueltas;

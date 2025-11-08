@@ -56,7 +56,7 @@ public class Main {
         ap.setAuto(auto);
         ap.setPiloto(piloto);
         ap.setFechaAsignacion("2025116");
-        auto.agregarPiloto(ap);
+        auto.agregarAutoPiloto(ap);
         piloto.agregarAuto(ap);
 
         //********** CARGAMOS LOS DATOS DE PRUEBA **********//

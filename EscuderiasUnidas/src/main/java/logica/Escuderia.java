@@ -11,6 +11,7 @@ import java.util.*;
 public class Escuderia {
     private String nombre;
     private ArrayList<Piloto> pilotos;
+    private ArrayList<PilotoEscuderia> pilotosEscuderia;
     private ArrayList<Auto> autos;
     private ArrayList<Mecanico> mecanicos;
     private Pais pais;
@@ -18,6 +19,7 @@ public class Escuderia {
     public Escuderia (){
         this.nombre = "x";
         pilotos = new ArrayList<>();
+        pilotosEscuderia = new ArrayList<>();
         autos = new ArrayList<>();
         mecanicos = new ArrayList<>();
         this.pais = null;
@@ -30,6 +32,7 @@ public class Escuderia {
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
         pilotos = new ArrayList<>();
+        pilotosEscuderia = new ArrayList<>();
         autos = new ArrayList<>();
         mecanicos = new ArrayList<>();
         this.pais = pais;
@@ -44,6 +47,12 @@ public class Escuderia {
     }
     public void agregarMecanico(Mecanico a){
         mecanicos.add(a);
+    }
+    public void agregarPilotoEscuderia(PilotoEscuderia pe) {
+        pilotosEscuderia.add(pe);
+    }
+    public void borrarPilotoEscuderia(PilotoEscuderia pe) {
+        pilotosEscuderia.remove(pe);
     }
     
     
@@ -61,6 +70,9 @@ public class Escuderia {
 // metodos gett    
     public String getNombre(){
         return nombre;
+    }
+    public ArrayList<PilotoEscuderia> getPilotosEscuderia() {
+        return pilotosEscuderia;
     }
     
     public Pais getPais(){

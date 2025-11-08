@@ -337,7 +337,7 @@ public class VentanaAuto extends javax.swing.JFrame {
         ap.setPiloto(piloto);
         ap.setFechaAsignacion(fecha);
 
-        auto.agregarPilotos(ap);
+        auto.agregarAutoPiloto(ap);
         piloto.agregarAuto(ap);
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
 
@@ -345,10 +345,10 @@ public class VentanaAuto extends javax.swing.JFrame {
         String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
         String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-        for (AutoPiloto ap : auto.getPilotos()) {
+        for (AutoPiloto ap : auto.getAutoPiloto()) {
             if (ap.getPiloto().getDni().equalsIgnoreCase(dni)
                     && ap.getFechaAsignacion().equals(fecha)) {
-                auto.borrarPiloto(ap);
+                auto.getAutoPiloto().remove(ap);
                 ap.getPiloto().borrarAuto(ap);
                 break;
             }

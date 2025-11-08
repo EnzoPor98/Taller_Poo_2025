@@ -13,13 +13,13 @@ public class Auto {
     private String modelo;
     private String motor;
     private Escuderia escuderia;
-    private  ArrayList<Piloto> pilotos;
+    private  ArrayList<AutoPiloto> pilotos;
     
     public Auto() {
         modelo = "x";
         motor = "x";
         escuderia = null;
-        pilotos = new ArrayList<Piloto>();
+        pilotos = new ArrayList<AutoPiloto>();
 
     }
     
@@ -33,7 +33,7 @@ public class Auto {
     }
     
 //metodos agregar
-    public void agregarPilotos(Piloto a){
+    public void agregarAutoPiloto(AutoPiloto a){
         pilotos.add(a);
     }
 
@@ -53,6 +53,10 @@ public class Auto {
     public String getModelo(){
         return modelo;
     }
+    public ArrayList<AutoPiloto> getAutoPiloto(){
+        return pilotos;
+    }
+    
     public String getMotor(){
         return motor;
     }

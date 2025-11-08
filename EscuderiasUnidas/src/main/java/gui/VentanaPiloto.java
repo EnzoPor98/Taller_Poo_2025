@@ -86,7 +86,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
         Object[] fila = new Object[modelo.getColumnCount()];
 
         modelo.setRowCount(0);
-        for (AutoPiloto ap : piloto.getAutos()) {
+        for (AutoPiloto ap : piloto.getAutoPiloto()) {
             fila[0] = ap.getAuto().getModelo();
             fila[1] = ap.getAuto().getMotor();
             fila[2] = ap.getFechaAsignacion();
@@ -381,7 +381,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
         pe.setEscuderia(escuderia);
 
         piloto.agregarEscuderia(pe);
-        escuderia.agregarPiloto(pe);
+        escuderia.agregarPilotoEscuderia(pe);
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
@@ -392,7 +392,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
             if (pe.getEscuderia().getNombre().equalsIgnoreCase(nombre)
                     && pe.getDesdeFecha().equals(fecha)) {
                 piloto.borrarEscuderia(pe);
-                pe.getEscuderia().borrarPiloto(pe);
+                pe.getEscuderia().borrarPilotoEscuderia(pe);
                 break;
             }
         }
@@ -421,18 +421,18 @@ public class VentanaPiloto extends javax.swing.JFrame {
         ap.setFechaAsignacion(fecha);
 
         piloto.agregarAuto(ap);
-        auto.agregarPilotos(ap);
+        auto.agregarAutoPiloto(ap);
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
         String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
         String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-        for (AutoPiloto ap : piloto.getAutos()) {
+        for (AutoPiloto ap : piloto.getAutoPiloto()) {
             if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)
                     && ap.getFechaAsignacion().equals(fecha)) {
                 piloto.borrarAuto(ap);
-                ap.getAuto().borrarPiloto(ap);
+                piloto.getAutoPiloto().remove(ap);
                 break;
             }
         }
