@@ -1,19 +1,21 @@
 package gui;
-
+import logica.*;
 import javax.swing.table.DefaultTableModel;
 import servicie.GestorDeClases;
 
 public class VentanaResultado extends javax.swing.JFrame {
-
+    private Carrera carrera;
     private GestorDeClases gc;
     private DefaultTableModel modelo;
 
-    public VentanaResultado(GestorDeClases gc) {
+    public VentanaResultado(GestorDeClases gc, Carrera carrera) {
         this.gc = gc;
+        this.carrera = null;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+        
         //cargarTabla();
     }
 

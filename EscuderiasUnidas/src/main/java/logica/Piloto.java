@@ -103,7 +103,7 @@ public class Piloto extends Persona {
         this.escuderias = escuderias;
     }
 
-    public ArrayList<AutoPiloto> getAutos() {
+    public ArrayList<AutoPiloto> getAutoPiloto() {
         return autos;
     }
 

@@ -65,6 +65,19 @@ public class GestorDeClases {
     public void eliminarCircuito(Circuito c) {
         circuitos.remove(c);
     }
+    
+     public Carrera buscarCarrera(String f , String h) {
+        Carrera c = null;
+
+        for (Carrera i : carreras) {
+            if (i.getFechaRealizacion().equals(f) && i.getHoraRealizacion().equals(h)) {
+                c = i;
+                break;
+            }
+        }
+
+        return c;
+    }
 
     public Circuito buscarCircuito(String nombre) {
         Circuito c = null;
