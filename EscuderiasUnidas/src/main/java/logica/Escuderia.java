@@ -10,7 +10,6 @@ import java.util.*;
  */
 public class Escuderia {
     private String nombre;
-    private ArrayList<Piloto> pilotos;
     private ArrayList<PilotoEscuderia> pilotosEscuderia;
     private ArrayList<Auto> autos;
     private ArrayList<Mecanico> mecanicos;
@@ -18,7 +17,6 @@ public class Escuderia {
     
     public Escuderia (){
         this.nombre = "x";
-        pilotos = new ArrayList<>();
         pilotosEscuderia = new ArrayList<>();
         autos = new ArrayList<>();
         mecanicos = new ArrayList<>();
@@ -31,7 +29,6 @@ public class Escuderia {
 // constructor parametrizado
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
-        pilotos = new ArrayList<>();
         pilotosEscuderia = new ArrayList<>();
         autos = new ArrayList<>();
         mecanicos = new ArrayList<>();
@@ -39,20 +36,26 @@ public class Escuderia {
     }
     
     //metodos agregar 
-    public void agregarPiloto(Piloto a){
-        pilotos.add(a);
-    }
     public void agregarAuto(Auto a){
         autos.add(a);
     }
+    public void borrarAuto(Auto a) {
+        autos.remove(a);
+    }
     public void agregarMecanico(Mecanico a){
         mecanicos.add(a);
+    }
+    public void borrarMecanico(Mecanico m) {
+        mecanicos.remove(m);
     }
     public void agregarPilotoEscuderia(PilotoEscuderia pe) {
         pilotosEscuderia.add(pe);
     }
     public void borrarPilotoEscuderia(PilotoEscuderia pe) {
         pilotosEscuderia.remove(pe);
+    }
+    public ArrayList<Auto> getAutos() {
+        return autos;
     }
     
     
@@ -71,7 +74,7 @@ public class Escuderia {
     public String getNombre(){
         return nombre;
     }
-    public ArrayList<PilotoEscuderia> getPilotosEscuderia() {
+    public ArrayList<PilotoEscuderia> getPilotoEscuderia() {
         return pilotosEscuderia;
     }
     
