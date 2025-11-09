@@ -120,6 +120,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel7.setText("ESPECIALIDAD:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, 25));
 
+        especialidadTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " MOTOR", " NEUMUMATICOS", "CHASIS", "ELECTRONICA" }));
         getContentPane().add(especialidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 130, 25));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
