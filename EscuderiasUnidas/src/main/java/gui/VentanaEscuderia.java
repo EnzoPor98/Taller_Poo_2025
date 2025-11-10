@@ -295,6 +295,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         if (e != null) {
             gc.eliminarEscuderia(e);
             cargarTabla();
+            JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
         }
