@@ -7,11 +7,13 @@ import servicie.GestorDeClases;
 
 public class VentanaPais extends javax.swing.JFrame {
 
+    private Pais pais;
     private GestorDeClases gc;
     private DefaultTableModel modelo;
 
     public VentanaPais(GestorDeClases gc) {
         this.gc = gc;
+        this.pais = new Pais();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -19,16 +21,22 @@ public class VentanaPais extends javax.swing.JFrame {
         cargarTabla();
     }
 
+    private void reiniciarCampos() {
+        idEtiq.setText("ID: ");
+        descripcionTxt.setText("");
+    }
+
     private void cargarTabla() {
         modelo = new DefaultTableModel();
-        String[] columnas = {"ID", "DESCRIPCION"};
+        String[] columnas = {"ID", "NOMBRE", "DESCRIPCION"};
         modelo.setColumnIdentifiers(columnas);
         Object[] fila = new Object[modelo.getColumnCount()];
 
         modelo.setRowCount(0);
-        for (Pais p : gc.getPaises()) {
-            fila[0] = p.getIdPais();
-            fila[1] = p.getDescripcion();
+        for (Pais x : gc.getPaises()) {
+            fila[0] = x.getIdPais();
+            fila[1] = x.getNombre();
+            fila[2] = x.getDescripcion();
             modelo.addRow(fila);
         }
 
@@ -47,13 +55,13 @@ public class VentanaPais extends javax.swing.JFrame {
         agregarPaisBtn = new javax.swing.JButton();
         eliminarPaisBtn = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        idEtiq = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         descripcionTxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         paisesTabla = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        apellidoTxt1 = new javax.swing.JTextField();
+        nombreTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,9 +119,9 @@ public class VentanaPais extends javax.swing.JFrame {
         jLabel12.setText("GESTION PAISES");
         getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 25));
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setText("ID:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 100, 25));
+        idEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        idEtiq.setText("ID:");
+        getContentPane().add(idEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("DESCRIPCION:");
@@ -152,7 +160,7 @@ public class VentanaPais extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("NOMBRE:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 25));
-        getContentPane().add(apellidoTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 150, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 320, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -163,21 +171,26 @@ public class VentanaPais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPaisBtnActionPerformed
-        Pais p = new Pais();
+        pais = new Pais();
 
         int id = gc.getPaises().getLast().getIdPais() + 1;
         String descripcion = descripcionTxt.getText();
+        String nombre = nombreTxt.getText();
 
-        gc.agregarPais(p);
+        pais.setIdPais(id);
+        pais.setNombre(nombre);
+        pais.setDescripcion(descripcion);
+
+        gc.agregarPais(pais);
         cargarTabla();
     }//GEN-LAST:event_agregarPaisBtnActionPerformed
 
     private void eliminarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPaisBtnActionPerformed
         int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del pais:"));
-        Pais p = gc.buscarPais(id);
+        pais = gc.buscarPais(id);
 
-        if (p.getIdPais() == id) {
-            gc.eliminarPais(p);
+        if (pais != null) {
+            gc.eliminarPais(pais);
         } else {
             JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
         }
@@ -185,10 +198,12 @@ public class VentanaPais extends javax.swing.JFrame {
 
     private void buscarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPaisBtnActionPerformed
         int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del pais:"));
-        Pais p = gc.buscarPais(id);
+        pais = gc.buscarPais(id);
 
-        if (p.getIdPais() == id) {
-            JOptionPane.showMessageDialog(null, "Piloto buscado: \n" + p.toString());
+        if (pais != null) {
+            idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
+            nombreTxt.setText(pais.getNombre());
+            descripcionTxt.setText(pais.getDescripcion());
         } else {
             JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
         }
@@ -196,19 +211,19 @@ public class VentanaPais extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarPaisBtn;
-    private javax.swing.JTextField apellidoTxt1;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton buscarPaisBtn;
     private javax.swing.JTextField descripcionTxt;
     private javax.swing.JButton eliminarPaisBtn;
+    private javax.swing.JLabel idEtiq;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField nombreTxt;
     private javax.swing.JTable paisesTabla;
     // End of variables declaration//GEN-END:variables
 }

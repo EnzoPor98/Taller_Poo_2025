@@ -15,7 +15,7 @@ public class Carrera {
     private Circuito circuito;
     private Pais pais;
     private ArrayList<AutoPiloto> autoPiloto;
-    private ArrayList<Resultados> resultados;
+    private ArrayList<Resultado> resultados;
     
      public Carrera (){
         this.fechaRealizacion = "x";
@@ -42,7 +42,7 @@ public class Carrera {
       autoPiloto.add(a);
   }  
 
-  public void agregarResultados(Resultados a){
+  public void agregarResultados(Resultado a){
       resultados.add(a);
   }
    

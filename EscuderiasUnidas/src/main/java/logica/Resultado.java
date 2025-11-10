@@ -8,18 +8,18 @@ package logica;
  *
  * @author Gaston PC
  */
-public class Resultados {
+public class Resultado {
     private Piloto piloto;
     private int posicion;
     private double tiempoVueltaRapida;
     
-    public Resultados (){
+    public Resultado (){
         this.piloto = null;
         this.posicion = 0;
         this. tiempoVueltaRapida =  0.0;
     }
 
-    public Resultados (Piloto piloto, int posicion ,double tiempoVueltaRapida){
+    public Resultado (Piloto piloto, int posicion ,double tiempoVueltaRapida){
         this.piloto = piloto;
         this.posicion = posicion;
         this.posicion= posicion;

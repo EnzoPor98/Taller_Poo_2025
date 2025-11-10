@@ -18,7 +18,7 @@ public class Auto {
     public Auto() {
         modelo = "x";
         motor = "x";
-        escuderia = null;
+        escuderia = new Escuderia();
         pilotos = new ArrayList<AutoPiloto>();
 
     }
