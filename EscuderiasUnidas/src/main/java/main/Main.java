@@ -5,22 +5,22 @@ import gui.VentanaInicio;
 import servicie.GestorDeClases;
 
 public class Main {
-
+    
     public static void main(String args[]) {
         GestorDeClases gc = new GestorDeClases();
 
         //********** CREAMOS DATOS DE PRUEBA **********//
         Pais pais = new Pais(0, "Argentina", "Descripcion");
-
+        
         Circuito circuito = new Circuito();
         circuito.setNombre("Circuito FCAD");
         circuito.setLongitud(500);
         circuito.setPais(pais);
-
+        
         Escuderia escuderia = new Escuderia();
         escuderia.setNombre("Sistemas");
         escuderia.setPais(pais);
-
+        
         Mecanico mecanico = new Mecanico();
         mecanico.setDni("12.123.123");
         mecanico.setNombre("Enzo");
@@ -28,12 +28,12 @@ public class Main {
         mecanico.setPais(pais);
         mecanico.setEspecialidad(Especialidad.ELECTRONICA);
         mecanico.setAñosExperiencia(4);
-
+        
         Auto auto = new Auto();
         auto.setModelo("modelo");
         auto.setMotor("motor");
         auto.setEscuderia(escuderia);
-
+        
         Piloto piloto = new Piloto();
         piloto.setDni("78.789.789");
         piloto.setNombre("Eze");
@@ -50,6 +50,8 @@ public class Main {
         pe.setEscuderia(escuderia);
         pe.setDesdeFecha("2025116");
         pe.setHastaFecha("2025126");
+        piloto.agregarEscuderia(pe);
+        escuderia.agregarPilotoEscuderia(pe);
 
         //RELACION AUTO-PILOTO
         AutoPiloto ap = new AutoPiloto();
@@ -66,7 +68,7 @@ public class Main {
         gc.agregarMecanico(mecanico);
         gc.agregarAuto(auto);
         gc.agregarPiloto(piloto);
-
+        
         VentanaInicio ventana = new VentanaInicio(gc);
     }
 }

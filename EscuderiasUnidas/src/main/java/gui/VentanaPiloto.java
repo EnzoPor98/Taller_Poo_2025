@@ -18,7 +18,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
     public VentanaPiloto(GestorDeClases gc) {
         this.gc = gc;
-        this.piloto = null;
+        this.piloto = new Piloto();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -27,11 +27,12 @@ public class VentanaPiloto extends javax.swing.JFrame {
         cargarTabla();
     }
 
-    public void limpiarCampos() {
+    public void reiniciarCampos() {
         nombreTxt.setText("");
         apellidoTxt.setText("");
         dniTxt.setText("");
-        piloto = null;
+        piloto = new Piloto();
+        cargarTabla();
     }
 
     private void cargarPaises() {
@@ -87,9 +88,9 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
         modelo.setRowCount(0);
         for (AutoPiloto ap : piloto.getAutoPiloto()) {
-            fila[0] = ap.getAuto().getModelo();
-            fila[1] = ap.getAuto().getMotor();
-            fila[2] = ap.getFechaAsignacion();
+            fila[0] = ap.getFechaAsignacion();
+            fila[1] = ap.getAuto().getModelo();
+            fila[2] = ap.getAuto().getMotor();
             modelo.addRow(fila);
         }
 
@@ -330,7 +331,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
         gc.agregarPiloto(piloto);
 
-        limpiarCampos();
+        reiniciarCampos();
         cargarTabla();
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
@@ -341,6 +342,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
         if (piloto != null) {
             gc.eliminarPiloto(piloto);
             cargarTabla();
+            reiniciarCampos();
         } else {
             JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
         }
@@ -361,89 +363,91 @@ public class VentanaPiloto extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarPilotoBtnActionPerformed
 
     private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
-        limpiarCampos();
+        reiniciarCampos();
     }//GEN-LAST:event_reiniciarBtnActionPerformed
 
     // ********** RELACION PILOTO-ESCUDERIA  ********** //
 
     private void agregarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaBtnActionPerformed
-        PilotoEscuderia pe = new PilotoEscuderia();
+        if (gc.getPilotos().contains(piloto)) {
+            PilotoEscuderia pe = new PilotoEscuderia();
 
-        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-        Escuderia escuderia = gc.buscarEscuderia(nombre);
+            String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+            String hastaFecha = JOptionPane.showInputDialog("Ingrese fecha de fin:");
+            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+            Escuderia escuderia = gc.buscarEscuderia(nombre);
 
-        String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
-        String hastaFecha = JOptionPane.showInputDialog("Ingrese fecha de fin:");
+            pe.setDesdeFecha(desdeFecha);
+            pe.setHastaFecha(hastaFecha);
+            pe.setPiloto(piloto);
+            pe.setEscuderia(escuderia);
 
-        pe.setDesdeFecha(desdeFecha);
-        pe.setHastaFecha(hastaFecha);
-        pe.setPiloto(piloto);
-        pe.setEscuderia(escuderia);
-
-        piloto.agregarEscuderia(pe);
-        escuderia.agregarPilotoEscuderia(pe);
+            piloto.agregarEscuderia(pe);
+            escuderia.agregarPilotoEscuderia(pe);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes buscar un piloto antes de realizar esta accion.");
+        }
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
-        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-        String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+        if (gc.getPilotos().contains(piloto)) {
+            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+            String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-        for (PilotoEscuderia pe : piloto.getEscuderias()) {
-            if (pe.getEscuderia().getNombre().equalsIgnoreCase(nombre)
-                    && pe.getDesdeFecha().equals(fecha)) {
-                piloto.borrarEscuderia(pe);
-                pe.getEscuderia().borrarPilotoEscuderia(pe);
-                break;
+            for (PilotoEscuderia pe : piloto.getEscuderias()) {
+                if (pe.getEscuderia().getNombre().equalsIgnoreCase(nombre)
+                        && pe.getDesdeFecha().equals(fecha)) {
+                    pe.getPiloto().borrarEscuderia(pe);
+                    pe.getEscuderia().borrarPilotoEscuderia(pe);
+                    break;
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes buscar un piloto antes de realizar esta accion.");
         }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
     private void mostrarEscuderiasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarEscuderiasBtnActionPerformed
-        if (modelo.getColumnCount() == 3) {
-            mostrarEscuderias();
-        } else {
-            cargarTabla();
-        }
+        mostrarEscuderias();
     }//GEN-LAST:event_mostrarEscuderiasBtnActionPerformed
 
     // ********** RELACION PILOTO-AUTO  ********** //
 
     private void agregarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoBtnActionPerformed
-        AutoPiloto ap = new AutoPiloto();
+        if (gc.getPilotos().contains(piloto)) {
+            AutoPiloto ap = new AutoPiloto();
 
-        String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
-        Auto auto = gc.buscarAuto(modeloAuto);
+            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
+            Auto auto = gc.buscarAuto(modeloAuto);
 
-        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
+            ap.setAuto(auto);
+            ap.setPiloto(piloto);
+            ap.setFechaAsignacion(fecha);
 
-        ap.setAuto(auto);
-        ap.setPiloto(piloto);
-        ap.setFechaAsignacion(fecha);
-
-        piloto.agregarAuto(ap);
-        auto.agregarAutoPiloto(ap);
+            piloto.agregarAuto(ap);
+            auto.agregarAutoPiloto(ap);
+        }
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
-        String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
-        String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+        if (gc.getPilotos().contains(piloto)) {
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
+            String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-        for (AutoPiloto ap : piloto.getAutoPiloto()) {
-            if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)
-                    && ap.getFechaAsignacion().equals(fecha)) {
-                piloto.borrarAuto(ap);
-                piloto.getAutoPiloto().remove(ap);
-                break;
+            for (AutoPiloto ap : piloto.getAutoPiloto()) {
+                if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)
+                        && ap.getFechaAsignacion().equals(fecha)) {
+                    //ap.getAuto().borrarAuto(ap);
+                    ap.getPiloto().borrarAuto(ap);
+                    break;
+                }
             }
         }
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 
     private void mostrarAutosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAutosBtnActionPerformed
-        if (modelo.getColumnCount() == 3) {
-            mostrarAutos();
-        } else {
-            cargarTabla();
-        }
+        mostrarAutos();
     }//GEN-LAST:event_mostrarAutosBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

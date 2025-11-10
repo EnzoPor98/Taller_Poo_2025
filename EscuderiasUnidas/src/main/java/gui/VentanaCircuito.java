@@ -9,10 +9,12 @@ import servicie.GestorDeClases;
 public class VentanaCircuito extends javax.swing.JFrame {
 
     private GestorDeClases gc;
+    private Circuito circuito;
     private DefaultTableModel modelo;
 
     public VentanaCircuito(GestorDeClases gc) {
         this.gc = gc;
+        this.circuito = new Circuito();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -34,10 +36,10 @@ public class VentanaCircuito extends javax.swing.JFrame {
         Object[] fila = new Object[modelo.getColumnCount()];
 
         modelo.setRowCount(0);
-        for (Circuito c : gc.getCircuitos()) {
-            fila[0] = c.getNombre();
-            fila[1] = c.getLongitud();
-            fila[2] = c.getPais().getNombre();
+        for (Circuito x : gc.getCircuitos()) {
+            fila[0] = x.getNombre();
+            fila[1] = x.getLongitud();
+            fila[2] = x.getPais().getNombre();
             modelo.addRow(fila);
         }
 
@@ -175,25 +177,25 @@ public class VentanaCircuito extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
-        Circuito c = new Circuito();
+        circuito = new Circuito();
 
         String nombre = nombreTxt.getText();
         int longitud = Integer.parseInt(longitudTxt.getText());
         Pais pais = gc.getPaises().get(paisBox.getItemCount());
 
-        c.setNombre(nombre);
-        c.setLongitud(longitud);
-        c.setPais(pais);
+        circuito.setNombre(nombre);
+        circuito.setLongitud(longitud);
+        circuito.setPais(pais);
 
-        gc.agregarCircuito(c);
+        gc.agregarCircuito(circuito);
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
     private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
         String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
-        Circuito c = gc.buscarCircuito(nombre);
+        circuito = gc.buscarCircuito(nombre);
 
-        if (c != null) {
-            gc.eliminarCircuito(c);
+        if (circuito != null) {
+            gc.eliminarCircuito(circuito);
             cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
@@ -202,10 +204,12 @@ public class VentanaCircuito extends javax.swing.JFrame {
 
     private void buscarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCircuitoBtnActionPerformed
         String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
-        Circuito c = gc.buscarCircuito(nombre);
+        circuito = gc.buscarCircuito(nombre);
 
-        if (c != null) {
-            JOptionPane.showMessageDialog(null, "Circuito buscado: \n" + c.toString());
+        if (circuito != null) {
+            nombreTxt.setText(circuito.getNombre());
+            longitudTxt.setText(Integer.toString(circuito.getLongitud()));
+            paisBox.setSelectedItem(circuito.getPais().getNombre());
         } else {
             JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }
