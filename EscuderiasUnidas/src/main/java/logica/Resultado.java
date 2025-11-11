@@ -4,68 +4,63 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Gaston PC
  */
 public class Resultado {
-    private Piloto piloto;
-    private int posicion;
-    private double tiempoVueltaRapida;
-    
-    public Resultado (){
-        this.piloto = null;
-        this.posicion = 0;
-        this. tiempoVueltaRapida =  0.0;
+
+    private Carrera carrera;
+    private ArrayList<AutoPiloto> participantes;
+    private ArrayList<String> vueltas;
+
+    public Resultado(Carrera carrera) {
+        this.carrera = carrera;
+        this.participantes = new ArrayList<AutoPiloto>();
+        this.vueltas = new ArrayList<String>();
     }
 
-    public Resultado (Piloto piloto, int posicion ,double tiempoVueltaRapida){
-        this.piloto = piloto;
-        this.posicion = posicion;
-        this.posicion= posicion;
-        this. tiempoVueltaRapida =  tiempoVueltaRapida;
+    // METODOS DE LISTAS.
+    public void agregarParticipante(AutoPiloto ap) {
+        participantes.add(ap);
     }
 
-    public void setPiloto(Piloto piloto) {
-        this.piloto = piloto;
+    public void agregarVuelta(String vuelta) {
+        vueltas.add(vuelta);
     }
 
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
+    public void borrarParticipante(int index) {
+        participantes.remove(index);
     }
 
-    public void setTiempoVueltaRapida(double tiempoVueltaRapida) {
-        this.tiempoVueltaRapida = tiempoVueltaRapida;
+    public void borrarVuelta(int index) {
+        vueltas.remove(index);
     }
 
-    public Piloto getPiloto() {
-        return piloto;
+    // GETTERS & SETTERS.
+    public ArrayList<AutoPiloto> getParticipantes() {
+        return participantes;
     }
 
-    public int getPosicion() {
-        return posicion;
+    public void setParticipantes(ArrayList<AutoPiloto> participantes) {
+        this.participantes = participantes;
     }
 
-    public double getTiempoVueltaRapida() {
-        return tiempoVueltaRapida;
+    public ArrayList<String> getVueltas() {
+        return vueltas;
     }
 
-    @Override
-    public String toString() {
-        return "Resultados{" + "piloto=" + piloto + ", posicion=" + posicion + ", tiempoVueltaRapida=" + tiempoVueltaRapida + '}';
+    public void setVueltas(ArrayList<String> vueltas) {
+        this.vueltas = vueltas;
     }
-    
-    
 
+    public Carrera getCarrera() {
+        return carrera;
+    }
 
-
-
-
-
-
-
-
-
-
-
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
+    }
 }

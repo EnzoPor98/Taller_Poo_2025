@@ -171,7 +171,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 
     private void informesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_informesBtnActionPerformed
         this.setVisible(false);
-        //VentanaInforme ventanaInformes = new VentanaInforme(gc);
+        VentanaInformes ventanaInformes = new VentanaInformes(gc);
     }//GEN-LAST:event_informesBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

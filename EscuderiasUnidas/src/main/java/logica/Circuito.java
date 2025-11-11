@@ -61,5 +61,13 @@ public class Circuito {
     public String toString(){
         return nombre + longitud;
     }
+
+    public ArrayList<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public void setCarreras(ArrayList<Carrera> carreras) {
+        this.carreras = carreras;
+    }
     
 }

@@ -55,6 +55,10 @@ public class Persona {
         this.pais = pais;
     }
 
+    public String getNombreCompleto() {
+        return this.nombre + " " + this.apellido;
+    }
+
     @Override
     public String toString() {
         return "Persona [dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", pais=" + pais + "]";

@@ -13,6 +13,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
     public VentanaMecanico(GestorDeClases gc) {
         this.gc = gc;
+        this.mecanico = new Mecanico();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,11 +45,11 @@ public class VentanaMecanico extends javax.swing.JFrame {
         modelo.setRowCount(0);
         for (Mecanico x : gc.getMecanicos()) {
             fila[0] = x.getNombre();
-            fila[0] = x.getApellido();
-            fila[0] = x.getDni();
-            fila[0] = x.getPais().getNombre();
-            fila[0] = x.getEspecialidad();
-            fila[0] = x.getAñosExperiencia();
+            fila[1] = x.getApellido();
+            fila[2] = x.getDni();
+            fila[3] = x.getPais().getNombre();
+            fila[4] = x.getEspecialidad();
+            fila[5] = x.getAñosExperiencia();
             modelo.addRow(fila);
         }
 
@@ -269,7 +270,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarMecanicoActionPerformed
-        Mecanico m = new Mecanico();
+        mecanico = new Mecanico();
 
         String nombre = nombreTxt.getText();
         String apellido = apellidoTxt.getText();
@@ -279,33 +280,38 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String ed = especialidadTxt.getSelectedItem().toString();
         Especialidad especialidadEnum = Especialidad.valueOf(ed.toUpperCase());
 
-        m.setNombre(nombre);
-        m.setApellido(apellido);
-        m.setDni(dni);
-        m.setAñosExperiencia(añosExperiencia);
-        m.setEspecialidad(especialidadEnum);
+        mecanico.setNombre(nombre);
+        mecanico.setApellido(apellido);
+        mecanico.setDni(dni);
+        mecanico.setAñosExperiencia(añosExperiencia);
+        mecanico.setEspecialidad(especialidadEnum);
 
-        gc.agregarMecanico(m);
+        gc.agregarMecanico(mecanico);
         cargarTabla();
         reiniciarCampos();
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        Mecanico m = gc.buscarMecanico(dni);
-        gc.eliminarMecanico(m);
+        mecanico = gc.buscarMecanico(dni);
+
+        if (mecanico != null) {
+            gc.eliminarMecanico(mecanico);
+        } else {
+            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+        }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
 
     private void buscarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMecanicoActionPerformed
         String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        Mecanico m = gc.buscarMecanico(dni);
+        mecanico = gc.buscarMecanico(dni);
 
-        if (m != null) {
-            nombreTxt.setText(m.getNombre());
-            apellidoTxt.setText(m.getApellido());
-            dniTxt.setText(m.getDni());
-            paisBox.setSelectedItem(m.getPais().getNombre());
-            añosExperienciaTxt.setText(Integer.toString(m.getAñosExperiencia()));
+        if (mecanico != null) {
+            nombreTxt.setText(mecanico.getNombre());
+            apellidoTxt.setText(mecanico.getApellido());
+            dniTxt.setText(mecanico.getDni());
+            paisBox.setSelectedItem(mecanico.getPais().getNombre());
+            añosExperienciaTxt.setText(Integer.toString(mecanico.getAñosExperiencia()));
         } else {
             JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
         }
@@ -316,9 +322,9 @@ public class VentanaMecanico extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    
-    
+
     private void verEscuderiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEscuderiasActionPerformed
+        /*
         String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
         Mecanico m = gc.buscarMecanico(dni);
         if (m != null) {
@@ -334,24 +340,19 @@ public class VentanaMecanico extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro un mecanico con ese dni ");
         }
+         */
+        mostrarEscuderias();
     }//GEN-LAST:event_verEscuderiasActionPerformed
 
+    // ********** RELACION MECANICO-ESCUDERIA ********** //
+
     private void agregarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
-        Mecanico m = gc.buscarMecanico(dni);
+        String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
+        Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        if (m != null) {
-            String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
-            Escuderia e = gc.buscarEscuderia(nombreEscuderia);
-
-            if (e == null) {
-                e = new Escuderia();
-                e.setNombre(nombreEscuderia);
-                gc.agregarEscuderia(e);
-            }
-            m.agregarEscuderia(e);
-            e.agregarMecanico(m);
-
+        if (e != null) {
+            mecanico.agregarEscuderia(e);
+            e.agregarMecanico(mecanico);
             JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
@@ -359,27 +360,21 @@ public class VentanaMecanico extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarEscuderiaActionPerformed
 
     private void borrarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarEscuderiaActionPerformed
+        String nombreEscuderia = JOptionPane.showInputDialog("Ingrese nombre de la escuderia a eliminar");
+        Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        String dni = JOptionPane.showInputDialog("Ingrese el dni del mecanico");
-        Mecanico m = gc.buscarMecanico(dni);
-
-        if (m != null) {
-            String nombreEscuderia = JOptionPane.showInputDialog("Ingrese nombre de la escuderia a eliminar");
-            Escuderia e = gc.buscarEscuderia(nombreEscuderia);
-            if (e != null && m.getEscuderias().contains(e)) {
-                m.getEscuderias().remove(e);
-                e.getMecanicos().remove(m);
-                JOptionPane.showMessageDialog(null, "Escuderia eliminada del mecanico correctamente ");
-            } else {
-                JOptionPane.showMessageDialog(null, "El mecanico no tiene esa escuderia asignada");
-            }
+        if (e != null && mecanico.getEscuderias().contains(e)) {
+            mecanico.borrarEscuderia(e);
+            e.borrarMecanico(mecanico);
+            JOptionPane.showMessageDialog(null, "Escuderia eliminada del mecanico correctamente ");
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontro un mecanico con ese dni");
+            JOptionPane.showMessageDialog(null, "El mecanico no tiene esa escuderia asignada");
         }
     }//GEN-LAST:event_borrarEscuderiaActionPerformed
 
     private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
         reiniciarCampos();
+        cargarTabla();
     }//GEN-LAST:event_reiniciarBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
