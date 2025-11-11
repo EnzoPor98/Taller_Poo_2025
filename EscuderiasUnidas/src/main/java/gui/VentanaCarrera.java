@@ -13,7 +13,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     public VentanaCarrera(GestorDeClases gc) {
         this.gc = gc;
-        this.carrera = null;
+        this.carrera = new Carrera();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -22,7 +22,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }
 
     private void reiniciarCampos() {
-        carrera = null;
+        carrera = new Carrera();
         fechaTxt.setText("");
         horaTxt.setText("");
         vueltasTxt.setText("");
@@ -92,8 +92,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         mostrarResultadoBtn = new javax.swing.JButton();
         buscarCarreraBtn = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        paisBox = new javax.swing.JComboBox<>();
         eliminarParticipanteBtn = new javax.swing.JButton();
         eliminarCarreraBtn = new javax.swing.JButton();
         asignarResultadoBtn = new javax.swing.JButton();
@@ -177,28 +175,28 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("FECHA:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, 25));
-        getContentPane().add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 150, 25));
-        getContentPane().add(horaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, 25));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, 25));
+        getContentPane().add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 150, 25));
+        getContentPane().add(horaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("HORA:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 25));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("VUELTAS:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 25));
-        getContentPane().add(vueltasTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 150, 25));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 25));
+        getContentPane().add(vueltasTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 150, 25));
 
         circuitoEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         circuitoEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         circuitoEtiq.setText("CIRCUITO:");
-        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 60, 25));
+        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 60, 25));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("PARTICIPANTES");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 100, 25));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 70, 100, 25));
 
         mostrarParticipantesBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         mostrarParticipantesBtn.setText("MOSTRAR");
@@ -207,7 +205,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 mostrarParticipantesBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(mostrarParticipantesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 100, 25));
+        getContentPane().add(mostrarParticipantesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 100, 25));
 
         agregarParticipanteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarParticipanteBtn.setText("AGREGAR");
@@ -216,12 +214,12 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 agregarParticipanteBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarParticipanteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 100, 25));
+        getContentPane().add(agregarParticipanteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 100, 25));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("RESULTADO");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 100, 25));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 90, 100, 25));
 
         mostrarResultadoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         mostrarResultadoBtn.setText("MOSTRAR");
@@ -230,7 +228,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 mostrarResultadoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(mostrarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, 100, 25));
+        getContentPane().add(mostrarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 100, 25));
 
         buscarCarreraBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarCarreraBtn.setText("BUSCAR");
@@ -241,12 +239,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
         });
         getContentPane().add(buscarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setText("PAIS:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 40, 25));
-
-        getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 70, 150, 25));
-
         eliminarParticipanteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarParticipanteBtn.setText("ELIMINAR");
         eliminarParticipanteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +246,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 eliminarParticipanteBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarParticipanteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 100, 25));
+        getContentPane().add(eliminarParticipanteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 100, 25));
 
         eliminarCarreraBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarCarreraBtn.setText("ELIMINAR");
@@ -272,8 +264,8 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 asignarResultadoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(asignarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 100, 25));
-        getContentPane().add(circuitoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 140, 25));
+        getContentPane().add(asignarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 100, 25));
+        getContentPane().add(circuitoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 140, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -289,13 +281,13 @@ public class VentanaCarrera extends javax.swing.JFrame {
         String fecha = fechaTxt.getText();
         String hora = horaTxt.getText();
         int vueltas = Integer.parseInt(vueltasTxt.getText());
-        Pais pais = gc.buscarPais(paisBox.getItemCount());
+
         Circuito circuito = gc.buscarCircuito(circuitoTxt.getText());
 
         carrera.setFechaRealizacion(fecha);
         carrera.sethoraRealizacion(hora);
         carrera.setNumeroVueltas(vueltas);
-        carrera.setPais(pais);
+        carrera.setPais(circuito.getPais());
         carrera.setCircuito(circuito);
 
         gc.agregarCarrera(carrera);
@@ -323,7 +315,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
             horaTxt.setText(carrera.getHoraRealizacion());
             vueltasTxt.setText(Integer.toString(carrera.getNumeroVueltas()));
             circuitoTxt.setText(carrera.getCircuito().getNombre());
-            paisBox.setSelectedItem(carrera.getPais().getNombre());
         } else {
             JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
         }
@@ -331,12 +322,26 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void reiniciarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarCarreraBtnActionPerformed
         reiniciarCampos();
+        cargarTabla();
     }//GEN-LAST:event_reiniciarCarreraBtnActionPerformed
 
     // ********** RELACION CARRERA-AUTOPILOTO ********** //
 
     private void agregarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarParticipanteBtnActionPerformed
-        // TODO add your handling code here:
+        if (carrera.getAutoPiloto().size() != 10) {
+            String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+
+            Piloto p = gc.buscarPiloto(dni);
+            for (AutoPiloto ap : p.getAutoPiloto()) {
+                if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)) {
+                    carrera.agregarAutoPilotoParticipante(ap);
+                    break;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "No pueden agregarse mas de 10 participantes.");
+        }
     }//GEN-LAST:event_agregarParticipanteBtnActionPerformed
 
     private void eliminarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarParticipanteBtnActionPerformed
@@ -350,29 +355,25 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarParticipanteBtnActionPerformed
 
     private void mostrarParticipantesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarParticipantesBtnActionPerformed
-        if (modelo.getColumnCount() == 2) {
-            mostrarParticipantes();
-        } else {
-            cargarTabla();
-        }
+        mostrarParticipantes();
     }//GEN-LAST:event_mostrarParticipantesBtnActionPerformed
 
     // ********** RELACION CARRERA-RESULTADO ********** //
 
     private void asignarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarResultadoBtnActionPerformed
         if (carrera != null) {
-        VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
-    } else {
-        JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
-    }
+            VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
+        }
     }//GEN-LAST:event_asignarResultadoBtnActionPerformed
 
     private void mostrarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarResultadoBtnActionPerformed
         if (carrera != null) {
-        VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
-    } else {
-        JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
-    }
+            VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
+        } else {
+            JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
+        }
     }//GEN-LAST:event_mostrarResultadoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -394,14 +395,12 @@ public class VentanaCarrera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JButton mostrarParticipantesBtn;
     private javax.swing.JButton mostrarResultadoBtn;
-    private javax.swing.JComboBox<String> paisBox;
     private javax.swing.JButton reiniciarCarreraBtn;
     private javax.swing.JTextField vueltasTxt;
     // End of variables declaration//GEN-END:variables
