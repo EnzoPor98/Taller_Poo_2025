@@ -6,14 +6,16 @@ import javax.swing.table.DefaultTableModel;
 import servicie.GestorDeClases;
 
 public class VentanaResultado extends javax.swing.JFrame {
-    
+
     private GestorDeClases gc;
+    private Carrera carrera;
     private Resultado resultado;
     private DefaultTableModel modelo;
-    
-    public VentanaResultado(GestorDeClases gc, Resultado resultado) {
+
+    public VentanaResultado(GestorDeClases gc, Carrera carrera) {
         this.gc = gc;
-        this.resultado = resultado;
+        this.carrera = carrera;
+        this.resultado = carrera.getResultado();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -21,28 +23,28 @@ public class VentanaResultado extends javax.swing.JFrame {
         cargarTabla();
         cargarDatos();
     }
-    
+
     private void cargarDatos() {
-        circuitoEtiq.setText("CIRCUITO: " + resultado.getCarrera().getCircuito().getNombre());
-        fechaEtiq.setText("FECHA: " + resultado.getCarrera().getFechaRealizacion());
-        horaEtiq.setText("HORA: " + resultado.getCarrera().getHoraRealizacion());
-        paisEtiq.setText("PAIS: " + resultado.getCarrera().getPais().getNombre());
-        vueltasEtiq.setText("VUELTAS: " + resultado.getCarrera().getNumeroVueltas());
+        circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
+        fechaEtiq.setText("FECHA: " + carrera.getFechaRealizacion());
+        horaEtiq.setText("HORA: " + carrera.getHoraRealizacion());
+        paisEtiq.setText("PAIS: " + carrera.getPais().getNombre());
+        vueltasEtiq.setText("VUELTAS: " + carrera.getNumeroVueltas());
     }
-    
+
     private void cargarPilotos() {
-        for (AutoPiloto x : resultado.getCarrera().getAutoPiloto()) {
+        for (AutoPiloto x : carrera.getAutoPiloto()) {
             String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
             pilotosBox.addItem(nombre);
         }
     }
-    
+
     private void cargarTabla() {
         modelo = new DefaultTableModel();
-        String[] columnas = {"NOMBRE", "APELLIDO", "DNI", "PAIS", "COMPETENCIAS", "VICTORIAS", "VUELTAS R.", "PODIOS"};
+        String[] columnas = {"POSICION", "ESCUDERIA", "PILOTO", "VUELTA"};
         modelo.setColumnIdentifiers(columnas);
         Object[] fila = new Object[modelo.getColumnCount()];
-        
+
         modelo.setRowCount(0);
         for (int i = 0; i < 9; i++) {
             fila[0] = i + 1;
@@ -51,10 +53,10 @@ public class VentanaResultado extends javax.swing.JFrame {
             fila[3] = resultado.getVueltas().get(i);
             modelo.addRow(fila);
         }
-        
+
         resultadosTabla.setModel(modelo);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -121,7 +123,7 @@ public class VentanaResultado extends javax.swing.JFrame {
                 eliminarResultadoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 140, 100, 25));
+        getContentPane().add(eliminarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 140, 110, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -210,7 +212,7 @@ public class VentanaResultado extends javax.swing.JFrame {
                 confirmarResultadoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(confirmarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 100, 25));
+        getContentPane().add(confirmarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 110, 25));
 
         vueltasEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         vueltasEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -222,16 +224,15 @@ public class VentanaResultado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        VentanaInicio inicio = new VentanaInicio(gc);
         this.setVisible(false);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
-        resultado.getCarrera().setResultado(resultado);
+        carrera.setResultado(resultado);
     }//GEN-LAST:event_confirmarResultadoBtnActionPerformed
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
-        resultado.getCarrera().setResultado(new Resultado(resultado.getCarrera()));
+        carrera.setResultado(new Resultado());
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
