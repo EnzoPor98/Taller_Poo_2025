@@ -32,6 +32,29 @@ public class VentanaResultado extends javax.swing.JFrame {
         vueltasEtiq.setText("VUELTAS: " + carrera.getNumeroVueltas());
     }
 
+    private void cargarDatosEnPilotos() {
+        resultado.getParticipantes().getFirst().getPiloto().sumarVictoria();
+
+        resultado.getParticipantes().get(0).getPiloto().sumarPodio();
+        resultado.getParticipantes().get(1).getPiloto().sumarPodio();
+        resultado.getParticipantes().get(2).getPiloto().sumarPodio();
+
+        String vueltaMin = "99:99:99";
+        String vueltaPar;
+        AutoPiloto ap = new AutoPiloto();
+        for (int i = 0; i < 10; i++) {
+            vueltaPar = resultado.getVueltas().get(i);
+            if (vueltaMin.compareTo(vueltaPar) > 0) {
+                vueltaMin = resultado.getVueltas().get(i);
+                ap = resultado.getParticipantes().get(i);
+            }
+
+            resultado.getParticipantes().get(i).getPiloto().sumarCompetencia();
+        }
+
+        ap.getPiloto().sumarVueltasRapidas();
+    }
+
     private void cargarPilotos() {
         for (AutoPiloto x : carrera.getAutoPiloto()) {
             String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
@@ -229,6 +252,7 @@ public class VentanaResultado extends javax.swing.JFrame {
 
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
         carrera.setResultado(resultado);
+        cargarDatosEnPilotos();
     }//GEN-LAST:event_confirmarResultadoBtnActionPerformed
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
