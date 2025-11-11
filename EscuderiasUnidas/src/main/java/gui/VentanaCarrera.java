@@ -29,7 +29,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
         circuitoTxt.setText("");
     }
 
-    public void cargarTabla() {
+    private void cargarTabla() {
         modelo = new DefaultTableModel();
         String[] columnas = {"PAIS", "CIRCUITO", "VUELTAS", "FECHA", "HORA"};
         modelo.setColumnIdentifiers(columnas);
@@ -50,7 +50,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void mostrarParticipantes() {
         modelo = new DefaultTableModel();
-        String[] columnas = {"PILOTO", "AUTO"};
+        String[] columnas = {"ESCUDERIA", "PILOTO", "AUTO"};
         modelo.setColumnIdentifiers(columnas);
         Object[] fila = new Object[modelo.getColumnCount()];
 
@@ -58,8 +58,11 @@ public class VentanaCarrera extends javax.swing.JFrame {
         for (AutoPiloto x : carrera.getAutoPiloto()) {
             String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
             String auto = x.getAuto().getModelo() + " " + x.getAuto().getMotor();
-            fila[0] = nombre;
-            fila[1] = auto;
+            String escuderia = x.getAuto().getEscuderia().getNombre();
+
+            fila[0] = escuderia;
+            fila[1] = nombre;
+            fila[2] = auto;
             modelo.addRow(fila);
         }
 
@@ -362,7 +365,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void asignarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarResultadoBtnActionPerformed
         if (carrera != null) {
-            VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
+            VentanaResultado ventana = new VentanaResultado(gc, carrera);
         } else {
             JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
         }
@@ -370,7 +373,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void mostrarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarResultadoBtnActionPerformed
         if (carrera != null) {
-            VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
+            VentanaResultado ventana = new VentanaResultado(gc, carrera);
         } else {
             JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
         }

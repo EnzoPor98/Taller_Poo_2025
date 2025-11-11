@@ -20,6 +20,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         setVisible(true);
         cargarPaises();
         cargarTabla();
+        cargarEspecialidades();
     }
 
     private void reiniciarCampos() {
@@ -33,6 +34,12 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private void cargarPaises() {
         for (Pais p : gc.getPaises()) {
             paisBox.addItem(p.getNombre());
+        }
+    }
+
+    private void cargarEspecialidades() {
+        for (Especialidad x : Especialidad.values()) {
+            especialidadBox.addItem(x.name());
         }
     }
 
@@ -87,7 +94,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         mecanicosTabla = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
-        especialidadTxt = new javax.swing.JComboBox<>();
+        especialidadBox = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         añosExperienciaTxt = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -170,8 +177,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         jLabel7.setText("ESPECIALIDAD:");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, 25));
 
-        especialidadTxt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " MOTOR", " NEUMUMATICOS", "CHASIS", "ELECTRONICA" }));
-        getContentPane().add(especialidadTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 130, 25));
+        getContentPane().add(especialidadBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, 130, 25));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("AÑOS EXPERIENCIA:");
@@ -277,7 +283,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String dni = dniTxt.getText();
         String añosExp = añosExperienciaTxt.getText();
         int añosExperiencia = Integer.parseInt(añosExp);
-        String ed = especialidadTxt.getSelectedItem().toString();
+        String ed = especialidadBox.getSelectedItem().toString();
         Especialidad especialidadEnum = Especialidad.valueOf(ed.toUpperCase());
 
         mecanico.setNombre(nombre);
@@ -387,7 +393,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
     private javax.swing.JButton buscarMecanico;
     private javax.swing.JTextField dniTxt;
     private javax.swing.JButton eliminarMecanico;
-    private javax.swing.JComboBox<String> especialidadTxt;
+    private javax.swing.JComboBox<String> especialidadBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

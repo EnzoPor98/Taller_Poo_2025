@@ -23,7 +23,7 @@ public class Carrera {
         this.numeroVueltas= 0;
         this.circuito = new Circuito();
         this.pais = new Pais();
-        this.resultado = new Resultado(this);
+        this.resultado = new Resultado();
         autoPiloto = new ArrayList<>();
     }
     
@@ -82,7 +82,7 @@ public class Carrera {
      } 
 
      public String mostrarParticipantes() {
-    if (autoPiloto == null || autoPiloto.isEmpty()) {
+    if (autoPiloto.isEmpty()) {
         return "No hay participantes";
     }
 
@@ -93,9 +93,7 @@ public class Carrera {
         lista = lista 
                       + i 
                       + ". " 
-                      + ap.getPiloto().getNombre() 
-                      + " " 
-                      + ap.getPiloto().getApellido()
+                      + ap.getPiloto().getNombreCompleto()
                       + " - Auto: " 
                       + ap.getAuto().getModelo() 
                       + "\n";

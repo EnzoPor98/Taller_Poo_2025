@@ -16,8 +16,7 @@ public class Resultado {
     private ArrayList<AutoPiloto> participantes;
     private ArrayList<String> vueltas;
 
-    public Resultado(Carrera carrera) {
-        this.carrera = carrera;
+    public Resultado() {
         this.participantes = new ArrayList<AutoPiloto>();
         this.vueltas = new ArrayList<String>();
     }
