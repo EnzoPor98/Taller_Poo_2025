@@ -36,6 +36,23 @@ public class Piloto extends Persona {
         autos = new ArrayList<AutoPiloto>();
     }
 
+    // METODOS PARA CONTADORES.
+    public void sumarCompetencia() {
+        numeroCompetencia++;
+    }
+
+    public void sumarVictoria() {
+        victorias++;
+    }
+
+    public void sumarVueltasRapidas() {
+        vueltasRapidas++;
+    }
+
+    public void sumarPodio() {
+        podios++;
+    }
+
     // LISTA DE ESCUDERIAS.
     public void agregarEscuderia(PilotoEscuderia pe) {
         escuderias.add(pe);

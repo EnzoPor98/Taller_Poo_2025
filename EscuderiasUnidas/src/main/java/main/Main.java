@@ -470,7 +470,7 @@ public class Main {
         
         resultado.agregarParticipante(ap2);
         resultado.agregarVuelta("01:58:03");
-
+        
         // ********** CARGAMOS LOS DATOS DE PRUEBA **********//
         gc.agregarPais(pais);
         gc.agregarPais(pais2);
