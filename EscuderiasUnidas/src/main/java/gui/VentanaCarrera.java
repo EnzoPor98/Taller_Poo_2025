@@ -361,7 +361,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void asignarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarResultadoBtnActionPerformed
         if (carrera != null) {
-        VentanaResultado ventana = new VentanaResultado(gc, carrera);
+        VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
     } else {
         JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
     }
@@ -369,7 +369,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void mostrarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarResultadoBtnActionPerformed
         if (carrera != null) {
-        VentanaResultado ventana = new VentanaResultado(gc, carrera);
+        VentanaResultado ventana = new VentanaResultado(gc, carrera.getResultado());
     } else {
         JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
     }

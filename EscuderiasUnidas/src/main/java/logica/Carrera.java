@@ -15,16 +15,16 @@ public class Carrera {
     private Circuito circuito;
     private Pais pais;
     private ArrayList<AutoPiloto> autoPiloto;
-    private ArrayList<Resultado> resultados;
+    private Resultado resultado;
     
      public Carrera (){
         this.fechaRealizacion = "x";
         this.horaRealizacion = "x";
         this.numeroVueltas= 0;
-        this.circuito = null;
-        this.pais = null;
+        this.circuito = new Circuito();
+        this.pais = new Pais();
+        this.resultado = new Resultado(this);
         autoPiloto = new ArrayList<>();
-        resultados = new ArrayList<>();
     }
     
 // constructor parametrizado    
@@ -35,16 +35,11 @@ public class Carrera {
         this.circuito = circuito;
         this.pais = pais;
         autoPiloto = new ArrayList<>();
-        resultados = new ArrayList<>();
     }
  //metodos agregar
   public void agregarAutoPilotoParticipante(AutoPiloto a){
       autoPiloto.add(a);
   }  
-
-  public void agregarResultados(Resultado a){
-      resultados.add(a);
-  }
    
 //metodos sett
     public void setCircuito(Circuito circuito){
@@ -112,6 +107,14 @@ public class Carrera {
     @Override 
     public String toString(){
         return fechaRealizacion + horaRealizacion + numeroVueltas;
+    }
+
+    public Resultado getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(Resultado resultado) {
+        this.resultado = resultado;
     }
     
 }

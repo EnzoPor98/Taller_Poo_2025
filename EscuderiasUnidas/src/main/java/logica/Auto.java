@@ -36,6 +36,10 @@ public class Auto {
     public void agregarAutoPiloto(AutoPiloto a){
         pilotos.add(a);
     }
+    
+    public void borrarPiloto(AutoPiloto ap){
+        pilotos.remove(ap);
+    }
 
     //metodos sett
     public void setModelo(String modelo){

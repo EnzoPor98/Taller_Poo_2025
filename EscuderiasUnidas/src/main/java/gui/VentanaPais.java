@@ -2,7 +2,12 @@ package gui;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.Carrera;
+import logica.Circuito;
+import logica.Escuderia;
 import logica.Pais;
+import logica.Persona;
+import logica.Piloto;
 import servicie.GestorDeClases;
 
 public class VentanaPais extends javax.swing.JFrame {
@@ -23,6 +28,7 @@ public class VentanaPais extends javax.swing.JFrame {
 
     private void reiniciarCampos() {
         idEtiq.setText("ID: ");
+        nombreTxt.setText("");
         descripcionTxt.setText("");
     }
 
@@ -37,6 +43,77 @@ public class VentanaPais extends javax.swing.JFrame {
             fila[0] = x.getIdPais();
             fila[1] = x.getNombre();
             fila[2] = x.getDescripcion();
+            modelo.addRow(fila);
+        }
+
+        paisesTabla.setModel(modelo);
+    }
+
+    private void mostrarCircuitos() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE", "LONGITUD"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Circuito x : pais.getCircuitos()) {
+            fila[0] = x.getNombre();
+            fila[1] = x.getLongitud();
+            modelo.addRow(fila);
+        }
+
+        paisesTabla.setModel(modelo);
+    }
+
+    private void mostrarCarreras() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"CIRCUITO", "VUELTAS", "FECHA", "HORA"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Carrera x : pais.getCarreras()) {
+            fila[0] = x.getCircuito().getNombre();
+            fila[1] = x.getNumeroVueltas();
+            fila[2] = x.getFechaRealizacion();
+            fila[3] = x.getHoraRealizacion();
+            modelo.addRow(fila);
+        }
+
+        paisesTabla.setModel(modelo);
+    }
+
+    private void mostrarEscuderias() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Escuderia x : pais.getEscuderias()) {
+            fila[0] = x.getNombre();
+            modelo.addRow(fila);
+        }
+
+        paisesTabla.setModel(modelo);
+    }
+
+    private void mostrarPersonas() {
+        modelo = new DefaultTableModel();
+        String[] columnas = {"NOMBRE", "APELLIDO", "DNI", "ROL"};
+        modelo.setColumnIdentifiers(columnas);
+        Object[] fila = new Object[modelo.getColumnCount()];
+
+        modelo.setRowCount(0);
+        for (Persona x : pais.getPersonas()) {
+            fila[0] = x.getNombre();
+            fila[1] = x.getApellido();
+            fila[2] = x.getDni();
+            if (x instanceof Piloto) {
+                fila[3] = "PILOTO";
+            } else {
+                fila[3] = "MECANICO";
+            }
             modelo.addRow(fila);
         }
 
@@ -62,6 +139,15 @@ public class VentanaPais extends javax.swing.JFrame {
         paisesTabla = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         nombreTxt = new javax.swing.JTextField();
+        reiniciarBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        mostrarCircuitosBtn = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        mostrarCarrerasBtn = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        mostrarEscuderiasBtn = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        mostrarPersonasBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,7 +180,7 @@ public class VentanaPais extends javax.swing.JFrame {
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 10, 140));
+        getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 50, 10, 180));
 
         agregarPaisBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarPaisBtn.setText("AGREGAR");
@@ -121,12 +207,13 @@ public class VentanaPais extends javax.swing.JFrame {
 
         idEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         idEtiq.setText("ID:");
-        getContentPane().add(idEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 390, 25));
+        getContentPane().add(idEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 390, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("DESCRIPCION:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, 25));
-        getContentPane().add(descripcionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 300, 25));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("CIRCUITOS");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 90, 25));
+        getContentPane().add(descripcionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 540, 25));
 
         paisesTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -155,12 +242,76 @@ public class VentanaPais extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(paisesTabla);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 780, 390));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 780, 350));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("NOMBRE:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 25));
-        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 320, 25));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, 25));
+        getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 320, 25));
+
+        reiniciarBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        reiniciarBtn.setText("REINICIAR");
+        reiniciarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reiniciarBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("DESCRIPCION:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, 25));
+
+        mostrarCircuitosBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mostrarCircuitosBtn.setText("MOSTRAR");
+        mostrarCircuitosBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarCircuitosBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrarCircuitosBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, -1, 25));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("CARRERAS");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 90, 25));
+
+        mostrarCarrerasBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mostrarCarrerasBtn.setText("MOSTRAR");
+        mostrarCarrerasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarCarrerasBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrarCarrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 25));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("ESCUDERIAS");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 90, 25));
+
+        mostrarEscuderiasBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mostrarEscuderiasBtn.setText("MOSTRAR");
+        mostrarEscuderiasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarEscuderiasBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrarEscuderiasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, 25));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("PILOTOS/MECANICOS");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, 130, 25));
+
+        mostrarPersonasBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mostrarPersonasBtn.setText("MOSTRAR");
+        mostrarPersonasBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarPersonasBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrarPersonasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, -1, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -209,6 +360,27 @@ public class VentanaPais extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarPaisBtnActionPerformed
 
+    private void reiniciarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reiniciarBtnActionPerformed
+        reiniciarCampos();
+        cargarTabla();
+    }//GEN-LAST:event_reiniciarBtnActionPerformed
+
+    private void mostrarCircuitosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCircuitosBtnActionPerformed
+        mostrarCircuitos();
+    }//GEN-LAST:event_mostrarCircuitosBtnActionPerformed
+
+    private void mostrarCarrerasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarCarrerasBtnActionPerformed
+        mostrarCarreras();
+    }//GEN-LAST:event_mostrarCarrerasBtnActionPerformed
+
+    private void mostrarEscuderiasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarEscuderiasBtnActionPerformed
+        mostrarEscuderias();
+    }//GEN-LAST:event_mostrarEscuderiasBtnActionPerformed
+
+    private void mostrarPersonasBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarPersonasBtnActionPerformed
+        mostrarPersonas();
+    }//GEN-LAST:event_mostrarPersonasBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarPaisBtn;
     private javax.swing.JButton btnVolver;
@@ -220,10 +392,19 @@ public class VentanaPais extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JButton mostrarCarrerasBtn;
+    private javax.swing.JButton mostrarCircuitosBtn;
+    private javax.swing.JButton mostrarEscuderiasBtn;
+    private javax.swing.JButton mostrarPersonasBtn;
     private javax.swing.JTextField nombreTxt;
     private javax.swing.JTable paisesTabla;
+    private javax.swing.JButton reiniciarBtn;
     // End of variables declaration//GEN-END:variables
 }

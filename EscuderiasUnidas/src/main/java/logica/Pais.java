@@ -81,6 +81,38 @@ public void agregarEscuderia(Escuderia a){
     public String toString(){
         return idPais + descripcion;
     }
+
+    public ArrayList<Circuito> getCircuitos() {
+        return circuitos;
+    }
+
+    public void setCircuitos(ArrayList<Circuito> circuitos) {
+        this.circuitos = circuitos;
+    }
+
+    public ArrayList<Escuderia> getEscuderias() {
+        return escuderias;
+    }
+
+    public void setEscuderias(ArrayList<Escuderia> escuderias) {
+        this.escuderias = escuderias;
+    }
+
+    public ArrayList<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public void setCarreras(ArrayList<Carrera> carreras) {
+        this.carreras = carreras;
+    }
+
+    public ArrayList<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(ArrayList<Persona> personas) {
+        this.personas = personas;
+    }
     
     
     }

@@ -6,16 +6,14 @@ import javax.swing.table.DefaultTableModel;
 import servicie.GestorDeClases;
 
 public class VentanaResultado extends javax.swing.JFrame {
-
-    private Carrera carrera;
+    
     private GestorDeClases gc;
     private Resultado resultado;
     private DefaultTableModel modelo;
-
-    public VentanaResultado(GestorDeClases gc, Carrera carrera) {
+    
+    public VentanaResultado(GestorDeClases gc, Resultado resultado) {
         this.gc = gc;
-        this.carrera = carrera;
-        resultado = carrera.getResultado();
+        this.resultado = resultado;
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -23,41 +21,40 @@ public class VentanaResultado extends javax.swing.JFrame {
         cargarTabla();
         cargarDatos();
     }
-
+    
     private void cargarDatos() {
-        circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
-        fechaEtiq.setText("FECHA: " + carrera.getFechaRealizacion());
-        horaEtiq.setText("HORA: " + carrera.getHoraRealizacion());
-        paisEtiq.setText(carrera.getPais().getNombre());
+        circuitoEtiq.setText("CIRCUITO: " + resultado.getCarrera().getCircuito().getNombre());
+        fechaEtiq.setText("FECHA: " + resultado.getCarrera().getFechaRealizacion());
+        horaEtiq.setText("HORA: " + resultado.getCarrera().getHoraRealizacion());
+        paisEtiq.setText("PAIS: " + resultado.getCarrera().getPais().getNombre());
+        vueltasEtiq.setText("VUELTAS: " + resultado.getCarrera().getNumeroVueltas());
     }
-
+    
     private void cargarPilotos() {
-        for (AutoPiloto x : carrera.getAutoPiloto()) {
+        for (AutoPiloto x : resultado.getCarrera().getAutoPiloto()) {
             String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
             pilotosBox.addItem(nombre);
         }
     }
-
+    
     private void cargarTabla() {
         modelo = new DefaultTableModel();
         String[] columnas = {"NOMBRE", "APELLIDO", "DNI", "PAIS", "COMPETENCIAS", "VICTORIAS", "VUELTAS R.", "PODIOS"};
         modelo.setColumnIdentifiers(columnas);
         Object[] fila = new Object[modelo.getColumnCount()];
-
+        
         modelo.setRowCount(0);
-        AutoPiloto pilotos[] = resultado.getPilotos();
-        String vueltas[] = resultado.getVueltas();
         for (int i = 0; i < 9; i++) {
             fila[0] = i + 1;
-            fila[1] = pilotos[i].getPiloto().getNombre() + "" + pilotos[i].getPiloto().getApellido();
-            fila[2] = pilotos[i].getAuto().getEscuderia().getNombre();
-            fila[3] = vueltas[i];
+            fila[1] = resultado.getParticipantes().get(i).getPiloto().getNombreCompleto();
+            fila[2] = resultado.getParticipantes().get(i).getAuto().getEscuderia().getNombre();
+            fila[3] = resultado.getVueltas().get(i);
             modelo.addRow(fila);
         }
-
+        
         resultadosTabla.setModel(modelo);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,6 +78,7 @@ public class VentanaResultado extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         vueltaTxt = new javax.swing.JTextField();
         confirmarResultadoBtn = new javax.swing.JButton();
+        vueltasEtiq = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventana de Resultados");
@@ -163,25 +161,25 @@ public class VentanaResultado extends javax.swing.JFrame {
         paisEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         paisEtiq.setText("PAIS:");
         paisEtiq.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(paisEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 300, 25));
+        getContentPane().add(paisEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 300, 25));
 
         circuitoEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         circuitoEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         circuitoEtiq.setText("CIRCUITO:");
         circuitoEtiq.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 300, 25));
+        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 300, 25));
 
         fechaEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         fechaEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         fechaEtiq.setText("FECHA:");
         fechaEtiq.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(fechaEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 300, 25));
+        getContentPane().add(fechaEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 300, 25));
 
         horaEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         horaEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         horaEtiq.setText("HORA:");
         horaEtiq.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(horaEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 300, 25));
+        getContentPane().add(horaEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 300, 25));
 
         agregarPilotoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregarPilotoBtn.setText("AGREGAR");
@@ -214,6 +212,12 @@ public class VentanaResultado extends javax.swing.JFrame {
         });
         getContentPane().add(confirmarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 100, 100, 25));
 
+        vueltasEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        vueltasEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        vueltasEtiq.setText("VUELTAS:");
+        vueltasEtiq.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(vueltasEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 300, 25));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -223,23 +227,23 @@ public class VentanaResultado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
-        carrera.setResultado(resultado);
+        resultado.getCarrera().setResultado(resultado);
     }//GEN-LAST:event_confirmarResultadoBtnActionPerformed
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
-        carrera.setResultado(new Resultado());
+        resultado.getCarrera().setResultado(new Resultado(resultado.getCarrera()));
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
         int indice = pilotosBox.getSelectedIndex() - 1;
-        resultado.agregarPiloto(carrera.getAutoPiloto(indice));
+        resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
         resultado.agregarVuelta(vueltaTxt.getText());
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
         int indice = Integer.parseInt(JOptionPane.showInputDialog("Ingresar posicion que desea eliminar."));
-        resultado.borrarPiloto(indice);
-        resultado.borrarPosicion(indice);
+        resultado.borrarParticipante(indice);
+        resultado.borrarVuelta(indice);
         cargarTabla();
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
@@ -263,5 +267,6 @@ public class VentanaResultado extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> pilotosBox;
     private javax.swing.JTable resultadosTabla;
     private javax.swing.JTextField vueltaTxt;
+    private javax.swing.JLabel vueltasEtiq;
     // End of variables declaration//GEN-END:variables
 }

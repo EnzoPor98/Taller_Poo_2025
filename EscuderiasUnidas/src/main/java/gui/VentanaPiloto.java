@@ -82,7 +82,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
     private void mostrarAutos() {
         modelo = new DefaultTableModel();
-        String[] columnas = {"MODELO", "MOTOR", "FECHA ASIGNACION"};
+        String[] columnas = {"FECHA ASIGNACION", "MODELO", "MOTOR"};
         modelo.setColumnIdentifiers(columnas);
         Object[] fila = new Object[modelo.getColumnCount()];
 
