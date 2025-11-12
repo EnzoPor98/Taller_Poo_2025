@@ -1,6 +1,8 @@
 package gui;
-
+import java.util.*;
+import logica.*;
 import servicie.GestorDeClases;
+import javax.swing.JOptionPane; 
 
 public class VentanaInformes extends javax.swing.JFrame {
 
@@ -129,31 +131,105 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void carreraEntreFechaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carreraEntreFechaBtnActionPerformed
-        // TODO add your handling code here:
+        String fechaInicio =  JOptionPane.showInputDialog("Ingrese fecha de inicio (YYYY-MM-DD):");
+        String fechaFin = JOptionPane.showInputDialog("Ingrese fecha de fin (YYYY-MM-DD):");
+        String lista = "Carrera entre" + fechaInicio + "y" + fechaFin+ ":\n\n";
+            for(Carrera c: gc.getCarreras()){
+                String f = c.getFechaRealizacion();
+                if (f.compareTo(fechaInicio) >= 0 && f.compareTo(fechaFin) <= 0){
+                    lista += c.getCircuito().getNombre()+ "(" + f + ")" ;
+                }
+            }
+        if(lista.equals("")){
+            lista = "No hay carreras entre esas fechas.";
+        } else {
+            areaTxt.setText(lista);
+        }
     }//GEN-LAST:event_carreraEntreFechaBtnActionPerformed
 
     private void rankingPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingPilotosBtnActionPerformed
-        // TODO add your handling code here:
+        ArrayList<Piloto> lista = gc.getPilotos();
+        Collections.sort(lista, (p1, p2) -> p2.getVictorias() - p1.getVictorias());
+        String texto = "RANKING DE PILOTOS (por victorias):\n\n";
+        int i = 1;
+        for (Piloto p : lista) {
+            texto += i + ". " + p.getNombre() + " " + p.getApellido() + " - " + p.getVictorias() + " victorias\n";
+            i++;
+        }
+        areaTxt.setText(texto);
     }//GEN-LAST:event_rankingPilotosBtnActionPerformed
 
     private void podiosVictoriasPilotoSBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_podiosVictoriasPilotoSBtnActionPerformed
-        // TODO add your handling code here:
+        String texto = "PODIOS Y VICTORIAS DE LOS PILOTOS:\n\n";
+
+        for (Piloto p : gc.getPilotos()) {
+            texto += p.getNombre() + " " + p.getApellido() +
+                " - Podios: " + p.getPodios() +
+                " | Victorias: " + p.getVictorias() + "\n";
+        }
+        areaTxt.setText(texto);
     }//GEN-LAST:event_podiosVictoriasPilotoSBtnActionPerformed
 
     private void autosUsadosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autosUsadosBtnActionPerformed
-        // TODO add your handling code here:
+        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+        Escuderia e = gc.buscarEscuderia(nombreEsc);
+            if (e != null) {
+                String texto = "AUTOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
+                for (Auto a : e.getAutos()) {
+                    texto += "- " + a.getModelo() + " (" + a.getMotor() + ")\n";
+                }
+            areaTxt.setText(texto);
+         } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+        }
     }//GEN-LAST:event_autosUsadosBtnActionPerformed
 
     private void mecanicosEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mecanicosEscuderiaBtnActionPerformed
-        // TODO add your handling code here:
+        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+        Escuderia e = gc.buscarEscuderia(nombreEsc);
+            if (e != null) {
+                String texto = "MECÁNICOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
+                for (Mecanico m : e.getMecanicos()) {
+                    texto += "- " + m.getNombre() + " " + m.getApellido() + 
+                    " | " + m.getEspecialidad() + 
+                    " | " + m.getAñosExperiencia() + " años de experiencia\n";
+                    }
+                areaTxt.setText(texto);
+            } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+            }
     }//GEN-LAST:event_mecanicosEscuderiaBtnActionPerformed
 
     private void carrerasPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerasPilotoBtnActionPerformed
-        // TODO add your handling code here:
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del piloto:");
+        String nombreCircuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+        Piloto piloto = gc.buscarPiloto(dni);
+
+        if (piloto != null) {
+            String texto = "CARRERAS DE " + piloto.getNombre() + " EN " + nombreCircuito + ":\n\n";
+            for (AutoPiloto ap : piloto.getAutoPiloto()) {
+                for (Carrera c : ap.getCarreras()) {
+                    if (c.getCircuito().getNombre().equalsIgnoreCase(nombreCircuito)) {
+                        texto += "- " + c.getFechaRealizacion() + " (" + c.getNumeroVueltas() + " vueltas)\n";
+                    }
+                }
+            }
+        areaTxt.setText(texto);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el piloto.");
+        }
     }//GEN-LAST:event_carrerasPilotoBtnActionPerformed
 
     private void carrerasEnCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerasEnCircuitoBtnActionPerformed
-        // TODO add your handling code here:
+        String nombre = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+        int contador = 0;
+
+        for (Carrera c : gc.getCarreras()) {
+            if (c.getCircuito().getNombre().equalsIgnoreCase(nombre)) {
+                contador++;
+            }
+        }
+        areaTxt.setText("El circuito " + nombre + " tiene " + contador + " carrera(s) registradas.");
     }//GEN-LAST:event_carrerasEnCircuitoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
