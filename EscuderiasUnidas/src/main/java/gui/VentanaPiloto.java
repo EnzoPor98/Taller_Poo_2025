@@ -264,7 +264,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 agregarPilotoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        getContentPane().add(agregarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 110, 25));
 
         eliminarPilotoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarPilotoBtn.setText("ELIMINAR");
@@ -273,7 +273,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 eliminarPilotoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        getContentPane().add(eliminarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 110, 25));
 
         buscarPilotoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarPilotoBtn.setText("BUSCAR");
@@ -282,7 +282,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 buscarPilotoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        getContentPane().add(buscarPilotoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 110, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("PAIS:");
@@ -306,7 +306,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 reiniciarBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 110, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -317,22 +317,24 @@ public class VentanaPiloto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
-        this.piloto = new Piloto();
-
         String nombre = nombreTxt.getText();
         String apellido = apellidoTxt.getText();
         String dni = dniTxt.getText();
         Pais pais = gc.getPaises().get(paisBox.getSelectedIndex());
 
-        piloto.setNombre(nombre);
-        piloto.setApellido(apellido);
-        piloto.setDni(dni);
-        piloto.setPais(pais);
+        if (!nombre.isBlank() || !apellido.isBlank() || !dni.isBlank()) {
+            piloto.setNombre(nombre);
+            piloto.setApellido(apellido);
+            piloto.setDni(dni);
+            piloto.setPais(pais);
 
-        gc.agregarPiloto(piloto);
+            gc.agregarPiloto(piloto);
 
-        reiniciarCampos();
-        cargarTabla();
+            reiniciarCampos();
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+        }
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
@@ -369,41 +371,44 @@ public class VentanaPiloto extends javax.swing.JFrame {
     // ********** RELACION PILOTO-ESCUDERIA  ********** //
 
     private void agregarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaBtnActionPerformed
-        if (gc.getPilotos().contains(piloto)) {
-            PilotoEscuderia pe = new PilotoEscuderia();
+        PilotoEscuderia pe = new PilotoEscuderia();
 
-            String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
-            String hastaFecha = JOptionPane.showInputDialog("Ingrese fecha de fin:");
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-            Escuderia escuderia = gc.buscarEscuderia(nombre);
+        String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+        String hastaFecha = JOptionPane.showInputDialog("Ingrese fecha de fin:");
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        Escuderia escuderia = gc.buscarEscuderia(nombre);
 
-            pe.setDesdeFecha(desdeFecha);
-            pe.setHastaFecha(hastaFecha);
-            pe.setPiloto(piloto);
-            pe.setEscuderia(escuderia);
+        pe.setDesdeFecha(desdeFecha);
+        pe.setHastaFecha(hastaFecha);
+        pe.setPiloto(piloto);
+        pe.setEscuderia(escuderia);
 
-            piloto.agregarEscuderia(pe);
-            escuderia.agregarPilotoEscuderia(pe);
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes buscar un piloto antes de realizar esta accion.");
-        }
+        piloto.agregarEscuderia(pe);
+        escuderia.agregarPilotoEscuderia(pe);
+
+        mostrarEscuderias();
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
-        if (gc.getPilotos().contains(piloto)) {
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-            String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-            for (PilotoEscuderia pe : piloto.getEscuderias()) {
-                if (pe.getEscuderia().getNombre().equalsIgnoreCase(nombre)
-                        && pe.getDesdeFecha().equals(fecha)) {
-                    pe.getPiloto().borrarEscuderia(pe);
-                    pe.getEscuderia().borrarPilotoEscuderia(pe);
-                    break;
-                }
+        boolean encontrado = false;
+        for (PilotoEscuderia pe : piloto.getEscuderias()) {
+            if (pe.getEscuderia().getNombre().equalsIgnoreCase(nombre)
+                    && pe.getDesdeFecha().equals(fecha)) {
+                pe.getPiloto().borrarEscuderia(pe);
+                pe.getEscuderia().borrarPilotoEscuderia(pe);
+                encontrado = true;
+                break;
             }
+        }
+
+        if (encontrado) {
+            mostrarEscuderias();
+            JOptionPane.showMessageDialog(null, "Se ha eliminado la escuderia.");
         } else {
-            JOptionPane.showMessageDialog(null, "Debes buscar un piloto antes de realizar esta accion.");
+            JOptionPane.showMessageDialog(null, "No se encontro la escuderia.");
         }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
@@ -414,35 +419,46 @@ public class VentanaPiloto extends javax.swing.JFrame {
     // ********** RELACION PILOTO-AUTO  ********** //
 
     private void agregarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoBtnActionPerformed
-        if (gc.getPilotos().contains(piloto)) {
-            AutoPiloto ap = new AutoPiloto();
+        AutoPiloto ap = new AutoPiloto();
 
-            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
-            String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
-            Auto auto = gc.buscarAuto(modeloAuto);
+        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
+        String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
+        Auto auto = gc.buscarAuto(modeloAuto);
 
+        if (!fecha.isBlank() || !modeloAuto.isBlank() || auto != null) {
             ap.setAuto(auto);
             ap.setPiloto(piloto);
             ap.setFechaAsignacion(fecha);
 
             piloto.agregarAuto(ap);
             auto.agregarAutoPiloto(ap);
+
+            mostrarAutos();
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
         }
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
-        if (gc.getPilotos().contains(piloto)) {
-            String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
-            String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
+        String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
+        String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-            for (AutoPiloto ap : piloto.getAutoPiloto()) {
-                if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)
-                        && ap.getFechaAsignacion().equals(fecha)) {
-                    //ap.getAuto().borrarAuto(ap);
-                    ap.getPiloto().borrarAuto(ap);
-                    break;
-                }
+        boolean encontrado = false;
+        for (AutoPiloto ap : piloto.getAutoPiloto()) {
+            if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)
+                    && ap.getFechaAsignacion().equals(fecha)) {
+                ap.getAuto().borrarPiloto(ap);
+                ap.getPiloto().borrarAuto(ap);
+                encontrado = true;
+                break;
             }
+        }
+
+        if (encontrado) {
+            mostrarAutos();
+            JOptionPane.showMessageDialog(null, "Auto eliminado.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontro el auto.");
         }
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 

@@ -32,29 +32,6 @@ public class VentanaResultado extends javax.swing.JFrame {
         vueltasEtiq.setText("VUELTAS: " + carrera.getNumeroVueltas());
     }
 
-    private void cargarDatosEnPilotos() {
-        resultado.getParticipantes().getFirst().getPiloto().sumarVictoria();
-
-        resultado.getParticipantes().get(0).getPiloto().sumarPodio();
-        resultado.getParticipantes().get(1).getPiloto().sumarPodio();
-        resultado.getParticipantes().get(2).getPiloto().sumarPodio();
-
-        String vueltaMin = "99:99:99";
-        String vueltaPar;
-        AutoPiloto ap = new AutoPiloto();
-        for (int i = 0; i < 10; i++) {
-            vueltaPar = resultado.getVueltas().get(i);
-            if (vueltaMin.compareTo(vueltaPar) > 0) {
-                vueltaMin = resultado.getVueltas().get(i);
-                ap = resultado.getParticipantes().get(i);
-            }
-
-            resultado.getParticipantes().get(i).getPiloto().sumarCompetencia();
-        }
-
-        ap.getPiloto().sumarVueltasRapidas();
-    }
-
     private void cargarPilotos() {
         for (AutoPiloto x : carrera.getAutoPiloto()) {
             String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
@@ -251,18 +228,25 @@ public class VentanaResultado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
-        carrera.setResultado(resultado);
-        cargarDatosEnPilotos();
+        if (resultado.getParticipantes().size() != 10
+                && resultado.getVueltas().size() != 10) {
+            carrera.setResultado(resultado);
+            resultado.actualizarDatosPilotos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes completar la tabla de resultados para confirmar.");
+        }
     }//GEN-LAST:event_confirmarResultadoBtnActionPerformed
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
         carrera.setResultado(new Resultado());
+        cargarTabla();
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
         int indice = pilotosBox.getSelectedIndex() - 1;
         resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
         resultado.agregarVuelta(vueltaTxt.getText());
+        cargarTabla();
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
