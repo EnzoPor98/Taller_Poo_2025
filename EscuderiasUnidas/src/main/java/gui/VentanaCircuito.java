@@ -27,6 +27,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
     private void reiniciarCampos() {
         nombreTxt.setText("");
         longitudTxt.setText("");
+        circuito = new Circuito();
     }
 
     private void cargarPaises() {
@@ -51,8 +52,8 @@ public class VentanaCircuito extends javax.swing.JFrame {
 
         circuitosTabla.setModel(modelo);
     }
-    
-    private void mostrarCarreras(){
+
+    private void mostrarCarreras() {
         modelo = new DefaultTableModel();
         String[] columnas = {"PAIS", "CIRCUITO", "VUELTAS", "FECHA", "HORA"};
         modelo.setColumnIdentifiers(columnas);
@@ -118,7 +119,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CARRERAS");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 80, 90, 25));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 100, 90, 25));
         getContentPane().add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -171,7 +172,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 agregarCircuitoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        getContentPane().add(agregarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 110, 25));
 
         eliminarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarCircuitoBtn.setText("ELIMINAR");
@@ -180,7 +181,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 eliminarCircuitoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        getContentPane().add(eliminarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 110, 25));
 
         buscarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarCircuitoBtn.setText("BUSCAR");
@@ -189,7 +190,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 buscarCircuitoBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        getContentPane().add(buscarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 110, 25));
 
         getContentPane().add(paisBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 180, 25));
 
@@ -204,7 +205,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 reiniciarBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 110, 25));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("NOMBRE:");
@@ -217,7 +218,7 @@ public class VentanaCircuito extends javax.swing.JFrame {
                 mostrarCarrerasBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(mostrarCarrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 110, -1, 25));
+        getContentPane().add(mostrarCarrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, -1, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,15 +229,18 @@ public class VentanaCircuito extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
-        circuito = new Circuito();
-
         String nombre = nombreTxt.getText();
-        int longitud = Integer.parseInt(longitudTxt.getText());
+        String longitud = longitudTxt.getText();
         Pais pais = gc.getPaises().get(paisBox.getItemCount());
 
-        circuito.setNombre(nombre);
-        circuito.setLongitud(longitud);
-        circuito.setPais(pais);
+        if (!nombre.isBlank() || !longitud.isBlank()) {
+            circuito.setNombre(nombre);
+            circuito.setLongitud(Integer.parseInt(longitud));
+            circuito.setPais(pais);
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco.");
+        }
 
         gc.agregarCircuito(circuito);
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed

@@ -21,6 +21,29 @@ public class Resultado {
         this.vueltas = new ArrayList<String>();
     }
 
+    public void actualizarDatosPilotos() {
+        participantes.getFirst().getPiloto().sumarVictoria();
+
+        participantes.get(0).getPiloto().sumarPodio();
+        participantes.get(1).getPiloto().sumarPodio();
+        participantes.get(2).getPiloto().sumarPodio();
+
+        String vueltaMin = "99:99:99";
+        String vueltaPar;
+        AutoPiloto ap = new AutoPiloto();
+        for (int i = 0; i < 10; i++) {
+            vueltaPar = vueltas.get(i);
+            if (vueltaMin.compareTo(vueltaPar) > 0) {
+                vueltaMin = vueltas.get(i);
+                ap = participantes.get(i);
+            }
+
+            participantes.get(i).getPiloto().sumarCompetencia();
+        }
+
+        ap.getPiloto().sumarVueltasRapidas();
+    }
+
     // METODOS DE LISTAS.
     public void agregarParticipante(AutoPiloto ap) {
         participantes.add(ap);

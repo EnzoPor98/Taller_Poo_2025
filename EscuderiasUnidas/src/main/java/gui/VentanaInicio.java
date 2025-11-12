@@ -52,7 +52,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 carrerasBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(carrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 250, 50));
+        getContentPane().add(carrerasBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 180, 50));
 
         paisesBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         paisesBtn.setText("PAISES");
@@ -128,7 +128,7 @@ public class VentanaInicio extends javax.swing.JFrame {
                 informesBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(informesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 120, 50));
+        getContentPane().add(informesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 180, 50));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 300));
 
         pack();

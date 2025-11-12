@@ -24,6 +24,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
     }
 
     private void reiniciarCampos() {
+        mecanico = new Mecanico();
         nombreTxt.setText("");
         apellidoTxt.setText("");
         dniTxt.setText("");
@@ -237,7 +238,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 agregarMecanicoActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        getContentPane().add(agregarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 110, 25));
 
         eliminarMecanico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarMecanico.setText("ELIMINAR");
@@ -246,7 +247,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 eliminarMecanicoActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        getContentPane().add(eliminarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 110, 25));
 
         buscarMecanico.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscarMecanico.setText("BUSCAR");
@@ -255,7 +256,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 buscarMecanicoActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        getContentPane().add(buscarMecanico, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 110, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("PAIS:");
@@ -270,31 +271,31 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 reiniciarBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 110, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarMecanicoActionPerformed
-        mecanico = new Mecanico();
-
         String nombre = nombreTxt.getText();
         String apellido = apellidoTxt.getText();
         String dni = dniTxt.getText();
         String añosExp = añosExperienciaTxt.getText();
-        int añosExperiencia = Integer.parseInt(añosExp);
         String ed = especialidadBox.getSelectedItem().toString();
-        Especialidad especialidadEnum = Especialidad.valueOf(ed.toUpperCase());
 
-        mecanico.setNombre(nombre);
-        mecanico.setApellido(apellido);
-        mecanico.setDni(dni);
-        mecanico.setAñosExperiencia(añosExperiencia);
-        mecanico.setEspecialidad(especialidadEnum);
+        if (!nombre.isBlank() || !apellido.isBlank() || !dni.isBlank() || !añosExp.isBlank() || !ed.isBlank()) {
+            mecanico.setNombre(nombre);
+            mecanico.setApellido(apellido);
+            mecanico.setDni(dni);
+            mecanico.setAñosExperiencia(Integer.parseInt(añosExp));
+            mecanico.setEspecialidad(Especialidad.valueOf(ed.toUpperCase()));
 
-        gc.agregarMecanico(mecanico);
-        cargarTabla();
-        reiniciarCampos();
+            gc.agregarMecanico(mecanico);
+            cargarTabla();
+            reiniciarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+        }
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
@@ -303,6 +304,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
         if (mecanico != null) {
             gc.eliminarMecanico(mecanico);
+            cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
         }
@@ -330,23 +332,6 @@ public class VentanaMecanico extends javax.swing.JFrame {
 
 
     private void verEscuderiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verEscuderiasActionPerformed
-        /*
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
-        Mecanico m = gc.buscarMecanico(dni);
-        if (m != null) {
-            if (m.getEscuderias().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Este mecanico no tiene  escuderias asignadas");
-            } else {
-                String lista = "Escuderias del mecanico:" + m.getNombre();
-                for (Escuderia e : m.getEscuderias()) {
-                    lista = lista + "-" + e.getNombre();
-                }
-                JOptionPane.showMessageDialog(null, lista);
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro un mecanico con ese dni ");
-        }
-         */
         mostrarEscuderias();
     }//GEN-LAST:event_verEscuderiasActionPerformed
 
@@ -359,6 +344,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         if (e != null) {
             mecanico.agregarEscuderia(e);
             e.agregarMecanico(mecanico);
+            mostrarEscuderias();
             JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
@@ -372,6 +358,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         if (e != null && mecanico.getEscuderias().contains(e)) {
             mecanico.borrarEscuderia(e);
             e.borrarMecanico(mecanico);
+            mostrarEscuderias();
             JOptionPane.showMessageDialog(null, "Escuderia eliminada del mecanico correctamente ");
         } else {
             JOptionPane.showMessageDialog(null, "El mecanico no tiene esa escuderia asignada");

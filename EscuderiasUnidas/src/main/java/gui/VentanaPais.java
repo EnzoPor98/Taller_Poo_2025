@@ -27,6 +27,7 @@ public class VentanaPais extends javax.swing.JFrame {
     }
 
     private void reiniciarCampos() {
+        pais = new Pais();
         idEtiq.setText("ID: ");
         nombreTxt.setText("");
         descripcionTxt.setText("");
@@ -176,7 +177,7 @@ public class VentanaPais extends javax.swing.JFrame {
                 buscarPaisBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        getContentPane().add(buscarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 110, 25));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -189,7 +190,7 @@ public class VentanaPais extends javax.swing.JFrame {
                 agregarPaisBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        getContentPane().add(agregarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 110, 25));
 
         eliminarPaisBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarPaisBtn.setText("ELIMINAR");
@@ -198,7 +199,7 @@ public class VentanaPais extends javax.swing.JFrame {
                 eliminarPaisBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        getContentPane().add(eliminarPaisBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 110, 25));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -256,7 +257,7 @@ public class VentanaPais extends javax.swing.JFrame {
                 reiniciarBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 110, 25));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("DESCRIPCION:");
@@ -322,18 +323,20 @@ public class VentanaPais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPaisBtnActionPerformed
-        pais = new Pais();
-
         int id = gc.getPaises().getLast().getIdPais() + 1;
         String descripcion = descripcionTxt.getText();
         String nombre = nombreTxt.getText();
 
-        pais.setIdPais(id);
-        pais.setNombre(nombre);
-        pais.setDescripcion(descripcion);
+        if (!nombre.isBlank() || !descripcion.isBlank()) {
+            pais.setIdPais(id);
+            pais.setNombre(nombre);
+            pais.setDescripcion(descripcion);
 
-        gc.agregarPais(pais);
-        cargarTabla();
+            gc.agregarPais(pais);
+            cargarTabla();
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco.");
+        }
     }//GEN-LAST:event_agregarPaisBtnActionPerformed
 
     private void eliminarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPaisBtnActionPerformed
@@ -342,6 +345,7 @@ public class VentanaPais extends javax.swing.JFrame {
 
         if (pais != null) {
             gc.eliminarPais(pais);
+            cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
         }

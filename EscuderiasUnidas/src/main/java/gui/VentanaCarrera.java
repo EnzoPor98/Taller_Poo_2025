@@ -26,7 +26,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
         fechaTxt.setText("");
         horaTxt.setText("");
         vueltasTxt.setText("");
-        circuitoTxt.setText("");
+        circuitoEtiq.setText("CIRCUITO: ");
     }
 
     private void cargarTabla() {
@@ -98,7 +98,8 @@ public class VentanaCarrera extends javax.swing.JFrame {
         eliminarParticipanteBtn = new javax.swing.JButton();
         eliminarCarreraBtn = new javax.swing.JButton();
         asignarResultadoBtn = new javax.swing.JButton();
-        circuitoTxt = new javax.swing.JTextField();
+        eliminarCircuitoBtn = new javax.swing.JButton();
+        agregarCircuitoBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,7 +137,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 agregarCarreraBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 100, 25));
+        getContentPane().add(agregarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 110, 25));
 
         reiniciarCarreraBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         reiniciarCarreraBtn.setText("REINICIAR");
@@ -145,7 +146,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 reiniciarCarreraBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(reiniciarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 200, 100, 25));
+        getContentPane().add(reiniciarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 200, 110, 25));
 
         carrerasTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -178,23 +179,23 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("FECHA:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, 25));
-        getContentPane().add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 150, 25));
-        getContentPane().add(horaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 150, 25));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, -1, 25));
+        getContentPane().add(fechaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 150, 25));
+        getContentPane().add(horaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, 25));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("HORA:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, -1, 25));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, 25));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("VUELTAS:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, -1, 25));
-        getContentPane().add(vueltasTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 150, 25));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, -1, 25));
+        getContentPane().add(vueltasTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 130, 150, 25));
 
         circuitoEtiq.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         circuitoEtiq.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         circuitoEtiq.setText("CIRCUITO:");
-        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 60, 25));
+        getContentPane().add(circuitoEtiq, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 210, 25));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -240,7 +241,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 buscarCarreraBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(buscarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 160, 100, 25));
+        getContentPane().add(buscarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 160, 110, 25));
 
         eliminarParticipanteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminarParticipanteBtn.setText("ELIMINAR");
@@ -258,7 +259,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 eliminarCarreraBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(eliminarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, 100, 25));
+        getContentPane().add(eliminarCarreraBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, 110, 25));
 
         asignarResultadoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         asignarResultadoBtn.setText("ASIGNAR");
@@ -268,7 +269,24 @@ public class VentanaCarrera extends javax.swing.JFrame {
             }
         });
         getContentPane().add(asignarResultadoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, 100, 25));
-        getContentPane().add(circuitoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 140, 25));
+
+        eliminarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        eliminarCircuitoBtn.setText("ELIMINAR");
+        eliminarCircuitoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarCircuitoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(eliminarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, -1, 25));
+
+        agregarCircuitoBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        agregarCircuitoBtn.setText("ASIGNAR");
+        agregarCircuitoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarCircuitoBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregarCircuitoBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, -1, 25));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -279,21 +297,25 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void agregarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCarreraBtnActionPerformed
-        carrera = new Carrera();
+        if (gc.getCarreras().contains(carrera)) {
+            JOptionPane.showMessageDialog(null, "Hay una escuderia seleccionada, presiona reiniciar.");
+        } else {
+            String fecha = fechaTxt.getText();
+            String hora = horaTxt.getText();
+            String vueltas = vueltasTxt.getText();
 
-        String fecha = fechaTxt.getText();
-        String hora = horaTxt.getText();
-        int vueltas = Integer.parseInt(vueltasTxt.getText());
+            if (!fecha.isBlank() || !hora.isBlank() || !vueltas.isBlank()) {
+                carrera.setFechaRealizacion(fecha);
+                carrera.sethoraRealizacion(hora);
+                carrera.setNumeroVueltas(Integer.parseInt(vueltas));
 
-        Circuito circuito = gc.buscarCircuito(circuitoTxt.getText());
-
-        carrera.setFechaRealizacion(fecha);
-        carrera.sethoraRealizacion(hora);
-        carrera.setNumeroVueltas(vueltas);
-        carrera.setPais(circuito.getPais());
-        carrera.setCircuito(circuito);
-
-        gc.agregarCarrera(carrera);
+                gc.agregarCarrera(carrera);
+                cargarTabla();
+                reiniciarCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+            }
+        }
     }//GEN-LAST:event_agregarCarreraBtnActionPerformed
 
     private void eliminarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCarreraBtnActionPerformed
@@ -303,6 +325,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
         if (carrera != null) {
             gc.eliminarCarrera(carrera);
+            cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
         }
@@ -317,7 +340,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
             fechaTxt.setText(carrera.getFechaRealizacion());
             horaTxt.setText(carrera.getHoraRealizacion());
             vueltasTxt.setText(Integer.toString(carrera.getNumeroVueltas()));
-            circuitoTxt.setText(carrera.getCircuito().getNombre());
+            circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
         } else {
             JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
         }
@@ -333,14 +356,25 @@ public class VentanaCarrera extends javax.swing.JFrame {
     private void agregarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarParticipanteBtnActionPerformed
         if (carrera.getAutoPiloto().size() != 10) {
             String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
-            String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-
             Piloto p = gc.buscarPiloto(dni);
-            for (AutoPiloto ap : p.getAutoPiloto()) {
-                if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)) {
-                    carrera.agregarAutoPilotoParticipante(ap);
-                    break;
+
+            if (p != null) {
+                String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+                boolean encontrado = false;
+                for (AutoPiloto ap : p.getAutoPiloto()) {
+                    if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)) {
+                        carrera.agregarAutoPilotoParticipante(ap);
+                        encontrado = true;
+                        mostrarParticipantes();
+                        break;
+                    }
                 }
+
+                if (!encontrado) {
+                    JOptionPane.showMessageDialog(null, "No se encontro el auto del piloto.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro piloto con el DNI ingresado.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "No pueden agregarse mas de 10 participantes.");
@@ -355,6 +389,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
         int valor = Integer.parseInt(v);
         valor--;
         carrera.getAutoPiloto().remove(valor);
+        mostrarParticipantes();
     }//GEN-LAST:event_eliminarParticipanteBtnActionPerformed
 
     private void mostrarParticipantesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarParticipantesBtnActionPerformed
@@ -364,31 +399,43 @@ public class VentanaCarrera extends javax.swing.JFrame {
     // ********** RELACION CARRERA-RESULTADO ********** //
 
     private void asignarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarResultadoBtnActionPerformed
-        if (carrera != null) {
-            VentanaResultado ventana = new VentanaResultado(gc, carrera);
-        } else {
-            JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
-        }
+        VentanaResultado ventana = new VentanaResultado(gc, carrera);
     }//GEN-LAST:event_asignarResultadoBtnActionPerformed
 
     private void mostrarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarResultadoBtnActionPerformed
-        if (carrera != null) {
-            VentanaResultado ventana = new VentanaResultado(gc, carrera);
-        } else {
-            JOptionPane.showMessageDialog(null, "Primero selecciona o crea una carrera.");
-        }
+        VentanaResultado ventana = new VentanaResultado(gc, carrera);
     }//GEN-LAST:event_mostrarResultadoBtnActionPerformed
+
+    private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
+        String circuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+        Circuito c = gc.buscarCircuito(circuito);
+
+        if (c != null) {
+            carrera.setCircuito(c);
+            carrera.setPais(c.getPais());
+            circuitoEtiq.setText("CIRCUITO: " + c.getNombre());
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito ingresado no existe.");
+        }
+    }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
+
+    private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
+        carrera.setCircuito(new Circuito());
+        carrera.setPais(new Pais());
+        circuitoEtiq.setText("CIRCUITO: ");
+    }//GEN-LAST:event_eliminarCircuitoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCarreraBtn;
+    private javax.swing.JButton agregarCircuitoBtn;
     private javax.swing.JButton agregarParticipanteBtn;
     private javax.swing.JButton asignarResultadoBtn;
     private javax.swing.JButton btnVolver;
     private javax.swing.JButton buscarCarreraBtn;
     private javax.swing.JTable carrerasTabla;
     private javax.swing.JLabel circuitoEtiq;
-    private javax.swing.JTextField circuitoTxt;
     private javax.swing.JButton eliminarCarreraBtn;
+    private javax.swing.JButton eliminarCircuitoBtn;
     private javax.swing.JButton eliminarParticipanteBtn;
     private javax.swing.JTextField fechaTxt;
     private javax.swing.JTextField horaTxt;
