@@ -1,5 +1,5 @@
 package servicie;
-
+import exceptions.*;
 import java.util.ArrayList;
 import logica.Auto;
 import logica.Carrera;
@@ -38,16 +38,16 @@ public class GestorDeClases {
         autos.remove(a);
     }
 
-    public Auto buscarAuto(String modelo) {
+    public Auto buscarAuto(String modelo) throws AutoNoEncontradoException{
         Auto a = null;
 
         for (Auto x : autos) {
             if (x.getModelo().equals(modelo)) {
                 a = x;
-                break;
+                return a;
             }
         }
-        return a;
+        throw new AutoNoEncontradoException("No se encontro un auto del modelo:" + modelo);
     }
 
     public void agregarCarrera(Carrera c) {
@@ -66,30 +66,29 @@ public class GestorDeClases {
         circuitos.remove(c);
     }
     
-     public Carrera buscarCarrera(String f , String h) {
+     public Carrera buscarCarrera(String f , String h) throws CarreraNoEncontradaException {
         Carrera c = null;
 
         for (Carrera i : carreras) {
             if (i.getFechaRealizacion().equals(f) && i.getHoraRealizacion().equals(h)) {
                 c = i;
-                break;
+                return c;
             }
         }
 
-        return c;
+         throw new CarreraNoEncontradaException("No se encontro una carrera en la fecha:" + f + "-" + "y en la hora:" + h);
     }
 
-    public Circuito buscarCircuito(String nombre) {
+    public Circuito buscarCircuito(String nombre) throws CircuitoNoEncontradoException {
         Circuito c = null;
 
         for (Circuito x : circuitos) {
             if (x.getNombre().equals(nombre)) {
                 c = x;
-                break;
+                return c;
             }
         }
-
-        return c;
+         throw new CircuitoNoEncontradoException("No se encontro un circuito con el nombre:" + nombre);
     }
 
     public void agregarEscuderia(Escuderia e) {
@@ -100,17 +99,15 @@ public class GestorDeClases {
         escuderias.remove(e);
     }
 
-    public Escuderia buscarEscuderia(String nombre) {
+    public Escuderia buscarEscuderia(String nombre) throws EscuderiaNoEncontradaException{
         Escuderia e = null;
-
         for (Escuderia x : escuderias) {
             if (x.getNombre().equals(nombre)) {
                 e = x;
-                break;
+                return e;
             }
         }
-
-        return e;
+        throw new EscuderiaNoEncontradaException("No se la escuderia con nombreI: " + nombre);
     }
 
     public void agregarMecanico(Mecanico m) {
@@ -146,28 +143,28 @@ public class GestorDeClases {
         pilotos.add(p);
     }
 
-    public Piloto buscarPiloto(String dni) {
+    public Piloto buscarPiloto(String dni) throws PilotoNoEncontradoException{
         Piloto p = null;
 
         for (Piloto x : pilotos) {
             if (x.getDni().equals(dni)) {
                 p = x;
-                break;
+                return p;
             }
         }
 
-        return p;
+        throw new PilotoNoEncontradoException("No se encontro el piloto con DNI: " + dni);
     }
 
-    public Mecanico buscarMecanico(String dni) {
+    public Mecanico buscarMecanico(String dni) throws MecanicoNoEncontradoException{
         Mecanico m = null;
         for (Mecanico i : mecanicos) {
             if (i.getDni().equals(dni)) {
                 m = i;
-                break;
+                return m;
             }
         }
-        return m;
+         throw new MecanicoNoEncontradoException("No se encontro el mecanico con DNI: " + dni);
     }
 
     public void eliminarPiloto(Piloto p) {

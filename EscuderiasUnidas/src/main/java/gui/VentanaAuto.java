@@ -1,5 +1,5 @@
 package gui;
-
+import exceptions.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
@@ -66,7 +66,10 @@ public class VentanaAuto extends javax.swing.JFrame {
 
         autosTabla.setModel(modelo);
     }
-
+    
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -283,28 +286,27 @@ public class VentanaAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
     private void eliminarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoBtnActionPerformed
-        String variable = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-        auto = gc.buscarAuto(variable);
-
-        if (auto != null) {
+        try{
+            String variable = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+            auto = gc.buscarAuto(variable);
             gc.eliminarAuto(auto);
             reiniciarCampos();
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
+            JOptionPane.showMessageDialog(this, "Auto eliminado correctamente.");
+        } catch(AutoNoEncontradoException ex){
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 
     private void buscarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarAutoBtnActionPerformed
-        String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-        auto = gc.buscarAuto(modeloAuto);
-
-        if (auto != null) {
+         try {
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+            auto = gc.buscarAuto(modeloAuto);
             modeloTxt.setText(auto.getModelo());
             motorTxt.setText(auto.getMotor());
             escuderiaEtiq.setText("ESCUDERIA: " + auto.getEscuderia().getNombre());
-        } else {
-            JOptionPane.showMessageDialog(null, "El auto con el modelo ingresado no existe.");
+        } catch (AutoNoEncontradoException ex){
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_buscarAutoBtnActionPerformed
 
@@ -316,13 +318,13 @@ public class VentanaAuto extends javax.swing.JFrame {
     // ********** RELACION AUTO-PILOTO  ********** //
 
     private void agregarPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotosBtnActionPerformed
+        try{
         AutoPiloto ap = new AutoPiloto();
 
         String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
         String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
         Piloto piloto = gc.buscarPiloto(dni);
 
-        if (piloto != null) {
             ap.setAuto(auto);
             ap.setPiloto(piloto);
             ap.setFechaAsignacion(fecha);
@@ -330,8 +332,9 @@ public class VentanaAuto extends javax.swing.JFrame {
             auto.agregarAutoPiloto(ap);
             piloto.agregarAuto(ap);
             mostrarPilotos();
-        } else {
-            JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
+            JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
+        } catch(PilotoNoEncontradoException ex){
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
 
@@ -361,15 +364,15 @@ public class VentanaAuto extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarPilotosBtnActionPerformed
 
     private void asignarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarEscuderiaBtnActionPerformed
-        String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
-        Escuderia e = gc.buscarEscuderia(nombre);
+        try {
+            String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
+            Escuderia e = gc.buscarEscuderia(nombre);
 
-        if (e != null) {
             auto.setEscuderia(e);
             escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "La escuderia ingresada no existe.");
+        } catch (EscuderiaNoEncontradaException ex){
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 
