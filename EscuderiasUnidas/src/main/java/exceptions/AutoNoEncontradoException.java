@@ -8,8 +8,8 @@ package exceptions;
  *
  * @author Gaston PC
  */
-public class IngresoInvalidoException extends Exception {
-    public IngresoInvalidoException (String msj){
+public class AutoNoEncontradoException extends Exception {
+    public AutoNoEncontradoException (String msj){
         super(msj);
     }
 }
