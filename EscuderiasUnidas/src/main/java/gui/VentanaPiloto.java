@@ -2,8 +2,6 @@ package gui;
 
 import exceptions.DatoInvalidoException;
 import exceptions.FormatoIncorrectoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
@@ -337,9 +335,9 @@ public class VentanaPiloto extends javax.swing.JFrame {
             reiniciarCampos();
             cargarTabla();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
@@ -359,7 +357,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
@@ -380,7 +378,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_buscarPilotoBtnActionPerformed
 
@@ -409,9 +407,9 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
             mostrarEscuderias();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
@@ -442,7 +440,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encontro la escuderia.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
@@ -469,9 +467,9 @@ public class VentanaPiloto extends javax.swing.JFrame {
             
             mostrarAutos();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
@@ -502,7 +500,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encontro el auto.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarAutoBtnActionPerformed
 

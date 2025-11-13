@@ -362,7 +362,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             gc.agregarEscuderia(escuderia);
             cargarTabla();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
@@ -479,9 +479,9 @@ public class VentanaEscuderia extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Piloto agregado correctamente a la escudería.");
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotoActionPerformed
 
@@ -497,6 +497,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             for (PilotoEscuderia p : escuderia.getPilotoEscuderia()) {
                 if (p.getPiloto().getDni().equalsIgnoreCase(dni)) {
                     escuderia.borrarPilotoEscuderia(p);
+                    encontrado = true;
                     break;
                 }
             }
@@ -528,7 +529,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             mostrarAutos();
             JOptionPane.showMessageDialog(null, "Auto agregado correctamente a la escudería.");
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarAutoActionPerformed
 

@@ -1,7 +1,6 @@
 package gui;
 
 import exceptions.DatoInvalidoException;
-import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Carrera;
@@ -337,7 +336,7 @@ public class VentanaPais extends javax.swing.JFrame {
             gc.agregarPais(pais);
             cargarTabla();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPaisBtnActionPerformed
 
@@ -358,17 +357,21 @@ public class VentanaPais extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarPaisBtnActionPerformed
 
     private void buscarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPaisBtnActionPerformed
-        String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
+        try {
+            String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
 
-        int id = Integer.parseInt(num);
-        pais = gc.buscarPais(id);
+            int id = Integer.parseInt(num);
+            pais = gc.buscarPais(id);
 
-        if (pais != null) {
-            idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
-            nombreTxt.setText(pais.getNombre());
-            descripcionTxt.setText(pais.getDescripcion());
-        } else {
-            JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            if (pais != null) {
+                idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
+                nombreTxt.setText(pais.getNombre());
+                descripcionTxt.setText(pais.getDescripcion());
+            } else {
+                JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "El ID debe ser un numero.");
         }
     }//GEN-LAST:event_buscarPaisBtnActionPerformed
 

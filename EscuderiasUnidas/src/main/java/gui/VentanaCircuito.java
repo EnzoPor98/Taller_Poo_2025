@@ -242,7 +242,9 @@ public class VentanaCircuito extends javax.swing.JFrame {
             gc.agregarCircuito(circuito);
             cargarTabla();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "El valor de longitud debe ser un numero.");
         }
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 

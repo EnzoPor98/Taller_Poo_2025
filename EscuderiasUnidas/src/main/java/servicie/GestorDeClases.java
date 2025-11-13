@@ -182,7 +182,7 @@ public class GestorDeClases {
 
         boolean encontrado = false;
         for (Piloto x : pilotos) {
-            if (x.getDni().equals(dni)) {
+            if (x.getDni().equalsIgnoreCase(dni)) {
                 p = x;
                 encontrado = true;
                 break;

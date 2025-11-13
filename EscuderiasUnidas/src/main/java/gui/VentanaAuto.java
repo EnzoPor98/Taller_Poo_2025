@@ -337,11 +337,11 @@ public class VentanaAuto extends javax.swing.JFrame {
             piloto.agregarAuto(ap);
 
             mostrarPilotos();
-            JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
+            JOptionPane.showMessageDialog(null, "Piloto asignado correctamente.");
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
 
@@ -370,7 +370,7 @@ public class VentanaAuto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no se relaciona con este  auto.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
@@ -388,10 +388,10 @@ public class VentanaAuto extends javax.swing.JFrame {
                 escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
                 cargarTabla();
             } catch (DatoInvalidoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMensaje());
+                JOptionPane.showMessageDialog(null, ex.getMensaje());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "No se encontro la escuderia con el nombre ingresado.");
+            JOptionPane.showMessageDialog(null, "No se encontro la escuderia con el nombre ingresado.");
         }
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 
@@ -401,7 +401,7 @@ public class VentanaAuto extends javax.swing.JFrame {
             escuderiaEtiq.setText("ESCUDERIA: ");
             cargarTabla();
         } catch (DatoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, e.getMensaje());
+            JOptionPane.showMessageDialog(null, e.getMensaje());
         }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
