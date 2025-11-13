@@ -40,10 +40,13 @@ public class Persona {
         return nombre;
     }
 
-    public void setNombre(String nombre)  throws DatoInvalidoException{
+    public void setNombre(String nombre)  throws DatoInvalidoException,FormatoIncorrectoException {
        if(nombre== null || nombre.trim().isEmpty()){
             throw new DatoInvalidoException("El nombre no puede estar vacío.");
-       }
+       } else if (!nombre.matches("[a-zA-Z]+")) {
+        throw new FormatoIncorrectoException ();
+    }
+       
         this.nombre = nombre;
     }
 
@@ -51,10 +54,12 @@ public class Persona {
         return apellido;
     }
 
-    public void setApellido(String apellido) throws DatoInvalidoException{
+    public void setApellido(String apellido) throws DatoInvalidoException, FormatoIncorrectoException{
        if(apellido== null || apellido.trim().isEmpty()){
             throw new DatoInvalidoException("El apellido no puede estar vacío.");
-       }
+       }else if (!apellido.matches("[a-zA-Z]+")) {
+        throw new FormatoIncorrectoException ();
+    }
         this.apellido = apellido;
     }
 
