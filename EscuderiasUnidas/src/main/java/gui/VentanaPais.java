@@ -341,22 +341,18 @@ public class VentanaPais extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarPaisBtnActionPerformed
 
     private void eliminarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPaisBtnActionPerformed
-        try {
-            String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
+        String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
 
-            int id = Integer.parseInt(num);
-            pais = gc.buscarPais(id);
+        int id = Integer.parseInt(num);
+        pais = gc.buscarPais(id);
 
-            if (pais != null) {
+        if (pais != null) {
 
-                gc.eliminarPais(pais);
-                cargarTabla();
+            gc.eliminarPais(pais);
+            cargarTabla();
 
-            } else {
-                JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "El ID debe ser un numero.");
+        } else {
+            JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
         }
     }//GEN-LAST:event_eliminarPaisBtnActionPerformed
 
