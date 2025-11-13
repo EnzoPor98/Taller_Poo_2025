@@ -138,8 +138,19 @@ public class VentanaInformes extends javax.swing.JFrame {
                 String f = c.getFechaRealizacion();
                 if (f.compareTo(fechaInicio) >= 0 && f.compareTo(fechaFin) <= 0){
                     lista += c.getCircuito().getNombre()+ "(" + f + ")" ;
+                    lista += "Vueltas:" + c.getNumeroVueltas();
+                   
+                    Resultado r = c.getResultado();
+                    if(r != null && !r.getParticipantes().isEmpty()){
+                        lista += "Ganador:" + r.getParticipantes().get(0).getPiloto().getNombre();
+                        lista += "Podio:";
+                        for (int i = 0; i < r.getParticipantes().size() && i < 3; i++) {
+                            lista += "  - " + r.getParticipantes().get(i).getPiloto().getNombre() + "\n";
+                            }
+                    }
+
+                    }
                 }
-            }
         if(lista.equals("")){
             lista = "No hay carreras entre esas fechas.";
         } else {
@@ -161,29 +172,68 @@ public class VentanaInformes extends javax.swing.JFrame {
 
     private void podiosVictoriasPilotoSBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_podiosVictoriasPilotoSBtnActionPerformed
         String texto = "PODIOS Y VICTORIAS DE LOS PILOTOS:\n\n";
-
-        for (Piloto p : gc.getPilotos()) {
+        String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto (o dejar vacio para ver todos):");
+        
+        if(dni != null && !dni.trim().isEmpty()){
+             Piloto p = gc.buscarPiloto(dni);
+        
+        if(p == null){
+             JOptionPane.showMessageDialog(null, "No se encontro un piloto con ese DNI.");
+            return;
+        }
             texto += p.getNombre() + " " + p.getApellido() +
                 " - Podios: " + p.getPodios() +
                 " | Victorias: " + p.getVictorias() + "\n";
+       
+        areaTxt.setText(texto);
+        return;
+        }
+        for(Piloto p : gc.getPilotos()){
+            texto += p.getNombre() + " " + p.getApellido() +
+                 " - Podios: " + p.getPodios() +
+                 " | Victorias: " + p.getVictorias() + "\n";
         }
         areaTxt.setText(texto);
     }//GEN-LAST:event_podiosVictoriasPilotoSBtnActionPerformed
 
     private void autosUsadosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autosUsadosBtnActionPerformed
 
-        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombreEsc);
-        if (e != null) {
-            String texto = "AUTOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
-            for (Auto a : e.getAutos()) {
+       if(e ==null){
+           JOptionPane.showMessageDialog(null, "No se encontro la escuderia.");
+        return;
+       }
+        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de la carrera (YYYY-MM-DD):");
+        String hora = JOptionPane.showInputDialog("Ingrese la hora (HH:MM):");
+        Carrera carrera = gc.buscarCarrera(fecha, hora);
+        
+        if (carrera == null) {
+            JOptionPane.showMessageDialog(null, "No se encontro la carrera.");
+        return;
+        }
+        //evitamos duplicados con el hashset
+        HashSet<Auto> usados = new HashSet<>();
+        for (AutoPiloto ap : carrera.getAutoPiloto()) {
+        Auto a = ap.getAuto();
+        Escuderia esc = a.getEscuderia();
+        if (esc != null && esc.getNombre().equalsIgnoreCase(e.getNombre())) {
+            usados.add(a);
+        }
+    }
+ 
+        String texto = "AUTOS DE LA ESCUDERIA: " + e.getNombre()
+            + " QUE COMPITIERON EN " + fecha + " " + hora + ":\n\n";
+       
+        if(usados.isEmpty()){
+            texto += "Ningún auto de esta escudería participó en esa carrera.";
+        } else{
+            for(Auto a: usados){
                 texto += "- " + a.getModelo() + " (" + a.getMotor() + ")\n";
             }
-            areaTxt.setText(texto);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
-
         }
+           areaTxt.setText(texto);
+        
     }//GEN-LAST:event_autosUsadosBtnActionPerformed
 
     private void mecanicosEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mecanicosEscuderiaBtnActionPerformed

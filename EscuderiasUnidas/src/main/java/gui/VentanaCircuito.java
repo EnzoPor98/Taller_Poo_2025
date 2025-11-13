@@ -253,8 +253,8 @@ public class VentanaCircuito extends javax.swing.JFrame {
         circuito = gc.buscarCircuito(nombre);
 
         if (circuito != null) {
-            gc.eliminarCircuito(circuito);
-            cargarTabla();
+                gc.eliminarCircuito(circuito);
+                cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }

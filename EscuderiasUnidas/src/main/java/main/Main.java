@@ -90,8 +90,8 @@ public class Main {
 
             Mecanico mecanico2 = new Mecanico();
             mecanico2.setDni("22333444");
-            mecanico2.setNombre("Enzo");
-            mecanico2.setApellido("Portillo 2");
+            mecanico2.setNombre("Ariel");
+            mecanico2.setApellido("Portillo");
             mecanico2.setPais(pais2);
             mecanico2.setEspecialidad(Especialidad.MOTOR);
             mecanico2.setAñosExperiencia(2);
