@@ -1,6 +1,5 @@
 package gui;
 import java.util.*;
-import exceptions.*;
 import logica.*;
 import servicie.GestorDeClases;
 import javax.swing.JOptionPane; 
@@ -148,9 +147,6 @@ public class VentanaInformes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_carreraEntreFechaBtnActionPerformed
 
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
     private void rankingPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingPilotosBtnActionPerformed
         ArrayList<Piloto> lista = gc.getPilotos();
         Collections.sort(lista, (p1, p2) -> p2.getVictorias() - p1.getVictorias());
@@ -236,11 +232,11 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_mecanicosEscuderiaBtnActionPerformed
 
     private void carrerasPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerasPilotoBtnActionPerformed
-        try{
-            String dni = JOptionPane.showInputDialog("Ingrese el DNI del piloto:");
-            String nombreCircuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
-            Piloto piloto = gc.buscarPiloto(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del piloto:");
+        String nombreCircuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+        Piloto piloto = gc.buscarPiloto(dni);
 
+        if (piloto != null) {
             String texto = "CARRERAS DE " + piloto.getNombre() + " EN " + nombreCircuito + ":\n\n";
             for (AutoPiloto ap : piloto.getAutoPiloto()) {
                 for (Carrera c : ap.getCarreras()) {

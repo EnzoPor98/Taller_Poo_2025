@@ -1,5 +1,5 @@
 package gui;
-import exceptions.*;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.*;
@@ -19,9 +19,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
         setResizable(false);
         setVisible(true);
         cargarTabla();
-    }
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void reiniciarCampos() {
@@ -322,32 +319,30 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarCarreraBtnActionPerformed
 
     private void eliminarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCarreraBtnActionPerformed
-       try{
-            String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
-            String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
-            carrera = gc.buscarCarrera(fecha, hora);
+        String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
+        String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
+        carrera = gc.buscarCarrera(fecha, hora);
 
+        if (carrera != null) {
             gc.eliminarCarrera(carrera);
             cargarTabla();
-            JOptionPane.showMessageDialog(null, "Carrera eliminada correctamente");
-        } catch(CarreraNoEncontradaException ex){
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
         }
     }//GEN-LAST:event_eliminarCarreraBtnActionPerformed
 
     private void buscarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCarreraBtnActionPerformed
-        try{
-            String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
-            String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
-            carrera = gc.buscarCarrera(fecha, hora);
+        String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
+        String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
+        carrera = gc.buscarCarrera(fecha, hora);
 
+        if (carrera != null) {
             fechaTxt.setText(carrera.getFechaRealizacion());
             horaTxt.setText(carrera.getHoraRealizacion());
             vueltasTxt.setText(Integer.toString(carrera.getNumeroVueltas()));
             circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
-            
-        }catch(CarreraNoEncontradaException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
         }
     }//GEN-LAST:event_buscarCarreraBtnActionPerformed
 
@@ -359,11 +354,11 @@ public class VentanaCarrera extends javax.swing.JFrame {
     // ********** RELACION CARRERA-AUTOPILOTO ********** //
 
     private void agregarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarParticipanteBtnActionPerformed
-        try{
-            if (carrera.getAutoPiloto().size() != 10) {
-                String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
-                Piloto p = gc.buscarPiloto(dni);
+        if (carrera.getAutoPiloto().size() != 10) {
+            String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
+            Piloto p = gc.buscarPiloto(dni);
 
+            if (p != null) {
                 String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
                 boolean encontrado = false;
                 for (AutoPiloto ap : p.getAutoPiloto()) {
@@ -381,8 +376,8 @@ public class VentanaCarrera extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro piloto con el DNI ingresado.");
             }
-        } catch(PilotoNoEncontradoException ex){
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No pueden agregarse mas de 10 participantes.");
         }
     }//GEN-LAST:event_agregarParticipanteBtnActionPerformed
 
@@ -412,15 +407,15 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarResultadoBtnActionPerformed
 
     private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
-        try{
-            String circuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
-            Circuito c = gc.buscarCircuito(circuito);
+        String circuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+        Circuito c = gc.buscarCircuito(circuito);
 
+        if (c != null) {
             carrera.setCircuito(c);
             carrera.setPais(c.getPais());
             circuitoEtiq.setText("CIRCUITO: " + c.getNombre());
-        } catch(CircuitoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito ingresado no existe.");
         }
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
