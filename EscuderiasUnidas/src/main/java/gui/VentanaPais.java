@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Carrera;
@@ -327,40 +329,66 @@ public class VentanaPais extends javax.swing.JFrame {
         String descripcion = descripcionTxt.getText();
         String nombre = nombreTxt.getText();
 
-        if (!nombre.isBlank() || !descripcion.isBlank()) {
+        try {
             pais.setIdPais(id);
             pais.setNombre(nombre);
             pais.setDescripcion(descripcion);
 
             gc.agregarPais(pais);
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPaisBtnActionPerformed
 
     private void eliminarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPaisBtnActionPerformed
-        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del pais:"));
-        pais = gc.buscarPais(id);
+        try {
+            String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
 
-        if (pais != null) {
-            gc.eliminarPais(pais);
-            cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            if (!num.matches("\\d+")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            int id = Integer.parseInt(num);
+            pais = gc.buscarPais(id);
+
+            if (pais != null) {
+
+                gc.eliminarPais(pais);
+                cargarTabla();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPaisBtnActionPerformed
 
     private void buscarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPaisBtnActionPerformed
-        int id = Integer.parseInt(JOptionPane.showInputDialog("Ingrese ID del pais:"));
-        pais = gc.buscarPais(id);
+        try {
+            String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
 
-        if (pais != null) {
-            idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
-            nombreTxt.setText(pais.getNombre());
-            descripcionTxt.setText(pais.getDescripcion());
-        } else {
-            JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            if (!num.matches("\\d+")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            int id = Integer.parseInt(num);
+            pais = gc.buscarPais(id);
+
+            if (pais != null) {
+                idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
+                nombreTxt.setText(pais.getNombre());
+                descripcionTxt.setText(pais.getDescripcion());
+            } else {
+                JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_buscarPaisBtnActionPerformed
 

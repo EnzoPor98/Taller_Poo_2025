@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import logica.*;
 import javax.swing.table.DefaultTableModel;
@@ -243,17 +245,33 @@ public class VentanaResultado extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
-        int indice = pilotosBox.getSelectedIndex() - 1;
-        resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
-        resultado.agregarVuelta(vueltaTxt.getText());
-        cargarTabla();
+        try {
+            String vuelta = vueltaTxt.getText();
+            if (!vuelta.matches("\\d{2}:\\d{2}:\\d{2}")) {
+                throw new FormatoIncorrectoException();
+            }
+            int indice = pilotosBox.getSelectedIndex() - 1;
+            resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
+            resultado.agregarVuelta(vuelta);
+            cargarTabla();
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        }
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
-        int indice = Integer.parseInt(JOptionPane.showInputDialog("Ingresar posicion que desea eliminar."));
-        resultado.borrarParticipante(indice);
-        resultado.borrarVuelta(indice);
-        cargarTabla();
+        try {
+            String index = JOptionPane.showInputDialog("Ingresar posicion que desea eliminar.");
+            if (!index.matches("\\d+")) {
+                throw new FormatoIncorrectoException();
+            }
+            int indice = Integer.parseInt(index);
+            resultado.borrarParticipante(indice);
+            resultado.borrarVuelta(indice);
+            cargarTabla();
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
