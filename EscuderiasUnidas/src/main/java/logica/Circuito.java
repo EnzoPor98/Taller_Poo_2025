@@ -4,6 +4,7 @@
  */
 package logica;
 import java.util.*;
+import exceptions.*;
 /**
  *
  * @author Gaston PC
@@ -35,13 +36,23 @@ public class Circuito {
         carreras.add(a);
     }
 //metodos sett
-    public void setNombre(String nombre){
+    public void setNombre(String nombre)throws DatoInvalidoException{
+       if(nombre== null || nombre.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita un nombre.");
+       }
         this.nombre = nombre;
     }
-    public void setLongitud(int longitud){
+    public void setLongitud(int longitud)throws DatoInvalidoException{
+       if(longitud < 0 ){
+            throw new DatoInvalidoException("Se necesita un la longitud del circuito.");
+       }
         this.longitud = longitud;
     }
-    public void setPais(Pais pais){
+    
+    public void setPais(Pais pais)throws DatoInvalidoException{
+       if(pais== null ){
+            throw new DatoInvalidoException("Se necesita un pais para circuito.");
+       }
         this.pais = pais;
     }
     
@@ -66,7 +77,10 @@ public class Circuito {
         return carreras;
     }
 
-    public void setCarreras(ArrayList<Carrera> carreras) {
+    public void setCarreras(ArrayList<Carrera> carreras) throws DatoInvalidoException{
+       if(carreras== null ){
+            throw new DatoInvalidoException("Se necesitan  carrera para el circuito.");
+       }
         this.carreras = carreras;
     }
     
