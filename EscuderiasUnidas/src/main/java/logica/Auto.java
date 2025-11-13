@@ -4,6 +4,7 @@
  */
 package logica;
 import java.util.*;
+import exceptions.*;
 /**
  *
  * @author Gaston PC
@@ -33,7 +34,10 @@ public class Auto {
     }
     
 //metodos agregar
-    public void agregarAutoPiloto(AutoPiloto a){
+    public void agregarAutoPiloto(AutoPiloto a)throws DatoInvalidoException{
+        if(a == null){
+        throw new DatoInvalidoException("El auto debe tener un piloto.");  
+        }
         pilotos.add(a);
     }
     
@@ -42,13 +46,22 @@ public class Auto {
     }
 
     //metodos sett
-    public void setModelo(String modelo){
+    public void setModelo(String modelo)throws DatoInvalidoException{
+       if(modelo == null || modelo.trim().isEmpty()){
+            throw new DatoInvalidoException("El modelo del auto no puede estar vacío.");
+       }
         this.modelo = modelo;
     }
-    public void setMotor(String motor){
-        this.motor = motor;
-    }
-    public void setEscuderia(Escuderia escuderia){
+    public void setMotor(String motor)throws DatoInvalidoException{
+       if(motor == null || motor.trim().isEmpty()){
+            throw new DatoInvalidoException("El motor del auto no puede estar vacío.");
+       }
+    this.motor = motor;
+}
+    public void setEscuderia(Escuderia escuderia)throws DatoInvalidoException{
+       if(escuderia == null){
+            throw new DatoInvalidoException("El auto debe pertenecer a una escuderia.");
+       }
         this.escuderia = escuderia;
     }
     
