@@ -1,5 +1,5 @@
 package gui;
-
+import exceptions.*;
 import logica.*;
 import servicie.GestorDeClases;
 import javax.swing.JOptionPane;
@@ -30,6 +30,9 @@ public class VentanaMecanico extends javax.swing.JFrame {
         dniTxt.setText("");
         añosExperienciaTxt.setText("");
         cargarTabla();
+    }
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void cargarPaises() {
@@ -299,29 +302,29 @@ public class VentanaMecanico extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        mecanico = gc.buscarMecanico(dni);
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
+            mecanico = gc.buscarMecanico(dni);
 
-        if (mecanico != null) {
             gc.eliminarMecanico(mecanico);
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+        } catch(MecanicoNoEncontradoException ex) {
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
 
     private void buscarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        mecanico = gc.buscarMecanico(dni);
+        try{
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
+            mecanico = gc.buscarMecanico(dni);
 
-        if (mecanico != null) {
             nombreTxt.setText(mecanico.getNombre());
             apellidoTxt.setText(mecanico.getApellido());
             dniTxt.setText(mecanico.getDni());
             paisBox.setSelectedItem(mecanico.getPais().getNombre());
             añosExperienciaTxt.setText(Integer.toString(mecanico.getAñosExperiencia()));
-        } else {
-            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+        } catch(MecanicoNoEncontradoException ex) {
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_buscarMecanicoActionPerformed
 
@@ -338,30 +341,30 @@ public class VentanaMecanico extends javax.swing.JFrame {
     // ********** RELACION MECANICO-ESCUDERIA ********** //
 
     private void agregarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaActionPerformed
+        try{
         String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        if (e != null) {
             mecanico.agregarEscuderia(e);
             e.agregarMecanico(mecanico);
             mostrarEscuderias();
             JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
+        } catch(EscuderiaNoEncontradaException ex) {
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_agregarEscuderiaActionPerformed
 
     private void borrarEscuderiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarEscuderiaActionPerformed
-        String nombreEscuderia = JOptionPane.showInputDialog("Ingrese nombre de la escuderia a eliminar");
-        Escuderia e = gc.buscarEscuderia(nombreEscuderia);
+        try{
+            String nombreEscuderia = JOptionPane.showInputDialog("Ingrese nombre de la escuderia a eliminar");
+            Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        if (e != null && mecanico.getEscuderias().contains(e)) {
             mecanico.borrarEscuderia(e);
             e.borrarMecanico(mecanico);
             mostrarEscuderias();
             JOptionPane.showMessageDialog(null, "Escuderia eliminada del mecanico correctamente ");
-        } else {
-            JOptionPane.showMessageDialog(null, "El mecanico no tiene esa escuderia asignada");
+        } catch(EscuderiaNoEncontradaException  ex) {
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_borrarEscuderiaActionPerformed
 
