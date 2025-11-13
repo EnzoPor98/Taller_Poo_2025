@@ -1,6 +1,7 @@
 package main;
 
 import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import logica.*;
 import gui.VentanaInicio;
 import servicie.GestorDeClases;
@@ -8,9 +9,10 @@ import servicie.GestorDeClases;
 public class Main {
 
     public static void main(String args[]) {
-        GestorDeClases gc = new GestorDeClases();
 
         try {
+            GestorDeClases gc = new GestorDeClases();
+
             // ********** CREAMOS DATOS DE PRUEBA ********** //
             // PAISES.
             Pais pais = new Pais(1, "Argentina", "Descripcion 1");
@@ -78,7 +80,7 @@ public class Main {
 
             // MECANICOS.
             Mecanico mecanico = new Mecanico();
-            mecanico.setDni("1");
+            mecanico.setDni("11222333");
             mecanico.setNombre("Enzo");
             mecanico.setApellido("Portillo");
             mecanico.setPais(pais);
@@ -87,7 +89,7 @@ public class Main {
             pais.agregarPersonas(mecanico);
 
             Mecanico mecanico2 = new Mecanico();
-            mecanico2.setDni("2");
+            mecanico2.setDni("22333444");
             mecanico2.setNombre("Ariel");
             mecanico2.setApellido("Portillo");
             mecanico2.setPais(pais2);
@@ -96,7 +98,7 @@ public class Main {
             pais2.agregarPersonas(mecanico2);
 
             Mecanico mecanico3 = new Mecanico();
-            mecanico3.setDni("3");
+            mecanico3.setDni("33444555");
             mecanico3.setNombre("Enzo");
             mecanico3.setApellido("Portillo");
             mecanico3.setPais(pais3);
@@ -105,7 +107,7 @@ public class Main {
             pais3.agregarPersonas(mecanico3);
 
             Mecanico mecanico4 = new Mecanico();
-            mecanico4.setDni("4");
+            mecanico4.setDni("44555666");
             mecanico4.setNombre("Enzo");
             mecanico4.setApellido("Portillo");
             mecanico4.setPais(pais4);
@@ -114,7 +116,7 @@ public class Main {
             pais4.agregarPersonas(mecanico4);
 
             Mecanico mecanico5 = new Mecanico();
-            mecanico5.setDni("5");
+            mecanico5.setDni("55666777");
             mecanico5.setNombre("Enzo");
             mecanico5.setApellido("Portillo");
             mecanico5.setPais(pais5);
@@ -185,70 +187,70 @@ public class Main {
 
             // PILOTOS.
             Piloto piloto = new Piloto();
-            piloto.setDni("1");
+            piloto.setDni("66777888");
             piloto.setNombre("Ezequiel");
             piloto.setApellido("Romero 1");
             piloto.setPais(pais);
             pais.agregarPersonas(piloto);
 
             Piloto piloto2 = new Piloto();
-            piloto2.setDni("2");
+            piloto2.setDni("77888999");
             piloto2.setNombre("Ezequiel");
             piloto2.setApellido("Romero 2");
             piloto2.setPais(pais);
             pais.agregarPersonas(piloto2);
 
             Piloto piloto3 = new Piloto();
-            piloto3.setDni("3");
+            piloto3.setDni("88999000");
             piloto3.setNombre("Ezequiel");
             piloto3.setApellido("Romero 3");
             piloto3.setPais(pais2);
             pais2.agregarPersonas(piloto3);
 
             Piloto piloto4 = new Piloto();
-            piloto4.setDni("4");
+            piloto4.setDni("00111222");
             piloto4.setNombre("Ezequiel");
             piloto4.setApellido("Romero 4");
             piloto4.setPais(pais2);
             pais2.agregarPersonas(piloto4);
 
             Piloto piloto5 = new Piloto();
-            piloto5.setDni("5");
+            piloto5.setDni("99888777");
             piloto5.setNombre("Ezequiel");
             piloto5.setApellido("Romero 5");
             piloto5.setPais(pais3);
             pais3.agregarPersonas(piloto5);
 
             Piloto piloto6 = new Piloto();
-            piloto6.setDni("6");
+            piloto6.setDni("88777666");
             piloto6.setNombre("Ezequiel");
             piloto6.setApellido("Romero 6");
             piloto6.setPais(pais3);
             pais3.agregarPersonas(piloto6);
 
             Piloto piloto7 = new Piloto();
-            piloto7.setDni("7");
+            piloto7.setDni("77666555");
             piloto7.setNombre("Ezequiel");
             piloto7.setApellido("Romero 7");
             piloto7.setPais(pais4);
             pais4.agregarPersonas(piloto7);
 
             Piloto piloto8 = new Piloto();
-            piloto8.setDni("8");
+            piloto8.setDni("66555444");
             piloto8.setNombre("Ezequiel");
             piloto8.setApellido("Romero 8");
             piloto8.setPais(pais4);
             pais4.agregarPersonas(piloto8);
 
             Piloto piloto9 = new Piloto();
-            piloto9.setDni("9");
+            piloto9.setDni("55444333");
             piloto9.setNombre("Ezequiel");
             piloto9.setApellido("Romero 9");
             piloto9.setPais(pais5);
             pais5.agregarPersonas(piloto9);
 
             Piloto piloto10 = new Piloto();
-            piloto10.setDni("10");
+            piloto10.setDni("44333222");
             piloto10.setNombre("Ezequiel");
             piloto10.setApellido("Romero 10");
             piloto10.setPais(pais5);
@@ -436,7 +438,7 @@ public class Main {
             carrera.agregarAutoPilotoParticipante(ap10);
             carrera.setCircuito(circuito);
             carrera.setFechaRealizacion("2025/12/13");
-            carrera.sethoraRealizacion("12:30:00");
+            carrera.sethoraRealizacion("12:30");
             carrera.setNumeroVueltas(5);
             carrera.setPais(pais);
             pais.agregarCarrera(carrera);
@@ -517,10 +519,12 @@ public class Main {
             gc.agregarPiloto(piloto9);
             gc.agregarPiloto(piloto10);
             gc.agregarCarrera(carrera);
-        } catch (DatoInvalidoException e) {
 
+            VentanaInicio ventana = new VentanaInicio(gc);
+        } catch (DatoInvalidoException ex) {
+            System.out.println(ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            System.out.println(ex.getMensaje());
         }
-
-        VentanaInicio ventana = new VentanaInicio(gc);
     }
 }

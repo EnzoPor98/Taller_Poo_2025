@@ -30,7 +30,7 @@ public class Persona {
     public void setDni(String dni) throws DatoInvalidoException, FormatoIncorrectoException{
        if(dni == null || dni.trim().isEmpty()){
             throw new DatoInvalidoException("El dni no puede estar vacío.");
-       } else if (dni.matches("\\d{8}")) {
+       } else if (!dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
         this.dni = dni;

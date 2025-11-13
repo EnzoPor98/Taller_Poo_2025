@@ -327,7 +327,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
             String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
             String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || hora.matches("\\d{2}:\\d{2}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || !hora.matches("\\d{2}:\\d{2}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -338,8 +338,6 @@ public class VentanaCarrera extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -350,7 +348,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
             String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
             String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || hora.matches("\\d{2}:\\d{2}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || !hora.matches("\\d{2}:\\d{2}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -380,7 +378,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
             try {
                 String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
 
-                if (dni.matches("\\d{8}")) {
+                if (!dni.matches("\\d{8}")) {
                     throw new FormatoIncorrectoException();
                 }
 

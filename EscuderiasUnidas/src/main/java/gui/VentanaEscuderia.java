@@ -371,13 +371,9 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         escuderia = gc.buscarEscuderia(nombre);
 
         if (escuderia != null) {
-            try {
-                gc.eliminarEscuderia(escuderia);
-                cargarTabla();
-                JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
-            } catch (DatoInvalidoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMensaje());
-            }
+            gc.eliminarEscuderia(escuderia);
+            cargarTabla();
+            JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
         } else {
             JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
         }
@@ -398,22 +394,27 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     // ********** RELACION ESCUDERIA-MECANICO ********** //
 
     private void agregarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
-        Mecanico m = gc.buscarMecanico(dni);
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
+            Mecanico m = gc.buscarMecanico(dni);
 
-        if (m != null) {
-            try {
+            if (!dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            if (m != null) {
                 escuderia.agregarMecanico(m);
                 m.agregarEscuderia(escuderia);
                 mostrarMecanicos();
                 JOptionPane.showMessageDialog(null, "Mecánico agregado correctamente a la escudería.");
-            } catch (DatoInvalidoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMensaje());
+            } else {
+                JOptionPane.showMessageDialog(null, "El mecanico no se encontro.");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "El mecanico no se encontro.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
-
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void mostrarMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMecanicosActionPerformed
@@ -423,6 +424,10 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
         try {
             String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecánico a eliminar:");
+
+            if (!dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
 
             boolean encontrado = false;
             for (Mecanico m : escuderia.getMecanicos()) {
@@ -440,7 +445,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró un mecánico con ese DNI.");
             }
-        } catch (DatoInvalidoException ex) {
+        } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
@@ -455,9 +460,9 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             String hasta = JOptionPane.showInputDialog("Ingrese la fecha de fin:");
             String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto:");
 
-            if (desde.matches("\\d{4}/\\d{2}/\\d{2}")
-                    || hasta.matches("\\d{4}/\\d{2}/\\d{2}")
-                    || dni.matches("\\d{8}")) {
+            if (!desde.matches("\\d{4}/\\d{2}/\\d{2}")
+                    || !hasta.matches("\\d{4}/\\d{2}/\\d{2}")
+                    || !dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -484,6 +489,10 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         try {
             String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto a eliminar:");
 
+            if (!dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
             boolean encontrado = false;
             for (PilotoEscuderia p : escuderia.getPilotoEscuderia()) {
                 if (p.getPiloto().getDni().equalsIgnoreCase(dni)) {
@@ -498,7 +507,7 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontró un Piloto con ese DNI.");
             }
-        } catch (DatoInvalidoException ex) {
+        } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoActionPerformed
@@ -524,30 +533,26 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarAutoActionPerformed
 
     private void eliminarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoActionPerformed
-        try {
-            String modeloAuto = JOptionPane.showInputDialog("Ingrese el Modelo del Auto a eliminar:");
+        String modeloAuto = JOptionPane.showInputDialog("Ingrese el Modelo del Auto a eliminar:");
 
-            boolean encontrado = false;
-            for (Auto a : escuderia.getAutos()) {
-                if (a.getModelo().equalsIgnoreCase(modeloAuto)) {
-                    escuderia.borrarAuto(a);
-                    try {
-                        a.setEscuderia(new Escuderia());
-                    } catch (DatoInvalidoException ex) {
-                        Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    break;
+        boolean encontrado = false;
+        for (Auto a : escuderia.getAutos()) {
+            if (a.getModelo().equalsIgnoreCase(modeloAuto)) {
+                escuderia.borrarAuto(a);
+                try {
+                    a.setEscuderia(new Escuderia());
+                } catch (DatoInvalidoException ex) {
+                    Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
             }
+        }
 
-            if (encontrado) {
-                mostrarAutos();
-                JOptionPane.showMessageDialog(null, "Auto eliminado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontró un Auto con ese modelo.");
-            }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        if (encontrado) {
+            mostrarAutos();
+            JOptionPane.showMessageDialog(null, "Auto eliminado correctamente.");
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró un Auto con ese modelo.");
         }
     }//GEN-LAST:event_eliminarAutoActionPerformed
 
