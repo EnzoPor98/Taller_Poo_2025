@@ -1,6 +1,6 @@
 package gui;
 
-import exceptions.*;
+import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
@@ -322,45 +322,60 @@ public class VentanaAuto extends javax.swing.JFrame {
     // ********** RELACION AUTO-PILOTO  ********** //
 
     private void agregarPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotosBtnActionPerformed
-        AutoPiloto ap = new AutoPiloto();
+        try {
+            AutoPiloto ap = new AutoPiloto();
 
-        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
-        String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
-        Piloto piloto = gc.buscarPiloto(dni);
+            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
+            String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
 
-        if (piloto != null) {
-            ap.setAuto(auto);
-            ap.setPiloto(piloto);
-            ap.setFechaAsignacion(fecha);
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
 
-            auto.agregarAutoPiloto(ap);
-            piloto.agregarAuto(ap);
-            mostrarPilotos();
-            JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(this, "No se encontro al piloto con el DNI ingresado.");
+            Piloto piloto = gc.buscarPiloto(dni);
+            if (piloto != null) {
+                ap.setAuto(auto);
+                ap.setPiloto(piloto);
+                ap.setFechaAsignacion(fecha);
+
+                auto.agregarAutoPiloto(ap);
+                piloto.agregarAuto(ap);
+                mostrarPilotos();
+                JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontro al piloto con el DNI ingresado.");
+            }
+        } catch (FormatoIncorrectoException e) {
+            JOptionPane.showMessageDialog(this, e.getMensaje());
         }
-
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
-        String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
+            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-        boolean encontrado = false;
-        for (AutoPiloto ap : auto.getAutoPiloto()) {
-            if (ap.getPiloto().getDni().equalsIgnoreCase(dni)
-                    && ap.getFechaAsignacion().equals(fecha)) {
-                ap.getAuto().borrarPiloto(ap);
-                ap.getPiloto().borrarAuto(ap);
-                encontrado = true;
-                break;
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
             }
-        }
 
-        if (!encontrado) {
-            mostrarPilotos();
-            JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no se relaciona con este  auto.");
+            boolean encontrado = false;
+            for (AutoPiloto ap : auto.getAutoPiloto()) {
+                if (ap.getPiloto().getDni().equalsIgnoreCase(dni)
+                        && ap.getFechaAsignacion().equals(fecha)) {
+                    ap.getAuto().borrarPiloto(ap);
+                    ap.getPiloto().borrarAuto(ap);
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                mostrarPilotos();
+                JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no se relaciona con este  auto.");
+            }
+        } catch (FormatoIncorrectoException e) {
+            JOptionPane.showMessageDialog(this, e.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
@@ -379,7 +394,6 @@ public class VentanaAuto extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro a la escuderia con el nombre ingresado.");
         }
-
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed

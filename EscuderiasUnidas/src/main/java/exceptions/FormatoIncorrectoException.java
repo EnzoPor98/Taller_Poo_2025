@@ -8,7 +8,7 @@ package exceptions;
  *
  * @author Portillo's PC
  */
-public class FormatoIncorrectoException {
+public class FormatoIncorrectoException extends Exception {
 
     private String mensaje;
 
