@@ -232,16 +232,24 @@ public class VentanaResultado extends javax.swing.JFrame {
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
         if (resultado.getParticipantes().size() != 10
                 && resultado.getVueltas().size() != 10) {
-            carrera.setResultado(resultado);
-            resultado.actualizarDatosPilotos();
+            try {
+                carrera.setResultado(resultado);
+                resultado.actualizarDatosPilotos();
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMensaje());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debes completar la tabla de resultados para confirmar.");
         }
     }//GEN-LAST:event_confirmarResultadoBtnActionPerformed
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
-        carrera.setResultado(new Resultado());
-        cargarTabla();
+        try {
+            carrera.setResultado(new Resultado());
+            cargarTabla();
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
+        }
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
@@ -254,6 +262,8 @@ public class VentanaResultado extends javax.swing.JFrame {
             resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
             resultado.agregarVuelta(vuelta);
             cargarTabla();
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }

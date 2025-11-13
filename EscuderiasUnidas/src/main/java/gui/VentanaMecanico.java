@@ -306,7 +306,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         try {
             String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
 
-            if (dni.matches("\\d{8}")) {
+            if (!dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -317,8 +317,6 @@ public class VentanaMecanico extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -328,7 +326,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         try {
             String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
 
-            if (dni.matches("\\d{8}")) {
+            if (!dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 

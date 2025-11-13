@@ -289,14 +289,9 @@ public class VentanaAuto extends javax.swing.JFrame {
         auto = gc.buscarAuto(variable);
 
         if (auto != null) {
-            try {
                 gc.eliminarAuto(auto);
                 reiniciarCampos();
                 cargarTabla();
-                JOptionPane.showMessageDialog(this, "Auto eliminado correctamente.");
-            } catch (DatoInvalidoException e) {
-                JOptionPane.showMessageDialog(null, e.getMensaje());
-            }
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro el auto con el modelo ingresado.");
         }
@@ -327,7 +322,7 @@ public class VentanaAuto extends javax.swing.JFrame {
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || !dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -355,7 +350,7 @@ public class VentanaAuto extends javax.swing.JFrame {
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || !dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 

@@ -346,7 +346,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
         try {
             String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
-            if (dni.matches("\\d{8}")) {
+            if (!dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -358,8 +358,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -368,7 +366,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
     private void buscarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPilotoBtnActionPerformed
         try {
             String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
-            if (dni.matches("\\d{8}")) {
+            if (!dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -422,7 +420,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
             String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
             String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -458,26 +456,18 @@ public class VentanaPiloto extends javax.swing.JFrame {
         try {
             AutoPiloto ap = new AutoPiloto();
 
-            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
             String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
             Auto auto = gc.buscarAuto(modeloAuto);
+            String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
 
-            if (!fecha.isBlank() || !modeloAuto.isBlank() || auto != null) {
-                ap.setAuto(auto);
-                ap.setPiloto(piloto);
-                ap.setFechaAsignacion(fecha);
+            ap.setAuto(auto);
+            ap.setPiloto(piloto);
+            ap.setFechaAsignacion(fecha);
 
-                piloto.agregarAuto(ap);
-                try {
-                    auto.agregarAutoPiloto(ap);
-                } catch (DatoInvalidoException ex) {
-                    Logger.getLogger(VentanaPiloto.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                mostrarAutos();
-            } else {
-                JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
-            }
+            piloto.agregarAuto(ap);
+            auto.agregarAutoPiloto(ap);
+            
+            mostrarAutos();
         } catch (DatoInvalidoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
@@ -490,7 +480,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
             String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
             String fecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
 
-            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
                 throw new FormatoIncorrectoException();
             }
 
