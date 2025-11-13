@@ -1,4 +1,5 @@
 package logica;
+import exceptions.*;
 
 public class PilotoEscuderia {
     private String desdeFecha;
@@ -26,7 +27,10 @@ public class PilotoEscuderia {
         return desdeFecha;
     }
 
-    public void setDesdeFecha(String desdeFecha) {
+    public void setDesdeFecha(String desdeFecha) throws DatoInvalidoException{
+       if(desdeFecha== null || desdeFecha.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita una fecha de inicio.");
+       }
         this.desdeFecha = desdeFecha;
     }
 
@@ -34,7 +38,10 @@ public class PilotoEscuderia {
         return hastaFecha;
     }
 
-    public void setHastaFecha(String hastaFecha) {
+    public void setHastaFecha(String hastaFecha)throws DatoInvalidoException{
+       if( hastaFecha== null ||  hastaFecha.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita una fecha final.");
+       }
         this.hastaFecha = hastaFecha;
     }
 
@@ -42,7 +49,10 @@ public class PilotoEscuderia {
         return piloto;
     }
 
-    public void setPiloto(Piloto piloto) {
+    public void setPiloto(Piloto piloto)throws DatoInvalidoException{
+       if(  piloto== null ){
+            throw new DatoInvalidoException("Se necesita un piloto.");
+       }
         this.piloto = piloto;
     }
 
@@ -50,7 +60,10 @@ public class PilotoEscuderia {
         return escuderia;
     }
 
-    public void setEscuderia(Escuderia escuderia) {
+    public void setEscuderia(Escuderia escuderia)throws DatoInvalidoException{
+       if( escuderia== null ){
+            throw new DatoInvalidoException("Se necesita una escuderia.");
+       }
         this.escuderia = escuderia;
     }
 }

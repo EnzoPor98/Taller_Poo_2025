@@ -5,7 +5,7 @@
 package logica;
 
 import java.util.ArrayList;
-
+import exceptions.*;
 /**
  *
  * @author Gaston PC
@@ -45,11 +45,17 @@ public class Resultado {
     }
 
     // METODOS DE LISTAS.
-    public void agregarParticipante(AutoPiloto ap) {
+    public void agregarParticipante(AutoPiloto ap) throws DatoInvalidoException{
+       if(  ap == null ){
+            throw new DatoInvalidoException("Se necesita el participante.");
+       }
         participantes.add(ap);
     }
 
-    public void agregarVuelta(String vuelta) {
+    public void agregarVuelta(String vuelta)  throws DatoInvalidoException{
+       if(  vuelta == null ){
+            throw new DatoInvalidoException("Se necesita la vuelta.");
+       }
         vueltas.add(vuelta);
     }
 
@@ -66,7 +72,10 @@ public class Resultado {
         return participantes;
     }
 
-    public void setParticipantes(ArrayList<AutoPiloto> participantes) {
+    public void setParticipantes(ArrayList<AutoPiloto> participantes)  throws DatoInvalidoException{
+       if(  participantes == null ){
+            throw new DatoInvalidoException("Se necesitan los participantes.");
+       }
         this.participantes = participantes;
     }
 
@@ -74,7 +83,10 @@ public class Resultado {
         return vueltas;
     }
 
-    public void setVueltas(ArrayList<String> vueltas) {
+    public void setVueltas(ArrayList<String> vueltas) throws DatoInvalidoException{
+       if(  vueltas == null ){
+            throw new DatoInvalidoException("Se necesitan las  vueltas.");
+       }
         this.vueltas = vueltas;
     }
 
@@ -82,7 +94,10 @@ public class Resultado {
         return carrera;
     }
 
-    public void setCarrera(Carrera carrera) {
+    public void setCarrera(Carrera carrera)throws DatoInvalidoException{
+       if( carrera== null ){
+            throw new DatoInvalidoException("Se necesita una carrera.");
+       }
         this.carrera = carrera;
     }
 }

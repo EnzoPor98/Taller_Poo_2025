@@ -1,5 +1,5 @@
 package logica;
-
+import exceptions.*;
 import java.util.ArrayList;
 
 public class Piloto extends Persona {
@@ -76,7 +76,10 @@ public class Piloto extends Persona {
         return numeroCompetencia;
     }
 
-    public void setNumeroCompetencia(int numeroCompetencia) {
+    public void setNumeroCompetencia(int numeroCompetencia) throws DatoInvalidoException{
+       if(numeroCompetencia< 0 ){
+            throw new DatoInvalidoException("El numero de Competencia no puede ser menor a 0.");
+       }
         this.numeroCompetencia = numeroCompetencia;
     }
 
@@ -84,7 +87,10 @@ public class Piloto extends Persona {
         return victorias;
     }
 
-    public void setVictorias(int victorias) {
+    public void setVictorias(int victorias) throws DatoInvalidoException{
+       if(victorias< 0 ){
+            throw new DatoInvalidoException("El numero de victorias no puede ser menor a 0.");
+       }
         this.victorias = victorias;
     }
 
@@ -92,7 +98,10 @@ public class Piloto extends Persona {
         return polePosition;
     }
 
-    public void setPolePosition(int polePosition) {
+    public void setPolePosition(int polePosition)  throws DatoInvalidoException{
+       if(polePosition< 0 ){
+            throw new DatoInvalidoException("El numero de polePosition no puede ser menor a 0.");
+       }
         this.polePosition = polePosition;
     }
 
@@ -100,7 +109,10 @@ public class Piloto extends Persona {
         return vueltasRapidas;
     }
 
-    public void setVueltasRapidas(int vueltasRapidas) {
+    public void setVueltasRapidas(int vueltasRapidas)  throws DatoInvalidoException{
+       if(vueltasRapidas< 0 ){
+            throw new DatoInvalidoException("El numero de vueltas Rapidas no puede ser menor a 0.");
+       }
         this.vueltasRapidas = vueltasRapidas;
     }
 
@@ -108,7 +120,10 @@ public class Piloto extends Persona {
         return podios;
     }
 
-    public void setPodios(int podios) {
+    public void setPodios(int podios) throws DatoInvalidoException{
+       if(podios <= 0 ){
+            throw new DatoInvalidoException("El numero de podios no puede ser menor a 0.");
+       }
         this.podios = podios;
     }
 
@@ -116,7 +131,10 @@ public class Piloto extends Persona {
         return escuderias;
     }
 
-    public void setEscuderias(ArrayList<PilotoEscuderia> escuderias) {
+    public void setEscuderias(ArrayList<PilotoEscuderia> escuderias) throws DatoInvalidoException{
+       if(escuderias == null ){
+            throw new DatoInvalidoException("Se necesita una escuderia.");
+       }
         this.escuderias = escuderias;
     }
 
@@ -124,7 +142,10 @@ public class Piloto extends Persona {
         return autos;
     }
 
-    public void setAutos(ArrayList<AutoPiloto> autos) {
+    public void setAutos(ArrayList<AutoPiloto> autos) throws DatoInvalidoException{
+       if(autos == null ){
+            throw new DatoInvalidoException("Se necesita una auto.");
+       }
         this.autos = autos;
     }
 }

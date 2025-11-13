@@ -1,5 +1,5 @@
 package logica;
-
+import exceptions.*;
 public class Persona {
 
     private String dni;
@@ -27,7 +27,10 @@ public class Persona {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(String dni) throws DatoInvalidoException{
+       if(dni == null || dni.trim().isEmpty()){
+            throw new DatoInvalidoException("El dni no puede estar vacío.");
+       }
         this.dni = dni;
     }
 
@@ -35,7 +38,10 @@ public class Persona {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public void setNombre(String nombre)  throws DatoInvalidoException{
+       if(nombre== null || nombre.trim().isEmpty()){
+            throw new DatoInvalidoException("El nombre no puede estar vacío.");
+       }
         this.nombre = nombre;
     }
 
@@ -43,7 +49,10 @@ public class Persona {
         return apellido;
     }
 
-    public void setApellido(String apellido) {
+    public void setApellido(String apellido) throws DatoInvalidoException{
+       if(apellido== null || apellido.trim().isEmpty()){
+            throw new DatoInvalidoException("El apellido no puede estar vacío.");
+       }
         this.apellido = apellido;
     }
 
@@ -51,7 +60,10 @@ public class Persona {
         return pais;
     }
 
-    public void setPais(Pais pais) {
+    public void setPais(Pais pais) throws DatoInvalidoException{
+       if( pais== null){
+            throw new DatoInvalidoException("El  pais no puede estar vacío.");
+       }
         this.pais = pais;
     }
 
