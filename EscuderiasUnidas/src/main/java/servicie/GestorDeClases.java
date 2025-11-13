@@ -178,7 +178,7 @@ public class GestorDeClases {
         pilotos.add(p);
     }
 
-    public Piloto buscarPiloto(String dni) throws PilotoNoEncontradoException {
+    public Piloto buscarPiloto(String dni) {
         Piloto p = new Piloto();
 
         boolean encontrado = false;
