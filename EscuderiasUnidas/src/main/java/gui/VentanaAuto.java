@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.AutoNoEncontradoException;
 import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -267,18 +268,18 @@ public class VentanaAuto extends javax.swing.JFrame {
         if (gc.getAutos().contains(auto)) {
             JOptionPane.showMessageDialog(null, "Hay un auto seleccionado, presiona reiniciar.");
         } else {
-            String modeloAuto = modeloTxt.getText();
-            String motor = motorTxt.getText();
+            try {
+                String modeloAuto = modeloTxt.getText();
+                String motor = motorTxt.getText();
 
-            if (!modeloAuto.isBlank() || !motor.isBlank()) {
                 auto.setModelo(modeloAuto);
                 auto.setMotor(motor);
 
                 gc.agregarAuto(auto);
                 reiniciarCampos();
                 cargarTabla();
-            } else {
-                JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+            } catch (FormatoIncorrectoException e) {
+                JOptionPane.showMessageDialog(null, e.getMensaje());
             }
         }
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
@@ -323,24 +324,17 @@ public class VentanaAuto extends javax.swing.JFrame {
 
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
-
-            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
-                throw new FormatoIncorrectoException();
-            }
-
             Piloto piloto = gc.buscarPiloto(dni);
-            if (piloto != null) {
-                ap.setAuto(auto);
-                ap.setPiloto(piloto);
-                ap.setFechaAsignacion(fecha);
 
-                auto.agregarAutoPiloto(ap);
-                piloto.agregarAuto(ap);
-                mostrarPilotos();
-                JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "No se encontro al piloto con el DNI ingresado.");
-            }
+            ap.setAuto(auto);
+            ap.setPiloto(piloto);
+            ap.setFechaAsignacion(fecha);
+
+            auto.agregarAutoPiloto(ap);
+            piloto.agregarAuto(ap);
+
+            mostrarPilotos();
+            JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
         } catch (FormatoIncorrectoException e) {
             JOptionPane.showMessageDialog(this, e.getMensaje());
         }
@@ -351,8 +345,8 @@ public class VentanaAuto extends javax.swing.JFrame {
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-            if (!fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
-                throw new FormatoIncorrectoException();
+            if () {
+
             }
 
             boolean encontrado = false;
@@ -383,12 +377,12 @@ public class VentanaAuto extends javax.swing.JFrame {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombre);
 
-        if (e != null) {
+        try {
             auto.setEscuderia(e);
             escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro a la escuderia con el nombre ingresado.");
+        } catch (FormatoIncorrectoException e) {
+            JOptionPane.showMessageDialog(this, e.getMensaje());
         }
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 
