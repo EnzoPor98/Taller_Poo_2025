@@ -284,6 +284,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String dni = dniTxt.getText();
         String añosExp = añosExperienciaTxt.getText();
         String ed = especialidadBox.getSelectedItem().toString();
+        Pais pais = gc.getPaises().get(paisBox.getSelectedIndex());
 
         try {
             mecanico.setNombre(nombre);
@@ -291,14 +292,17 @@ public class VentanaMecanico extends javax.swing.JFrame {
             mecanico.setDni(dni);
             mecanico.setAñosExperiencia(Integer.parseInt(añosExp));
             mecanico.setEspecialidad(Especialidad.valueOf(ed.toUpperCase()));
+            mecanico.setPais(pais);
 
             gc.agregarMecanico(mecanico);
             cargarTabla();
             reiniciarCampos();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Los años de experiencia deben ser numeros.");
         }
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
@@ -318,7 +322,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
 
@@ -341,7 +345,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
             }
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_buscarMecanicoActionPerformed
 
@@ -361,7 +365,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        try{
+        try {
             if (e != null) {
                 mecanico.agregarEscuderia(e);
                 e.agregarMecanico(mecanico);
@@ -371,7 +375,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
             }
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarEscuderiaActionPerformed
 

@@ -82,7 +82,7 @@ public class Main {
             Mecanico mecanico = new Mecanico();
             mecanico.setDni("11222333");
             mecanico.setNombre("Enzo");
-            mecanico.setApellido("Portillo");
+            mecanico.setApellido("Portillo 1");
             mecanico.setPais(pais);
             mecanico.setEspecialidad(Especialidad.ELECTRONICA);
             mecanico.setAñosExperiencia(4);
@@ -90,8 +90,8 @@ public class Main {
 
             Mecanico mecanico2 = new Mecanico();
             mecanico2.setDni("22333444");
-            mecanico2.setNombre("Ariel");
-            mecanico2.setApellido("Portillo");
+            mecanico2.setNombre("Enzo");
+            mecanico2.setApellido("Portillo 2");
             mecanico2.setPais(pais2);
             mecanico2.setEspecialidad(Especialidad.MOTOR);
             mecanico2.setAñosExperiencia(2);
@@ -100,7 +100,7 @@ public class Main {
             Mecanico mecanico3 = new Mecanico();
             mecanico3.setDni("33444555");
             mecanico3.setNombre("Enzo");
-            mecanico3.setApellido("Portillo");
+            mecanico3.setApellido("Portillo 3");
             mecanico3.setPais(pais3);
             mecanico3.setEspecialidad(Especialidad.CHASIS);
             mecanico3.setAñosExperiencia(4);
@@ -109,7 +109,7 @@ public class Main {
             Mecanico mecanico4 = new Mecanico();
             mecanico4.setDni("44555666");
             mecanico4.setNombre("Enzo");
-            mecanico4.setApellido("Portillo");
+            mecanico4.setApellido("Portillo 4");
             mecanico4.setPais(pais4);
             mecanico4.setEspecialidad(Especialidad.NEUMUMATICOS);
             mecanico4.setAñosExperiencia(4);
@@ -118,7 +118,7 @@ public class Main {
             Mecanico mecanico5 = new Mecanico();
             mecanico5.setDni("55666777");
             mecanico5.setNombre("Enzo");
-            mecanico5.setApellido("Portillo");
+            mecanico5.setApellido("Portillo 5");
             mecanico5.setPais(pais5);
             mecanico5.setEspecialidad(Especialidad.ELECTRONICA);
             mecanico5.setAñosExperiencia(4);
@@ -442,6 +442,7 @@ public class Main {
             carrera.setNumeroVueltas(5);
             carrera.setPais(pais);
             pais.agregarCarrera(carrera);
+            circuito.agregarCarrera(carrera);
 
             // RESULTADO.
             Resultado resultado = carrera.getResultado();

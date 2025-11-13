@@ -2,6 +2,7 @@ package gui;
 
 import exceptions.DatoInvalidoException;
 import exceptions.FormatoIncorrectoException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.*;
 import javax.swing.table.DefaultTableModel;
@@ -13,20 +14,23 @@ public class VentanaResultado extends javax.swing.JFrame {
     private Carrera carrera;
     private Resultado resultado;
     private DefaultTableModel modelo;
+    private ArrayList<AutoPiloto> lista;
 
     public VentanaResultado(GestorDeClases gc, Carrera carrera) {
         this.gc = gc;
         this.carrera = carrera;
         this.resultado = carrera.getResultado();
+        this.lista = new ArrayList<AutoPiloto>();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
         cargarTabla();
-        cargarDatos();
+        cargarPilotos();
+        cargarDatosCarrera();
     }
 
-    private void cargarDatos() {
+    private void cargarDatosCarrera() {
         circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
         fechaEtiq.setText("FECHA: " + carrera.getFechaRealizacion());
         horaEtiq.setText("HORA: " + carrera.getHoraRealizacion());
@@ -35,9 +39,11 @@ public class VentanaResultado extends javax.swing.JFrame {
     }
 
     private void cargarPilotos() {
-        for (AutoPiloto x : carrera.getAutoPiloto()) {
-            String nombre = x.getPiloto().getNombre() + " " + x.getPiloto().getApellido();
-            pilotosBox.addItem(nombre);
+        if (!carrera.getAutoPiloto().isEmpty()) {
+            for (AutoPiloto x : carrera.getAutoPiloto()) {
+                String nombre = x.getPiloto().getNombreCompleto();
+                pilotosBox.addItem(nombre);
+            }
         }
     }
 
@@ -48,10 +54,10 @@ public class VentanaResultado extends javax.swing.JFrame {
         Object[] fila = new Object[modelo.getColumnCount()];
 
         modelo.setRowCount(0);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             fila[0] = i + 1;
-            fila[1] = resultado.getParticipantes().get(i).getPiloto().getNombreCompleto();
-            fila[2] = resultado.getParticipantes().get(i).getAuto().getEscuderia().getNombre();
+            fila[1] = resultado.getParticipantes().get(i).getAuto().getEscuderia().getNombre();
+            fila[2] = resultado.getParticipantes().get(i).getPiloto().getNombreCompleto();
             fila[3] = resultado.getVueltas().get(i);
             modelo.addRow(fila);
         }
@@ -265,7 +271,7 @@ public class VentanaResultado extends javax.swing.JFrame {
         } catch (DatoInvalidoException ex) {
             JOptionPane.showMessageDialog(null, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
@@ -280,7 +286,7 @@ public class VentanaResultado extends javax.swing.JFrame {
             resultado.borrarVuelta(indice);
             cargarTabla();
         } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 

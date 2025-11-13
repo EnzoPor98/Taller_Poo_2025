@@ -242,7 +242,9 @@ public class VentanaCircuito extends javax.swing.JFrame {
             gc.agregarCircuito(circuito);
             cargarTabla();
         } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "El valor de longitud debe ser un numero.");
         }
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
@@ -251,8 +253,8 @@ public class VentanaCircuito extends javax.swing.JFrame {
         circuito = gc.buscarCircuito(nombre);
 
         if (circuito != null) {
-                gc.eliminarCircuito(circuito);
-                cargarTabla();
+            gc.eliminarCircuito(circuito);
+            cargarTabla();
         } else {
             JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }
