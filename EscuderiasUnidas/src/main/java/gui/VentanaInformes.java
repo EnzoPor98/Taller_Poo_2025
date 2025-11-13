@@ -1,9 +1,8 @@
 package gui;
-
 import java.util.*;
 import logica.*;
 import servicie.GestorDeClases;
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane; 
 
 public class VentanaInformes extends javax.swing.JFrame {
 
@@ -132,16 +131,16 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void carreraEntreFechaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carreraEntreFechaBtnActionPerformed
-        String fechaInicio = JOptionPane.showInputDialog("Ingrese fecha de inicio (YYYY-MM-DD):");
+        String fechaInicio =  JOptionPane.showInputDialog("Ingrese fecha de inicio (YYYY-MM-DD):");
         String fechaFin = JOptionPane.showInputDialog("Ingrese fecha de fin (YYYY-MM-DD):");
-        String lista = "Carrera entre" + fechaInicio + "y" + fechaFin + ":\n\n";
-        for (Carrera c : gc.getCarreras()) {
-            String f = c.getFechaRealizacion();
-            if (f.compareTo(fechaInicio) >= 0 && f.compareTo(fechaFin) <= 0) {
-                lista += c.getCircuito().getNombre() + "(" + f + ")";
+        String lista = "Carrera entre" + fechaInicio + "y" + fechaFin+ ":\n\n";
+            for(Carrera c: gc.getCarreras()){
+                String f = c.getFechaRealizacion();
+                if (f.compareTo(fechaInicio) >= 0 && f.compareTo(fechaFin) <= 0){
+                    lista += c.getCircuito().getNombre()+ "(" + f + ")" ;
+                }
             }
-        }
-        if (lista.equals("")) {
+        if(lista.equals("")){
             lista = "No hay carreras entre esas fechas.";
         } else {
             areaTxt.setText(lista);
@@ -149,7 +148,6 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_carreraEntreFechaBtnActionPerformed
 
     private void rankingPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingPilotosBtnActionPerformed
-        /*
         ArrayList<Piloto> lista = gc.getPilotos();
         Collections.sort(lista, (p1, p2) -> p2.getVictorias() - p1.getVictorias());
         String texto = "RANKING DE PILOTOS (por victorias):\n\n";
@@ -159,32 +157,21 @@ public class VentanaInformes extends javax.swing.JFrame {
             i++;
         }
         areaTxt.setText(texto);
-         */
-
-        ArrayList<Piloto> lista = gc.getPilotos();
-        Collections.sort(lista);
-
-        String texto = "RANKING DE PILOTOS POR PUNTOS:\n\n";
-        for (int i = 0; i < 9; i++) {
-            Piloto p = lista.get(i);
-            texto += i+1 + ". " + p.getNombreCompleto() + ": " + p.getPuntaje() + "\n";
-        }
-
-        areaTxt.setText(texto);
     }//GEN-LAST:event_rankingPilotosBtnActionPerformed
 
     private void podiosVictoriasPilotoSBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_podiosVictoriasPilotoSBtnActionPerformed
         String texto = "PODIOS Y VICTORIAS DE LOS PILOTOS:\n\n";
 
         for (Piloto p : gc.getPilotos()) {
-            texto += p.getNombre() + " " + p.getApellido()
-                    + " - Podios: " + p.getPodios()
-                    + " | Victorias: " + p.getVictorias() + "\n";
+            texto += p.getNombre() + " " + p.getApellido() +
+                " - Podios: " + p.getPodios() +
+                " | Victorias: " + p.getVictorias() + "\n";
         }
         areaTxt.setText(texto);
     }//GEN-LAST:event_podiosVictoriasPilotoSBtnActionPerformed
 
     private void autosUsadosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autosUsadosBtnActionPerformed
+
         String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
         Escuderia e = gc.buscarEscuderia(nombreEsc);
         if (e != null) {
@@ -195,10 +182,12 @@ public class VentanaInformes extends javax.swing.JFrame {
             areaTxt.setText(texto);
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+
         }
     }//GEN-LAST:event_autosUsadosBtnActionPerformed
 
     private void mecanicosEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mecanicosEscuderiaBtnActionPerformed
+
         String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
         Escuderia e = gc.buscarEscuderia(nombreEsc);
         if (e != null) {
@@ -211,6 +200,7 @@ public class VentanaInformes extends javax.swing.JFrame {
             areaTxt.setText(texto);
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+
         }
     }//GEN-LAST:event_mecanicosEscuderiaBtnActionPerformed
 
@@ -231,6 +221,7 @@ public class VentanaInformes extends javax.swing.JFrame {
             areaTxt.setText(texto);
         } else {
             JOptionPane.showMessageDialog(null, "No se encontró el piloto.");
+
         }
     }//GEN-LAST:event_carrerasPilotoBtnActionPerformed
 

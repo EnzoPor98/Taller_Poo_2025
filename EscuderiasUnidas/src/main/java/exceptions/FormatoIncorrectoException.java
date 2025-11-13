@@ -6,7 +6,7 @@ package exceptions;
 
 /**
  *
- * @author Portillo's PC
+ * @author Gaston PC
  */
 public class FormatoIncorrectoException extends Exception {
 
@@ -20,3 +20,4 @@ public class FormatoIncorrectoException extends Exception {
         return mensaje;
     }
 }
+
