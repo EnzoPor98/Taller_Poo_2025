@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.*;
@@ -300,11 +302,11 @@ public class VentanaCarrera extends javax.swing.JFrame {
         if (gc.getCarreras().contains(carrera)) {
             JOptionPane.showMessageDialog(null, "Hay una escuderia seleccionada, presiona reiniciar.");
         } else {
-            String fecha = fechaTxt.getText();
-            String hora = horaTxt.getText();
-            String vueltas = vueltasTxt.getText();
+            try {
+                String fecha = fechaTxt.getText();
+                String hora = horaTxt.getText();
+                String vueltas = vueltasTxt.getText();
 
-            if (!fecha.isBlank() || !hora.isBlank() || !vueltas.isBlank()) {
                 carrera.setFechaRealizacion(fecha);
                 carrera.sethoraRealizacion(hora);
                 carrera.setNumeroVueltas(Integer.parseInt(vueltas));
@@ -312,37 +314,57 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 gc.agregarCarrera(carrera);
                 cargarTabla();
                 reiniciarCampos();
-            } else {
-                JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMensaje());
+            } catch (FormatoIncorrectoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
             }
         }
     }//GEN-LAST:event_agregarCarreraBtnActionPerformed
 
     private void eliminarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCarreraBtnActionPerformed
-        String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
-        String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
-        carrera = gc.buscarCarrera(fecha, hora);
+        try {
+            String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
+            String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
 
-        if (carrera != null) {
-            gc.eliminarCarrera(carrera);
-            cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
+            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || hora.matches("\\d{2}:\\d{2}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            carrera = gc.buscarCarrera(fecha, hora);
+            if (carrera != null) {
+                gc.eliminarCarrera(carrera);
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarCarreraBtnActionPerformed
 
     private void buscarCarreraBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCarreraBtnActionPerformed
-        String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
-        String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
-        carrera = gc.buscarCarrera(fecha, hora);
+        try {
+            String fecha = JOptionPane.showInputDialog("Ingrese fecha de la carrera:");
+            String hora = JOptionPane.showInputDialog("Ingrese hora de la carrera:");
 
-        if (carrera != null) {
-            fechaTxt.setText(carrera.getFechaRealizacion());
-            horaTxt.setText(carrera.getHoraRealizacion());
-            vueltasTxt.setText(Integer.toString(carrera.getNumeroVueltas()));
-            circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
-        } else {
-            JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
+            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || hora.matches("\\d{2}:\\d{2}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            carrera = gc.buscarCarrera(fecha, hora);
+            if (carrera != null) {
+                fechaTxt.setText(carrera.getFechaRealizacion());
+                horaTxt.setText(carrera.getHoraRealizacion());
+                vueltasTxt.setText(Integer.toString(carrera.getNumeroVueltas()));
+                circuitoEtiq.setText("CIRCUITO: " + carrera.getCircuito().getNombre());
+            } else {
+                JOptionPane.showMessageDialog(null, "No se organizo carrera en las fecha y hora ingresada.");
+            }
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_buscarCarreraBtnActionPerformed
 
@@ -355,29 +377,37 @@ public class VentanaCarrera extends javax.swing.JFrame {
 
     private void agregarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarParticipanteBtnActionPerformed
         if (carrera.getAutoPiloto().size() != 10) {
-            String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
-            Piloto p = gc.buscarPiloto(dni);
+            try {
+                String dni = JOptionPane.showInputDialog("Ingrese dni del piloto:");
 
-            if (p != null) {
-                String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
-                boolean encontrado = false;
-                for (AutoPiloto ap : p.getAutoPiloto()) {
-                    if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)) {
-                        carrera.agregarAutoPilotoParticipante(ap);
-                        encontrado = true;
-                        mostrarParticipantes();
-                        break;
+                if (dni.matches("\\d{8}")) {
+                    throw new FormatoIncorrectoException();
+                }
+
+                Piloto p = gc.buscarPiloto(dni);
+                if (p != null) {
+                    String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del auto:");
+                    boolean encontrado = false;
+                    for (AutoPiloto ap : p.getAutoPiloto()) {
+                        if (ap.getAuto().getModelo().equalsIgnoreCase(modeloAuto)) {
+                            carrera.agregarAutoPilotoParticipante(ap);
+                            encontrado = true;
+                            mostrarParticipantes();
+                            break;
+                        }
                     }
-                }
 
-                if (!encontrado) {
-                    JOptionPane.showMessageDialog(null, "No se encontro el auto del piloto.");
+                    if (!encontrado) {
+                        JOptionPane.showMessageDialog(null, "No se encontro el auto del piloto.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se encontro piloto con el DNI ingresado.");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "No se encontro piloto con el DNI ingresado.");
+            } catch (FormatoIncorrectoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
             }
         } else {
-            JOptionPane.showMessageDialog(null, "No pueden agregarse mas de 10 participantes.");
+            JOptionPane.showMessageDialog(null, "No puede haber mas de 10 participantes.");
         }
     }//GEN-LAST:event_agregarParticipanteBtnActionPerformed
 
@@ -411,18 +441,26 @@ public class VentanaCarrera extends javax.swing.JFrame {
         Circuito c = gc.buscarCircuito(circuito);
 
         if (c != null) {
-            carrera.setCircuito(c);
-            carrera.setPais(c.getPais());
-            circuitoEtiq.setText("CIRCUITO: " + c.getNombre());
+            try {
+                carrera.setCircuito(c);
+                carrera.setPais(c.getPais());
+                circuitoEtiq.setText("CIRCUITO: " + c.getNombre());
+            } catch (DatoInvalidoException e) {
+                JOptionPane.showMessageDialog(null, e.getMensaje());
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "El circuito ingresado no existe.");
+            JOptionPane.showMessageDialog(this, "No se encontro el circuito con el nombre ingresado.");
         }
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
     private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
-        carrera.setCircuito(new Circuito());
-        carrera.setPais(new Pais());
-        circuitoEtiq.setText("CIRCUITO: ");
+        try {
+            carrera.setCircuito(new Circuito());
+            carrera.setPais(new Pais());
+            circuitoEtiq.setText("CIRCUITO: ");
+        } catch (DatoInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMensaje());
+        }
     }//GEN-LAST:event_eliminarCircuitoBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

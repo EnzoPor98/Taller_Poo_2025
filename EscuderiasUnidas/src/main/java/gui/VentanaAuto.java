@@ -289,10 +289,14 @@ public class VentanaAuto extends javax.swing.JFrame {
         auto = gc.buscarAuto(variable);
 
         if (auto != null) {
-            gc.eliminarAuto(auto);
-            reiniciarCampos();
-            cargarTabla();
-            JOptionPane.showMessageDialog(this, "Auto eliminado correctamente.");
+            try {
+                gc.eliminarAuto(auto);
+                reiniciarCampos();
+                cargarTabla();
+                JOptionPane.showMessageDialog(this, "Auto eliminado correctamente.");
+            } catch (DatoInvalidoException e) {
+                JOptionPane.showMessageDialog(null, e.getMensaje());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "No se encontro el auto con el modelo ingresado.");
         }
@@ -320,12 +324,16 @@ public class VentanaAuto extends javax.swing.JFrame {
 
     private void agregarPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotosBtnActionPerformed
         try {
-            AutoPiloto ap = new AutoPiloto();
-
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
+
+            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
             Piloto piloto = gc.buscarPiloto(dni);
 
+            AutoPiloto ap = new AutoPiloto();
             ap.setAuto(auto);
             ap.setPiloto(piloto);
             ap.setFechaAsignacion(fecha);
@@ -335,8 +343,10 @@ public class VentanaAuto extends javax.swing.JFrame {
 
             mostrarPilotos();
             JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
-        } catch (DatoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, e.getMensaje());
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
 
@@ -345,7 +355,7 @@ public class VentanaAuto extends javax.swing.JFrame {
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-            if (dni.matches("\\d{8}") || fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            if (fecha.matches("\\d{4}/\\d{2}/\\d{2}") || dni.matches("\\d{8}")) {
                 throw new FormatoIncorrectoException();
             }
 
@@ -364,8 +374,10 @@ public class VentanaAuto extends javax.swing.JFrame {
                 mostrarPilotos();
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no se relaciona con este  auto.");
             }
-        } catch (FormatoIncorrectoException e) {
-            JOptionPane.showMessageDialog(this, e.getMensaje());
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
@@ -377,12 +389,16 @@ public class VentanaAuto extends javax.swing.JFrame {
         String nombre = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombre);
 
-        try {
-            auto.setEscuderia(e);
-            escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
-            cargarTabla();
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        if (e != null) {
+            try {
+                auto.setEscuderia(e);
+                escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
+                cargarTabla();
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontro la escuderia con el nombre ingresado.");
         }
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 

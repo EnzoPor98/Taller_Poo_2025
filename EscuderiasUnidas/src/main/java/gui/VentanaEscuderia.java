@@ -1,6 +1,7 @@
 package gui;
 
 import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -354,14 +355,14 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         String nombre = nombreTxt.getText();
         Pais pais = gc.getPaises().get(paisBox.getItemCount() - 1);
 
-        if (!nombre.isBlank()) {
+        try {
             escuderia.setNombre(nombre);
             escuderia.setPais(pais);
 
             gc.agregarEscuderia(escuderia);
             cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
@@ -370,9 +371,13 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         escuderia = gc.buscarEscuderia(nombre);
 
         if (escuderia != null) {
-            gc.eliminarEscuderia(escuderia);
-            cargarTabla();
-            JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
+            try {
+                gc.eliminarEscuderia(escuderia);
+                cargarTabla();
+                JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
         }
@@ -397,13 +402,18 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         Mecanico m = gc.buscarMecanico(dni);
 
         if (m != null) {
-            escuderia.agregarMecanico(m);
-            m.agregarEscuderia(escuderia);
-            mostrarMecanicos();
-            JOptionPane.showMessageDialog(null, "Mecánico agregado correctamente a la escudería.");
+            try {
+                escuderia.agregarMecanico(m);
+                m.agregarEscuderia(escuderia);
+                mostrarMecanicos();
+                JOptionPane.showMessageDialog(null, "Mecánico agregado correctamente a la escudería.");
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el mecánico.");
+            JOptionPane.showMessageDialog(null, "El mecanico no se encontro.");
         }
+
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void mostrarMecanicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarMecanicosActionPerformed
@@ -411,37 +421,47 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarMecanicosActionPerformed
 
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecánico a eliminar:");
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecánico a eliminar:");
 
-        boolean encontrado = false;
-        for (Mecanico m : escuderia.getMecanicos()) {
-            if (m.getDni().equalsIgnoreCase(dni)) {
-                escuderia.borrarMecanico(m);
-                m.borrarEscuderia(escuderia);
-                encontrado = true;
-                break;
+            boolean encontrado = false;
+            for (Mecanico m : escuderia.getMecanicos()) {
+                if (m.getDni().equalsIgnoreCase(dni)) {
+                    escuderia.borrarMecanico(m);
+                    m.borrarEscuderia(escuderia);
+                    encontrado = true;
+                    break;
+                }
             }
-        }
 
-        if (encontrado) {
-            mostrarMecanicos();
-            JOptionPane.showMessageDialog(null, "Mecánico eliminado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró un mecánico con ese DNI.");
+            if (encontrado) {
+                mostrarMecanicos();
+                JOptionPane.showMessageDialog(null, "Mecánico eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró un mecánico con ese DNI.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
 
 // ********** RELACION ESCUDERIA-PILOTO ********** //
 
     private void agregarPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto:");
-        Piloto piloto = gc.buscarPiloto(dni);
-
-        if (piloto != null) {
+        try {
             PilotoEscuderia pe = new PilotoEscuderia();
 
             String desde = JOptionPane.showInputDialog("Ingrese la fecha de inicio:");
             String hasta = JOptionPane.showInputDialog("Ingrese la fecha de fin:");
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto:");
+
+            if (desde.matches("\\d{4}/\\d{2}/\\d{2}")
+                    || hasta.matches("\\d{4}/\\d{2}/\\d{2}")
+                    || dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            Piloto piloto = gc.buscarPiloto(dni);
 
             pe.setPiloto(piloto);
             pe.setEscuderia(escuderia);
@@ -453,27 +473,33 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             mostrarPilotos();
 
             JOptionPane.showMessageDialog(null, "Piloto agregado correctamente a la escudería.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el Piloto.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotoActionPerformed
 
     private void eliminarPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto a eliminar:");
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto a eliminar:");
 
-        boolean encontrado = false;
-        for (PilotoEscuderia p : escuderia.getPilotoEscuderia()) {
-            if (p.getPiloto().getDni().equalsIgnoreCase(dni)) {
-                escuderia.borrarPilotoEscuderia(p);
-                break;
+            boolean encontrado = false;
+            for (PilotoEscuderia p : escuderia.getPilotoEscuderia()) {
+                if (p.getPiloto().getDni().equalsIgnoreCase(dni)) {
+                    escuderia.borrarPilotoEscuderia(p);
+                    break;
+                }
             }
-        }
 
-        if (encontrado) {
-            mostrarPilotos();
-            JOptionPane.showMessageDialog(null, "Piloto eliminado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró un Piloto con ese DNI.");
+            if (encontrado) {
+                mostrarPilotos();
+                JOptionPane.showMessageDialog(null, "Piloto eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró un Piloto con ese DNI.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarPilotoActionPerformed
 
@@ -484,44 +510,44 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     // ********** RELACION ESCUDERIA-AUTO ********** //
 
     private void agregarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el modelo del Auto:");
-        Auto a = gc.buscarAuto(dni);
+        try {
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese el modelo del Auto:");
+            Auto a = gc.buscarAuto(modeloAuto);
 
-        if (a != null) {
             escuderia.agregarAuto(a);
-            try {
-                a.setEscuderia(escuderia);
-            } catch (DatoInvalidoException ex) {
-                Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            a.setEscuderia(escuderia);
             mostrarAutos();
             JOptionPane.showMessageDialog(null, "Auto agregado correctamente a la escudería.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el Auto.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarAutoActionPerformed
 
     private void eliminarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarAutoActionPerformed
-        String modeloAuto = JOptionPane.showInputDialog("Ingrese el Modelo del Auto a eliminar:");
+        try {
+            String modeloAuto = JOptionPane.showInputDialog("Ingrese el Modelo del Auto a eliminar:");
 
-        boolean encontrado = false;
-        for (Auto a : escuderia.getAutos()) {
-            if (a.getModelo().equalsIgnoreCase(modeloAuto)) {
-                escuderia.borrarAuto(a);
-                try {
-                    a.setEscuderia(new Escuderia());
-                } catch (DatoInvalidoException ex) {
-                    Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
+            boolean encontrado = false;
+            for (Auto a : escuderia.getAutos()) {
+                if (a.getModelo().equalsIgnoreCase(modeloAuto)) {
+                    escuderia.borrarAuto(a);
+                    try {
+                        a.setEscuderia(new Escuderia());
+                    } catch (DatoInvalidoException ex) {
+                        Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
                 }
-                break;
             }
-        }
 
-        if (encontrado) {
-            mostrarAutos();
-            JOptionPane.showMessageDialog(null, "Auto eliminado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró un Auto con ese modelo.");
+            if (encontrado) {
+                mostrarAutos();
+                JOptionPane.showMessageDialog(null, "Auto eliminado correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontró un Auto con ese modelo.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarAutoActionPerformed
 

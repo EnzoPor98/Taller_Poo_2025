@@ -1,5 +1,7 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import exceptions.FormatoIncorrectoException;
 import logica.*;
 import servicie.GestorDeClases;
 import javax.swing.JOptionPane;
@@ -283,7 +285,7 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String añosExp = añosExperienciaTxt.getText();
         String ed = especialidadBox.getSelectedItem().toString();
 
-        if (!nombre.isBlank() || !apellido.isBlank() || !dni.isBlank() || !añosExp.isBlank() || !ed.isBlank()) {
+        try {
             mecanico.setNombre(nombre);
             mecanico.setApellido(apellido);
             mecanico.setDni(dni);
@@ -293,35 +295,57 @@ public class VentanaMecanico extends javax.swing.JFrame {
             gc.agregarMecanico(mecanico);
             cargarTabla();
             reiniciarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
     private void eliminarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        mecanico = gc.buscarMecanico(dni);
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
 
-        if (mecanico != null) {
-            gc.eliminarMecanico(mecanico);
-            cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+            if (dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            mecanico = gc.buscarMecanico(dni);
+            if (mecanico != null) {
+                gc.eliminarMecanico(mecanico);
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_eliminarMecanicoActionPerformed
 
     private void buscarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarMecanicoActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
-        mecanico = gc.buscarMecanico(dni);
+        try {
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Mecanico:");
 
-        if (mecanico != null) {
-            nombreTxt.setText(mecanico.getNombre());
-            apellidoTxt.setText(mecanico.getApellido());
-            dniTxt.setText(mecanico.getDni());
-            paisBox.setSelectedItem(mecanico.getPais().getNombre());
-            añosExperienciaTxt.setText(Integer.toString(mecanico.getAñosExperiencia()));
-        } else {
-            JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+            if (dni.matches("\\d{8}")) {
+                throw new FormatoIncorrectoException();
+            }
+
+            mecanico = gc.buscarMecanico(dni);
+            if (mecanico != null) {
+                nombreTxt.setText(mecanico.getNombre());
+                apellidoTxt.setText(mecanico.getApellido());
+                dniTxt.setText(mecanico.getDni());
+                paisBox.setSelectedItem(mecanico.getPais().getNombre());
+                añosExperienciaTxt.setText(Integer.toString(mecanico.getAñosExperiencia()));
+            } else {
+                JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        } catch (FormatoIncorrectoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_buscarMecanicoActionPerformed
 

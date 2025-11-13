@@ -1,5 +1,6 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Carrera;
@@ -231,18 +232,18 @@ public class VentanaCircuito extends javax.swing.JFrame {
     private void agregarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCircuitoBtnActionPerformed
         String nombre = nombreTxt.getText();
         String longitud = longitudTxt.getText();
-        Pais pais = gc.getPaises().get(paisBox.getItemCount());
+        Pais pais = gc.getPaises().get(paisBox.getItemCount() - 1);
 
-        if (!nombre.isBlank() || !longitud.isBlank()) {
+        try {
             circuito.setNombre(nombre);
             circuito.setLongitud(Integer.parseInt(longitud));
             circuito.setPais(pais);
-            cargarTabla();
-        } else {
-            JOptionPane.showMessageDialog(null, "No puede dejar campos en blanco.");
-        }
 
-        gc.agregarCircuito(circuito);
+            gc.agregarCircuito(circuito);
+            cargarTabla();
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        }
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
     private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
@@ -250,8 +251,12 @@ public class VentanaCircuito extends javax.swing.JFrame {
         circuito = gc.buscarCircuito(nombre);
 
         if (circuito != null) {
-            gc.eliminarCircuito(circuito);
-            cargarTabla();
+            try {
+                gc.eliminarCircuito(circuito);
+                cargarTabla();
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMensaje());
+            }
         } else {
             JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }
