@@ -1,5 +1,8 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Escuderia;
@@ -486,7 +489,11 @@ public class VentanaEscuderia extends javax.swing.JFrame {
 
         if (a != null) {
             escuderia.agregarAuto(a);
-            a.setEscuderia(escuderia);
+            try {
+                a.setEscuderia(escuderia);
+            } catch (DatoInvalidoException ex) {
+                Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
+            }
             mostrarAutos();
             JOptionPane.showMessageDialog(null, "Auto agregado correctamente a la escudería.");
         } else {
@@ -501,7 +508,11 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         for (Auto a : escuderia.getAutos()) {
             if (a.getModelo().equalsIgnoreCase(modeloAuto)) {
                 escuderia.borrarAuto(a);
-                a.setEscuderia(new Escuderia());
+                try {
+                    a.setEscuderia(new Escuderia());
+                } catch (DatoInvalidoException ex) {
+                    Logger.getLogger(VentanaEscuderia.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 break;
             }
         }

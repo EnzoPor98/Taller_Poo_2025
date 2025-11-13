@@ -1,5 +1,8 @@
 package gui;
 
+import exceptions.DatoInvalidoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
@@ -431,7 +434,11 @@ public class VentanaPiloto extends javax.swing.JFrame {
             ap.setFechaAsignacion(fecha);
 
             piloto.agregarAuto(ap);
-            auto.agregarAutoPiloto(ap);
+            try {
+                auto.agregarAutoPiloto(ap);
+            } catch (DatoInvalidoException ex) {
+                Logger.getLogger(VentanaPiloto.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
             mostrarAutos();
         } else {
