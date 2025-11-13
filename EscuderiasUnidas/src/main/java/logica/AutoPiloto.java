@@ -1,7 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
-
+import exceptions.*;
 public class AutoPiloto {
 
     private String fechaAsignacion;
@@ -25,7 +25,10 @@ public class AutoPiloto {
     }
 
     // LISTA DE CARRERAS.
-    public void agregarCarrera(Carrera c) {
+    public void agregarCarrera(Carrera c) throws DatoInvalidoException {
+         if(c == null){
+        throw new DatoInvalidoException("El debe haber un piloto y un auto para la carrera.");  
+        }
         carreras.add(c);
     }
 
@@ -38,7 +41,10 @@ public class AutoPiloto {
         return fechaAsignacion;
     }
 
-    public void setFechaAsignacion(String fechaAsignacion) {
+    public void setFechaAsignacion(String fechaAsignacion) throws DatoInvalidoException{
+       if(fechaAsignacion == null || fechaAsignacion.trim().isEmpty()){
+            throw new DatoInvalidoException("La fecha no puede estar vacia.");
+       }
         this.fechaAsignacion = fechaAsignacion;
     }
 
@@ -46,7 +52,10 @@ public class AutoPiloto {
         return auto;
     }
 
-    public void setAuto(Auto auto) {
+    public void setAuto(Auto auto) throws DatoInvalidoException{
+       if(auto == null){
+            throw new DatoInvalidoException("Se necesita un auto.");
+       }
         this.auto = auto;
     }
 
@@ -54,7 +63,10 @@ public class AutoPiloto {
         return piloto;
     }
 
-    public void setPiloto(Piloto piloto) {
+    public void setPiloto(Piloto piloto) throws DatoInvalidoException{
+       if(piloto == null){
+            throw new DatoInvalidoException("Se necesita un piloto.");
+       }
         this.piloto = piloto;
     }
 
@@ -62,7 +74,10 @@ public class AutoPiloto {
         return carreras;
     }
 
-    public void setCarreras(ArrayList<Carrera> carreras) {
+    public void setCarreras(ArrayList<Carrera> carreras) throws DatoInvalidoException{
+       if(carreras == null){
+            throw new DatoInvalidoException("Se necesita una carrera.");
+       }
         this.carreras = carreras;
     }
 }
