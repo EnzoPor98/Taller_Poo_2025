@@ -1,5 +1,6 @@
 package gui;
 import java.util.*;
+import exceptions.*;
 import logica.*;
 import servicie.GestorDeClases;
 import javax.swing.JOptionPane; 
@@ -147,6 +148,9 @@ public class VentanaInformes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_carreraEntreFechaBtnActionPerformed
 
+    private void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+    }
     private void rankingPilotosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingPilotosBtnActionPerformed
         ArrayList<Piloto> lista = gc.getPilotos();
         Collections.sort(lista, (p1, p2) -> p2.getVictorias() - p1.getVictorias());
@@ -171,23 +175,26 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_podiosVictoriasPilotoSBtnActionPerformed
 
     private void autosUsadosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autosUsadosBtnActionPerformed
-        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
-        Escuderia e = gc.buscarEscuderia(nombreEsc);
-            if (e != null) {
+        try{
+            String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+            Escuderia e = gc.buscarEscuderia(nombreEsc);
+
                 String texto = "AUTOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
                 for (Auto a : e.getAutos()) {
                     texto += "- " + a.getModelo() + " (" + a.getMotor() + ")\n";
                 }
             areaTxt.setText(texto);
-         } else {
-            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+         } catch(EscuderiaNoEncontradaException ex) {
+            mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_autosUsadosBtnActionPerformed
 
     private void mecanicosEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mecanicosEscuderiaBtnActionPerformed
-        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
-        Escuderia e = gc.buscarEscuderia(nombreEsc);
-            if (e != null) {
+        try{
+        
+            String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+            Escuderia e = gc.buscarEscuderia(nombreEsc);
+
                 String texto = "MECÁNICOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
                 for (Mecanico m : e.getMecanicos()) {
                     texto += "- " + m.getNombre() + " " + m.getApellido() + 
@@ -195,17 +202,17 @@ public class VentanaInformes extends javax.swing.JFrame {
                     " | " + m.getAñosExperiencia() + " años de experiencia\n";
                     }
                 areaTxt.setText(texto);
-            } else {
-            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
-            }
+            } catch(EscuderiaNoEncontradaException ex) {
+            mostrarError(ex.getMessage());
+        }
     }//GEN-LAST:event_mecanicosEscuderiaBtnActionPerformed
 
     private void carrerasPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carrerasPilotoBtnActionPerformed
-        String dni = JOptionPane.showInputDialog("Ingrese el DNI del piloto:");
-        String nombreCircuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
-        Piloto piloto = gc.buscarPiloto(dni);
+        try{
+            String dni = JOptionPane.showInputDialog("Ingrese el DNI del piloto:");
+            String nombreCircuito = JOptionPane.showInputDialog("Ingrese el nombre del circuito:");
+            Piloto piloto = gc.buscarPiloto(dni);
 
-        if (piloto != null) {
             String texto = "CARRERAS DE " + piloto.getNombre() + " EN " + nombreCircuito + ":\n\n";
             for (AutoPiloto ap : piloto.getAutoPiloto()) {
                 for (Carrera c : ap.getCarreras()) {
@@ -215,8 +222,8 @@ public class VentanaInformes extends javax.swing.JFrame {
                 }
             }
         areaTxt.setText(texto);
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontró el piloto.");
+        } catch(PilotoNoEncontradoException ex) {
+           mostrarError(ex.getMessage());
         }
     }//GEN-LAST:event_carrerasPilotoBtnActionPerformed
 
