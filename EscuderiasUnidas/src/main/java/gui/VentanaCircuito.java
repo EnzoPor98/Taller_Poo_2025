@@ -1,5 +1,5 @@
 package gui;
-import exceptions.*;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Carrera;
@@ -28,9 +28,6 @@ public class VentanaCircuito extends javax.swing.JFrame {
         nombreTxt.setText("");
         longitudTxt.setText("");
         circuito = new Circuito();
-    }
-     private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void cargarPaises() {
@@ -249,28 +246,27 @@ public class VentanaCircuito extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarCircuitoBtnActionPerformed
 
     private void eliminarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarCircuitoBtnActionPerformed
-        try{
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
-            circuito = gc.buscarCircuito(nombre);
-            
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
+        circuito = gc.buscarCircuito(nombre);
+
+        if (circuito != null) {
             gc.eliminarCircuito(circuito);
             cargarTabla();
-            JOptionPane.showMessageDialog(this, "Circuito eliminado correctamente.");
-        } catch(CircuitoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }
     }//GEN-LAST:event_eliminarCircuitoBtnActionPerformed
 
     private void buscarCircuitoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarCircuitoBtnActionPerformed
-        try{
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
-            circuito = gc.buscarCircuito(nombre);
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre del circuito:");
+        circuito = gc.buscarCircuito(nombre);
 
+        if (circuito != null) {
             nombreTxt.setText(circuito.getNombre());
             longitudTxt.setText(Integer.toString(circuito.getLongitud()));
             paisBox.setSelectedItem(circuito.getPais().getNombre());
-        } catch(CircuitoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "El circuito con el nombre ingresado no existe.");
         }
     }//GEN-LAST:event_buscarCircuitoBtnActionPerformed
 

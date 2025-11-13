@@ -1,5 +1,5 @@
 package gui;
-import exceptions.*;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Escuderia;
@@ -35,9 +35,6 @@ public class VentanaEscuderia extends javax.swing.JFrame {
         }
     }
 
-     private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
     private void cargarTabla() {
         modelo = new DefaultTableModel();
         String[] columnas = {"NOMBRE", "PAIS"};
@@ -366,43 +363,43 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
-        try{
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-            escuderia = gc.buscarEscuderia(nombre);
-            
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        escuderia = gc.buscarEscuderia(nombre);
+
+        if (escuderia != null) {
             gc.eliminarEscuderia(escuderia);
             cargarTabla();
             JOptionPane.showMessageDialog(null, "La escuderia eliminada correctamente.");
-        } catch(EscuderiaNoEncontradaException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
         }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
     private void buscarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEscuderiaBtnActionPerformed
-       try{
-            String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
-            escuderia = gc.buscarEscuderia(nombre);
+        String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
+        escuderia = gc.buscarEscuderia(nombre);
 
+        if (escuderia != null) {
             nombreTxt.setText(escuderia.getNombre());
             paisBox.setSelectedItem(escuderia.getPais().getNombre());
-        } catch(EscuderiaNoEncontradaException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "La escuderia con el nombre ingresado no existe.");
         }
     }//GEN-LAST:event_buscarEscuderiaBtnActionPerformed
 
     // ********** RELACION ESCUDERIA-MECANICO ********** //
 
     private void agregarMecanicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarMecanicoActionPerformed
-        try{ 
-            String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");      
-            Mecanico m = gc.buscarMecanico(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del mecanico:");
+        Mecanico m = gc.buscarMecanico(dni);
 
+        if (m != null) {
             escuderia.agregarMecanico(m);
             m.agregarEscuderia(escuderia);
             mostrarMecanicos();
             JOptionPane.showMessageDialog(null, "Mecánico agregado correctamente a la escudería.");
-        } catch(MecanicoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el mecánico.");
         }
     }//GEN-LAST:event_agregarMecanicoActionPerformed
 
@@ -434,11 +431,10 @@ public class VentanaEscuderia extends javax.swing.JFrame {
 // ********** RELACION ESCUDERIA-PILOTO ********** //
 
     private void agregarPilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoActionPerformed
-       try{
-        
-            String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto:");
-            Piloto piloto = gc.buscarPiloto(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese el DNI del Piloto:");
+        Piloto piloto = gc.buscarPiloto(dni);
 
+        if (piloto != null) {
             PilotoEscuderia pe = new PilotoEscuderia();
 
             String desde = JOptionPane.showInputDialog("Ingrese la fecha de inicio:");
@@ -454,8 +450,8 @@ public class VentanaEscuderia extends javax.swing.JFrame {
             mostrarPilotos();
 
             JOptionPane.showMessageDialog(null, "Piloto agregado correctamente a la escudería.");
-        } catch(PilotoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el Piloto.");
         }
     }//GEN-LAST:event_agregarPilotoActionPerformed
 
@@ -485,16 +481,16 @@ public class VentanaEscuderia extends javax.swing.JFrame {
     // ********** RELACION ESCUDERIA-AUTO ********** //
 
     private void agregarAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoActionPerformed
-       try{
-            String dni = JOptionPane.showInputDialog("Ingrese el modelo del Auto:");
-            Auto a = gc.buscarAuto(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese el modelo del Auto:");
+        Auto a = gc.buscarAuto(dni);
 
+        if (a != null) {
             escuderia.agregarAuto(a);
             a.setEscuderia(escuderia);
             mostrarAutos();
             JOptionPane.showMessageDialog(null, "Auto agregado correctamente a la escudería.");
-        } catch(AutoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el Auto.");
         }
     }//GEN-LAST:event_agregarAutoActionPerformed
 

@@ -1,5 +1,5 @@
 package gui;
-import exceptions.*;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.Auto;
@@ -33,9 +33,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
         dniTxt.setText("");
         piloto = new Piloto();
         cargarTabla();
-    }
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void cargarPaises() {
@@ -341,29 +338,29 @@ public class VentanaPiloto extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
     private void eliminarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarPilotoBtnActionPerformed
-        try {
-            String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
-            this.piloto = gc.buscarPiloto(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
+        this.piloto = gc.buscarPiloto(dni);
 
+        if (piloto != null) {
             gc.eliminarPiloto(piloto);
             cargarTabla();
             reiniciarCampos();
-        } catch(PilotoNoEncontradoException ex){
-             mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
         }
     }//GEN-LAST:event_eliminarPilotoBtnActionPerformed
 
     private void buscarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPilotoBtnActionPerformed
-        try{
-            String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
-            this.piloto = gc.buscarPiloto(dni);
+        String dni = JOptionPane.showInputDialog("Ingrese DNI del piloto:");
+        this.piloto = gc.buscarPiloto(dni);
 
+        if (piloto != null) {
             nombreTxt.setText(piloto.getNombre());
             apellidoTxt.setText(piloto.getApellido());
             dniTxt.setText(piloto.getDni());
             paisBox.setSelectedItem(piloto.getPais().getNombre());
-        } catch(PilotoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
         }
     }//GEN-LAST:event_buscarPilotoBtnActionPerformed
 
@@ -374,7 +371,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
     // ********** RELACION PILOTO-ESCUDERIA  ********** //
 
     private void agregarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarEscuderiaBtnActionPerformed
-       try{
         PilotoEscuderia pe = new PilotoEscuderia();
 
         String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
@@ -391,9 +387,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
         escuderia.agregarPilotoEscuderia(pe);
 
         mostrarEscuderias();
-       }catch(EscuderiaNoEncontradaException ex){
-           mostrarError(ex.getMessage());
-       }
     }//GEN-LAST:event_agregarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
@@ -426,12 +419,13 @@ public class VentanaPiloto extends javax.swing.JFrame {
     // ********** RELACION PILOTO-AUTO  ********** //
 
     private void agregarAutoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarAutoBtnActionPerformed
-        try{
         AutoPiloto ap = new AutoPiloto();
 
         String fecha = JOptionPane.showInputDialog("Ingrese la fecha de hoy:");
         String modeloAuto = JOptionPane.showInputDialog("Ingrese modelo del auto:");
         Auto auto = gc.buscarAuto(modeloAuto);
+
+        if (!fecha.isBlank() || !modeloAuto.isBlank() || auto != null) {
             ap.setAuto(auto);
             ap.setPiloto(piloto);
             ap.setFechaAsignacion(fecha);
@@ -440,8 +434,8 @@ public class VentanaPiloto extends javax.swing.JFrame {
             auto.agregarAutoPiloto(ap);
 
             mostrarAutos();
-        } catch(AutoNoEncontradoException ex) {
-            mostrarError(ex.getMessage());
+        } else {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios en blanco.");
         }
     }//GEN-LAST:event_agregarAutoBtnActionPerformed
 
