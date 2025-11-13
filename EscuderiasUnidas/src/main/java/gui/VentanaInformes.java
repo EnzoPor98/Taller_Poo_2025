@@ -175,6 +175,7 @@ public class VentanaInformes extends javax.swing.JFrame {
     }//GEN-LAST:event_podiosVictoriasPilotoSBtnActionPerformed
 
     private void autosUsadosBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autosUsadosBtnActionPerformed
+
         try{
             String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
             Escuderia e = gc.buscarEscuderia(nombreEsc);
@@ -186,10 +187,23 @@ public class VentanaInformes extends javax.swing.JFrame {
             areaTxt.setText(texto);
          } catch(EscuderiaNoEncontradaException ex) {
             mostrarError(ex.getMessage());
+
+        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+        Escuderia e = gc.buscarEscuderia(nombreEsc);
+        if (e != null) {
+            String texto = "AUTOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
+            for (Auto a : e.getAutos()) {
+                texto += "- " + a.getModelo() + " (" + a.getMotor() + ")\n";
+            }
+            areaTxt.setText(texto);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+
         }
     }//GEN-LAST:event_autosUsadosBtnActionPerformed
 
     private void mecanicosEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mecanicosEscuderiaBtnActionPerformed
+
         try{
         
             String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
@@ -204,6 +218,20 @@ public class VentanaInformes extends javax.swing.JFrame {
                 areaTxt.setText(texto);
             } catch(EscuderiaNoEncontradaException ex) {
             mostrarError(ex.getMessage());
+
+        String nombreEsc = JOptionPane.showInputDialog("Ingrese el nombre de la escudería:");
+        Escuderia e = gc.buscarEscuderia(nombreEsc);
+        if (e != null) {
+            String texto = "MECÁNICOS DE LA ESCUDERÍA " + e.getNombre() + ":\n\n";
+            for (Mecanico m : e.getMecanicos()) {
+                texto += "- " + m.getNombre() + " " + m.getApellido()
+                        + " | " + m.getEspecialidad()
+                        + " | " + m.getAñosExperiencia() + " años de experiencia\n";
+            }
+            areaTxt.setText(texto);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró la escudería.");
+
         }
     }//GEN-LAST:event_mecanicosEscuderiaBtnActionPerformed
 
@@ -221,9 +249,15 @@ public class VentanaInformes extends javax.swing.JFrame {
                     }
                 }
             }
+
         areaTxt.setText(texto);
         } catch(PilotoNoEncontradoException ex) {
            mostrarError(ex.getMessage());
+
+            areaTxt.setText(texto);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se encontró el piloto.");
+
         }
     }//GEN-LAST:event_carrerasPilotoBtnActionPerformed
 
