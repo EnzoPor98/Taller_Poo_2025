@@ -68,10 +68,6 @@ public class VentanaAuto extends javax.swing.JFrame {
         autosTabla.setModel(modelo);
     }
 
-    private void mostrarError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
