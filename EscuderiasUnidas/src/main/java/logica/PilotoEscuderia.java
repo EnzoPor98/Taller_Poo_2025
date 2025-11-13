@@ -27,10 +27,12 @@ public class PilotoEscuderia {
         return desdeFecha;
     }
 
-    public void setDesdeFecha(String desdeFecha) throws DatoInvalidoException{
+    public void setDesdeFecha(String desdeFecha) throws DatoInvalidoException, FormatoIncorrectoException{
        if(desdeFecha== null || desdeFecha.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita una fecha de inicio.");
-       }
+       } else if (desdeFecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+                throw new FormatoIncorrectoException();
+            }
         this.desdeFecha = desdeFecha;
     }
 
@@ -38,10 +40,12 @@ public class PilotoEscuderia {
         return hastaFecha;
     }
 
-    public void setHastaFecha(String hastaFecha)throws DatoInvalidoException{
+    public void setHastaFecha(String hastaFecha)throws DatoInvalidoException, FormatoIncorrectoException{
        if( hastaFecha== null ||  hastaFecha.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita una fecha final.");
-       }
+       } else if (hastaFecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+                throw new FormatoIncorrectoException();
+            }
         this.hastaFecha = hastaFecha;
     }
 

@@ -368,27 +368,17 @@ public class VentanaPais extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarPaisBtnActionPerformed
 
     private void buscarPaisBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPaisBtnActionPerformed
-        try {
-            String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
+        String num = JOptionPane.showInputDialog("Ingrese ID del pais:");
 
-            if (!num.matches("\\d+")) {
-                throw new FormatoIncorrectoException();
-            }
+        int id = Integer.parseInt(num);
+        pais = gc.buscarPais(id);
 
-            int id = Integer.parseInt(num);
-            pais = gc.buscarPais(id);
-
-            if (pais != null) {
-                idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
-                nombreTxt.setText(pais.getNombre());
-                descripcionTxt.setText(pais.getDescripcion());
-            } else {
-                JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
-            }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
-        } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
+        if (pais != null) {
+            idEtiq.setText("ID: " + Integer.toString(pais.getIdPais()));
+            nombreTxt.setText(pais.getNombre());
+            descripcionTxt.setText(pais.getDescripcion());
+        } else {
+            JOptionPane.showMessageDialog(null, "El pais con el ID ingresado no existe.");
         }
     }//GEN-LAST:event_buscarPaisBtnActionPerformed
 

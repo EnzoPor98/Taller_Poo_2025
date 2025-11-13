@@ -56,15 +56,19 @@ public class Carrera {
         this.pais = pais;
     }
     
-    public void setFechaRealizacion(String fechaRealizacion)throws DatoInvalidoException{
+    public void setFechaRealizacion(String fechaRealizacion)throws DatoInvalidoException, FormatoIncorrectoException{
        if(fechaRealizacion== null || fechaRealizacion.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un fecha para la carrera");
+       } else if(fechaRealizacion.matches("\\d{4}/\\d{2}/\\d{2}")){
+           throw new FormatoIncorrectoException();
        }
         this.fechaRealizacion = fechaRealizacion;
     }
-    public void sethoraRealizacion(String horaRealizacion)throws DatoInvalidoException{
+    public void sethoraRealizacion(String horaRealizacion)throws DatoInvalidoException, FormatoIncorrectoException{
        if( horaRealizacion== null ||  horaRealizacion.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita una hora para la carrera");
+       } else if(horaRealizacion.matches("\\d{2}:\\d{2}")){
+           throw new FormatoIncorrectoException();
        }
         this.horaRealizacion = horaRealizacion;
     }

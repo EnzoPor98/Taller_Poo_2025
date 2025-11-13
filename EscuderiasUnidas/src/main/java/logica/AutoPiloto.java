@@ -41,9 +41,11 @@ public class AutoPiloto {
         return fechaAsignacion;
     }
 
-    public void setFechaAsignacion(String fechaAsignacion) throws DatoInvalidoException{
+    public void setFechaAsignacion(String fechaAsignacion) throws DatoInvalidoException, FormatoIncorrectoException{
        if(fechaAsignacion == null || fechaAsignacion.trim().isEmpty()){
             throw new DatoInvalidoException("La fecha no puede estar vacia.");
+       } else if(fechaAsignacion.matches("\\d{4}/\\d{2}/\\d{2}")){
+           throw new FormatoIncorrectoException();
        }
         this.fechaAsignacion = fechaAsignacion;
     }

@@ -55,7 +55,7 @@ public class Mecanico extends Persona {
 
     public void setAñosExperiencia(int añosExperiencia)  throws DatoInvalidoException{
        if(añosExperiencia < 0 ){
-            throw new DatoInvalidoException("Se necesitan los años de experiencia.");
+            throw new DatoInvalidoException("Los años de experiencia no pueden ser negativos.");
        }
         this.añosExperiencia = añosExperiencia;
     }

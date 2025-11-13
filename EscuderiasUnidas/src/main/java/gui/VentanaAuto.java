@@ -374,8 +374,6 @@ public class VentanaAuto extends javax.swing.JFrame {
                 mostrarPilotos();
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no se relaciona con este  auto.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }

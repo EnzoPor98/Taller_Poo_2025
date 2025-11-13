@@ -342,8 +342,6 @@ public class VentanaMecanico extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El Mecanico con el DNI ingresado no existe.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -365,13 +363,17 @@ public class VentanaMecanico extends javax.swing.JFrame {
         String nombreEscuderia = JOptionPane.showInputDialog("Ingrese el nombre de la escuderia:");
         Escuderia e = gc.buscarEscuderia(nombreEscuderia);
 
-        if (e != null) {
-            mecanico.agregarEscuderia(e);
-            e.agregarMecanico(mecanico);
-            mostrarEscuderias();
-            JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
+        try{
+            if (e != null) {
+                mecanico.agregarEscuderia(e);
+                e.agregarMecanico(mecanico);
+                mostrarEscuderias();
+                JOptionPane.showMessageDialog(null, "Escuderia agregada correctamente");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontro una escuderia con ese nombre");
+            }
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarEscuderiaActionPerformed
 
