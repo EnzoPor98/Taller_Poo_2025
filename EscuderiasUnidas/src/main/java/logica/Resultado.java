@@ -22,12 +22,15 @@ public class Resultado {
     }
 
     public void actualizarDatosPilotos() {
+        // SUMAMOS VICTORIA.
         participantes.getFirst().getPiloto().sumarVictoria();
 
+        // SUMAMOS PODIOS.
         participantes.get(0).getPiloto().sumarPodio();
         participantes.get(1).getPiloto().sumarPodio();
         participantes.get(2).getPiloto().sumarPodio();
 
+        // BUSCAMOS LA VUELTA MAS RAPIDA.
         String vueltaMin = "99:99:99";
         String vueltaPar;
         AutoPiloto ap = new AutoPiloto();
@@ -40,8 +43,34 @@ public class Resultado {
 
             participantes.get(i).getPiloto().sumarCompetencia();
         }
-
+        // SUMAMOS LA VUELTA RAPIDA.
         ap.getPiloto().sumarVueltasRapidas();
+
+        // SUMAMOS LOS PUNTOS CORRESPONDIENTES A CADA POSICION.
+        for (int i = 0; i < 9; i++) {
+            switch (i) {
+                case 0 ->
+                    participantes.get(i).getPiloto().sumarPuntos(25);
+                case 1 ->
+                    participantes.get(i).getPiloto().sumarPuntos(18);
+                case 2 ->
+                    participantes.get(i).getPiloto().sumarPuntos(15);
+                case 3 ->
+                    participantes.get(i).getPiloto().sumarPuntos(12);
+                case 4 ->
+                    participantes.get(i).getPiloto().sumarPuntos(10);
+                case 5 ->
+                    participantes.get(i).getPiloto().sumarPuntos(8);
+                case 6 ->
+                    participantes.get(i).getPiloto().sumarPuntos(6);
+                case 7 ->
+                    participantes.get(i).getPiloto().sumarPuntos(4);
+                case 8 ->
+                    participantes.get(i).getPiloto().sumarPuntos(2);
+                case 9 ->
+                    participantes.get(i).getPiloto().sumarPuntos(1);
+            }
+        }
     }
 
     // METODOS DE LISTAS.

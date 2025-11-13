@@ -2,13 +2,14 @@ package logica;
 
 import java.util.ArrayList;
 
-public class Piloto extends Persona {
+public class Piloto extends Persona implements Comparable<Piloto> {
 
     private int numeroCompetencia;
     private int victorias;
     private int polePosition;
     private int vueltasRapidas;
     private int podios;
+    private int puntaje;
     private ArrayList<PilotoEscuderia> escuderias;
     private ArrayList<AutoPiloto> autos;
 
@@ -20,20 +21,27 @@ public class Piloto extends Persona {
         polePosition = 0;
         vueltasRapidas = 0;
         podios = 0;
+        puntaje = 0;
         escuderias = new ArrayList<PilotoEscuderia>();
         autos = new ArrayList<AutoPiloto>();
     }
 
     public Piloto(String dni, String nombre, String apellido, Pais pais, int numeroCompetencia, int victorias,
-            int polePosition, int vueltasRapidas, int podios) {
+            int polePosition, int vueltasRapidas, int podios, int puntaje) {
         super(dni, nombre, apellido, pais);
         this.numeroCompetencia = numeroCompetencia;
         this.victorias = victorias;
         this.polePosition = polePosition;
         this.vueltasRapidas = vueltasRapidas;
         this.podios = podios;
+        this.puntaje = puntaje;
         escuderias = new ArrayList<PilotoEscuderia>();
         autos = new ArrayList<AutoPiloto>();
+    }
+
+    @Override
+    public int compareTo(Piloto o) {
+        return o.getPuntaje() - puntaje;
     }
 
     // METODOS PARA CONTADORES.
@@ -51,6 +59,10 @@ public class Piloto extends Persona {
 
     public void sumarPodio() {
         podios++;
+    }
+
+    public void sumarPuntos(int valor) {
+        puntaje += valor;
     }
 
     // LISTA DE ESCUDERIAS.
@@ -110,6 +122,14 @@ public class Piloto extends Persona {
 
     public void setPodios(int podios) {
         this.podios = podios;
+    }
+
+    public int getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(int puntaje) {
+        this.puntaje = puntaje;
     }
 
     public ArrayList<PilotoEscuderia> getEscuderias() {
