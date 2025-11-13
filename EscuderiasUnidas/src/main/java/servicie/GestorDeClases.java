@@ -1,6 +1,5 @@
 package servicie;
 
-import exceptions.*;
 import java.util.ArrayList;
 import logica.Auto;
 import logica.Carrera;
