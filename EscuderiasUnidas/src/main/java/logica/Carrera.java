@@ -39,7 +39,12 @@ public class Carrera {
     }
  //metodos agregar
   public void agregarAutoPilotoParticipante(AutoPiloto a){
-      autoPiloto.add(a);
+     try{
+         autoPiloto.add(a);
+      a.agregarCarrera(this);
+     } catch(DatoInvalidoException ex) {
+        System.out.println(ex.getMessage());
+     }
   }  
    
 //metodos sett
