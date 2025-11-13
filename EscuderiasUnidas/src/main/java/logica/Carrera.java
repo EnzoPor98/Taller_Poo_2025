@@ -4,6 +4,7 @@
  */
 package logica;
 import java.util.*;
+import exceptions.*;
 /**
  *
  * @author Gaston PC
@@ -42,20 +43,35 @@ public class Carrera {
   }  
    
 //metodos sett
-    public void setCircuito(Circuito circuito){
+    public void setCircuito(Circuito circuito) throws DatoInvalidoException{
+       if(circuito == null ){
+            throw new DatoInvalidoException("Se necesita un circuito para la carrera.");
+       }
         this.circuito = circuito;
     }
-    public void setPais(Pais pais){
+    public void setPais(Pais pais)throws DatoInvalidoException{
+       if(pais == null ){
+            throw new DatoInvalidoException("Se necesita un pais para la carrera.");
+       }
         this.pais = pais;
     }
     
-    public void setFechaRealizacion(String fechaRealizacion){
+    public void setFechaRealizacion(String fechaRealizacion)throws DatoInvalidoException{
+       if(fechaRealizacion== null || fechaRealizacion.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita un fecha para la carrera");
+       }
         this.fechaRealizacion = fechaRealizacion;
     }
-    public void sethoraRealizacion(String horaRealizacion){
+    public void sethoraRealizacion(String horaRealizacion)throws DatoInvalidoException{
+       if( horaRealizacion== null ||  horaRealizacion.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita una hora para la carrera");
+       }
         this.horaRealizacion = horaRealizacion;
     }
-     public void setNumeroVueltas(int numeroVueltas){
+     public void setNumeroVueltas(int numeroVueltas)throws DatoInvalidoException{
+       if( numeroVueltas < 0){
+            throw new DatoInvalidoException("La carrena no puede tener vueltas negativas");
+       }
         this.numeroVueltas = numeroVueltas;
     }
     
@@ -111,7 +127,10 @@ public class Carrera {
         return resultado;
     }
 
-    public void setResultado(Resultado resultado) {
+    public void setResultado(Resultado resultado)throws DatoInvalidoException{
+       if( resultado== null ){
+            throw new DatoInvalidoException("El resultado no puede estar vacio.");
+       }
         this.resultado = resultado;
     }
     
