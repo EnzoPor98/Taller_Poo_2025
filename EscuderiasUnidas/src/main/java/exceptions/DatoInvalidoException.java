@@ -9,7 +9,14 @@ package exceptions;
  * @author Gaston PC
  */
 public class DatoInvalidoException extends Exception {
-    public DatoInvalidoException (String msj){
-        super(msj);
+
+    private String mensaje;
+
+    public DatoInvalidoException(String msj) {
+        this.mensaje = msj;
+    }
+
+    public String getMensaje() {
+        return mensaje;
     }
 }

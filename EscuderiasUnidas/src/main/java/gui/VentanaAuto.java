@@ -1,6 +1,6 @@
 package gui;
 
-import exceptions.AutoNoEncontradoException;
+import exceptions.DatoInvalidoException;
 import exceptions.FormatoIncorrectoException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -278,7 +278,7 @@ public class VentanaAuto extends javax.swing.JFrame {
                 gc.agregarAuto(auto);
                 reiniciarCampos();
                 cargarTabla();
-            } catch (FormatoIncorrectoException e) {
+            } catch (DatoInvalidoException e) {
                 JOptionPane.showMessageDialog(null, e.getMensaje());
             }
         }
@@ -335,7 +335,7 @@ public class VentanaAuto extends javax.swing.JFrame {
 
             mostrarPilotos();
             JOptionPane.showMessageDialog(this, "Piloto asignado correctamente.");
-        } catch (FormatoIncorrectoException e) {
+        } catch (DatoInvalidoException e) {
             JOptionPane.showMessageDialog(this, e.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotosBtnActionPerformed
@@ -345,8 +345,8 @@ public class VentanaAuto extends javax.swing.JFrame {
             String dni = JOptionPane.showInputDialog("Ingrese el dni del piloto:");
             String fecha = JOptionPane.showInputDialog("Ingrese la fecha de asignacion:");
 
-            if () {
-
+            if (dni.matches("\\d{8}") || fecha.matches("\\d{4}/\\d{2}/\\d{2}")) {
+                throw new FormatoIncorrectoException();
             }
 
             boolean encontrado = false;
@@ -381,15 +381,19 @@ public class VentanaAuto extends javax.swing.JFrame {
             auto.setEscuderia(e);
             escuderiaEtiq.setText("ESCUDERIA: " + e.getNombre());
             cargarTabla();
-        } catch (FormatoIncorrectoException e) {
-            JOptionPane.showMessageDialog(this, e.getMensaje());
+        } catch (DatoInvalidoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
     }//GEN-LAST:event_asignarEscuderiaBtnActionPerformed
 
     private void eliminarEscuderiaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEscuderiaBtnActionPerformed
-        auto.setEscuderia(new Escuderia());
-        escuderiaEtiq.setText("ESCUDERIA: ");
-        cargarTabla();
+        try {
+            auto.setEscuderia(new Escuderia());
+            escuderiaEtiq.setText("ESCUDERIA: ");
+            cargarTabla();
+        } catch (DatoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMensaje());
+        }
     }//GEN-LAST:event_eliminarEscuderiaBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
