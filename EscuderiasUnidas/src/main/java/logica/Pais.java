@@ -4,6 +4,7 @@
  */
 package logica;
 import java.util.*;
+import exceptions.*;
 /**
  *
  * @author Gaston PC
@@ -42,26 +43,47 @@ public class Pais {
     }
     
 //metodo agregar
-public void agregarPersonas(Persona a){
+public void agregarPersonas(Persona a) throws DatoInvalidoException{
+       if(a == null ){
+            throw new DatoInvalidoException("Se necesitan personas.");
+       }
     personas.add(a);
 }       
-public void agregarCarrera(Carrera a){
+public void agregarCarrera(Carrera a) throws DatoInvalidoException{
+       if(a == null ){
+            throw new DatoInvalidoException("Se necesita una carrera.");
+       }
     carreras.add(a);
 }      
-public void agregarCircuito(Circuito a){
+public void agregarCircuito(Circuito a) throws DatoInvalidoException{
+       if(a == null ){
+            throw new DatoInvalidoException("Se necesita un circuito.");
+       }
     circuitos.add(a);
 }    
-public void agregarEscuderia(Escuderia a){
+public void agregarEscuderia(Escuderia a) throws DatoInvalidoException{
+       if(a == null ){
+            throw new DatoInvalidoException("Se necesita una escuderia.");
+       }
     escuderias.add(a);
 }  
 //metodos sett
-    public void setIdPais(int idPais){
+    public void setIdPais(int idPais) throws DatoInvalidoException{
+       if(idPais < 0 ){
+            throw new DatoInvalidoException("Se necesita un id del pais.");
+       }
         this.idPais = idPais;
     }
-    public void setDescripcion(String descripcion){
+    public void setDescripcion(String descripcion)throws DatoInvalidoException{
+       if(descripcion == null || descripcion.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita una descripcion.");
+       }
         this.descripcion = descripcion;
     }
-    public void setNombre(String nombre){
+    public void setNombre(String nombre)throws DatoInvalidoException{
+       if(nombre == null || nombre.trim().isEmpty()){
+            throw new DatoInvalidoException("Se necesita un nombre.");
+       }
         this.nombre = nombre;
     }
     
@@ -86,7 +108,10 @@ public void agregarEscuderia(Escuderia a){
         return circuitos;
     }
 
-    public void setCircuitos(ArrayList<Circuito> circuitos) {
+    public void setCircuitos(ArrayList<Circuito> circuitos) throws DatoInvalidoException{
+       if(circuitos == null){
+            throw new DatoInvalidoException("Se necesitan al menos un circuito.");
+       }
         this.circuitos = circuitos;
     }
 
@@ -94,7 +119,10 @@ public void agregarEscuderia(Escuderia a){
         return escuderias;
     }
 
-    public void setEscuderias(ArrayList<Escuderia> escuderias) {
+    public void setEscuderias(ArrayList<Escuderia> escuderias) throws DatoInvalidoException{
+       if(escuderias== null){
+            throw new DatoInvalidoException("Se necesitan al menos una escuderia.");
+       }
         this.escuderias = escuderias;
     }
 
@@ -102,7 +130,10 @@ public void agregarEscuderia(Escuderia a){
         return carreras;
     }
 
-    public void setCarreras(ArrayList<Carrera> carreras) {
+    public void setCarreras(ArrayList<Carrera> carreras) throws DatoInvalidoException{
+       if( carreras== null){
+            throw new DatoInvalidoException("Se necesitan al menos una carrera.");
+       }
         this.carreras = carreras;
     }
 
@@ -110,7 +141,10 @@ public void agregarEscuderia(Escuderia a){
         return personas;
     }
 
-    public void setPersonas(ArrayList<Persona> personas) {
+    public void setPersonas(ArrayList<Persona> personas) throws DatoInvalidoException{
+       if( personas == null){
+            throw new DatoInvalidoException("Se necesitan al menos una persona.");
+       }
         this.personas = personas;
     }
     

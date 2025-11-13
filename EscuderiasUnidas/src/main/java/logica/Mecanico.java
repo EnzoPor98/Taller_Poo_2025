@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import exceptions.*;
 
 public class Mecanico extends Persona {
 
@@ -25,7 +26,10 @@ public class Mecanico extends Persona {
     }
 
     // LISTA DE ESCUDERIAS.
-    public void agregarEscuderia(Escuderia e) {
+    public void agregarEscuderia(Escuderia e) throws DatoInvalidoException{
+       if(e == null ){
+            throw new DatoInvalidoException("Se necesita una escuderia.");
+       }
         escuderias.add(e);
     }
 
@@ -38,7 +42,10 @@ public class Mecanico extends Persona {
         return especialidad;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
+    public void setEspecialidad(Especialidad especialidad)  throws DatoInvalidoException{
+       if(especialidad == null ){
+            throw new DatoInvalidoException("Se necesita una especialidad.");
+       }
         this.especialidad = especialidad;
     }
 
@@ -46,7 +53,10 @@ public class Mecanico extends Persona {
         return añosExperiencia;
     }
 
-    public void setAñosExperiencia(int añosExperiencia) {
+    public void setAñosExperiencia(int añosExperiencia)  throws DatoInvalidoException{
+       if(añosExperiencia < 0 ){
+            throw new DatoInvalidoException("Se necesitan los años de experiencia.");
+       }
         this.añosExperiencia = añosExperiencia;
     }
 
@@ -54,7 +64,10 @@ public class Mecanico extends Persona {
         return escuderias;
     }
 
-    public void setEscuderias(ArrayList<Escuderia> escuderias) {
+    public void setEscuderias(ArrayList<Escuderia> escuderias)throws DatoInvalidoException{
+       if(escuderias == null ){
+            throw new DatoInvalidoException("Se necesita una escuderia.");
+       }
         this.escuderias = escuderias;
     }
 }
