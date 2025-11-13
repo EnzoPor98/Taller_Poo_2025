@@ -381,8 +381,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "El piloto con el DNI ingresado no existe.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -445,8 +443,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro la escuderia.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }
@@ -515,8 +511,6 @@ public class VentanaPiloto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No se encontro el auto.");
             }
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMensaje());
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMensaje());
         }

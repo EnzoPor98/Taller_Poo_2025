@@ -44,7 +44,7 @@ public class Circuito {
     }
     public void setLongitud(int longitud)throws DatoInvalidoException{
        if(longitud < 0 ){
-            throw new DatoInvalidoException("Se necesita un la longitud del circuito.");
+            throw new DatoInvalidoException("La longitud no puede ser negativa.");
        }
         this.longitud = longitud;
     }
