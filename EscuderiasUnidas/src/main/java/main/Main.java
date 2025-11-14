@@ -5,6 +5,10 @@ import exceptions.FormatoIncorrectoException;
 import logica.*;
 import gui.VentanaInicio;
 import servicie.GestorDeClases;
+/**
+ * Representa un Main . 
+ * crea diveros objetos prueba
+ */
 
 public class Main {
     public static void main(String args[]) {

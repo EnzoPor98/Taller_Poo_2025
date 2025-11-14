@@ -6,8 +6,9 @@ package logica;
 import java.util.*;
 import exceptions.*;
 /**
- *
- * @author Gaston PC
+ * Representa una Escuderia dentro del campeonato. 
+ * Almacena nombre , pais
+ * y la lista de pilotosEscuderia,autos,mecanicos.
  */
 public class Escuderia {
     private String nombre;
@@ -16,6 +17,8 @@ public class Escuderia {
     private ArrayList<Mecanico> mecanicos;
     private Pais pais;
     
+    
+    /** constructor por defecto   */ 
     public Escuderia (){
         this.nombre = "x";
         pilotosEscuderia = new ArrayList<>();
@@ -23,11 +26,8 @@ public class Escuderia {
         mecanicos = new ArrayList<>();
         this.pais = null;
     }
-    
-    
-    
-    
-// constructor parametrizado
+
+/** constructor parametrizado   */ 
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
         pilotosEscuderia = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Escuderia {
         this.pais = pais;
     }
     
-    //metodos agregar 
+    /**metodos agregar */
     public void agregarAuto(Auto a)throws DatoInvalidoException{
        if(a== null ){
             throw new DatoInvalidoException("Se necesita un auto.");
@@ -70,7 +70,7 @@ public class Escuderia {
     
     
     
-//metodos sett
+ /**metodos sett */
     public void setNombre(String nombre)throws DatoInvalidoException{
        if(nombre== null || nombre.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un nombre.");
@@ -86,7 +86,7 @@ public class Escuderia {
     }
     
     
-// metodos gett    
+/**metodos gett */  
     public String getNombre(){
         return nombre;
     }

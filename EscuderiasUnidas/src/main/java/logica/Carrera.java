@@ -6,8 +6,9 @@ package logica;
 import java.util.*;
 import exceptions.*;
 /**
- *
- * @author Gaston PC
+ * Representa una carrera dentro del campeonato. 
+ * Almacena circuito, país, fecha, hora, cantidad de vueltas, AutoPiloto, Resultado 
+ * y la lista de autos/pilotos participantes.
  */
 public class Carrera {
     private String fechaRealizacion;
@@ -18,6 +19,7 @@ public class Carrera {
     private ArrayList<AutoPiloto> autoPiloto;
     private Resultado resultado;
     
+    /** constructor por defecto   */ 
      public Carrera (){
         this.fechaRealizacion = "x";
         this.horaRealizacion = "x";
@@ -28,7 +30,7 @@ public class Carrera {
         autoPiloto = new ArrayList<>();
     }
     
-// constructor parametrizado    
+/** constructor parametrizado   */ 
     public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas, Circuito circuito, Pais pais ){
         this.fechaRealizacion = fechaRealizacion;
         this.horaRealizacion = horaRealizacion;
@@ -37,9 +39,17 @@ public class Carrera {
         this.pais = pais;
         autoPiloto = new ArrayList<>();
     }
- //metodos agregar
+ /**metodos agregar */
   public void agregarAutoPilotoParticipante(AutoPiloto a){
      try{
+         if(a == null){
+             throw new DatoInvalidoException("El participante no puede ser nulo.");
+         }
+          for (AutoPiloto ap : autoPiloto) {
+            if (ap.getAuto().getModelo().equalsIgnoreCase(a.getAuto().getModelo())) {
+                throw new DatoInvalidoException("Ese auto ya está asignado en esta carrera.");
+            }
+        }
          autoPiloto.add(a);
       a.agregarCarrera(this);
      } catch(DatoInvalidoException ex) {
@@ -47,7 +57,7 @@ public class Carrera {
      }
   }  
    
-//metodos sett
+/** metodos sett */
     public void setCircuito(Circuito circuito) throws DatoInvalidoException{
        if(circuito == null ){
             throw new DatoInvalidoException("Se necesita un circuito para la carrera.");
@@ -85,7 +95,7 @@ public class Carrera {
     }
     
     
-// metodos gett    
+/** metodos gett */    
      public Circuito getCircuito(){
          return circuito;
      }
