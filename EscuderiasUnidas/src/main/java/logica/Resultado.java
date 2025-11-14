@@ -17,7 +17,7 @@ public class Resultado {
     private ArrayList<AutoPiloto> participantes;
     private ArrayList<String> vueltas;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto  * @param * @throws *return  */ 
     public Resultado() {
         this.participantes = new ArrayList<AutoPiloto>();
         this.vueltas = new ArrayList<String>();
@@ -46,7 +46,7 @@ public class Resultado {
         ap.getPiloto().sumarVueltasRapidas();
     }
 
-    /** METODOS DE LISTAS.*/
+    /** METODOS DE LISTAS.* @param * @throws *return */
     public void agregarParticipante(AutoPiloto ap) throws DatoInvalidoException{
        if(  ap == null ){
             throw new DatoInvalidoException("Se necesita el participante.");
@@ -69,7 +69,7 @@ public class Resultado {
         vueltas.remove(index);
     }
 
-    /** GETTERS & SETTERS. */
+    /** GETTERS & SETTERS.* @param * @throws *return  */
     public ArrayList<AutoPiloto> getParticipantes() {
         return participantes;
     }

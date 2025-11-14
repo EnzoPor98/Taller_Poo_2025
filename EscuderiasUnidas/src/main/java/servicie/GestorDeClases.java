@@ -22,7 +22,7 @@ public class GestorDeClases {
     private ArrayList<Pais> paises;
     private ArrayList<Piloto> pilotos;
 
-     /** constructor por defecto   */ 
+     /** constructor por defecto  * @param * @throws *return  */ 
     public GestorDeClases() {
         autos = new ArrayList<>();
         carreras = new ArrayList<>();
@@ -33,7 +33,7 @@ public class GestorDeClases {
         pilotos = new ArrayList<>();
     }
 
-    /**  METODOS DE LISTAS. */
+    /**  METODOS DE LISTAS.* @param * @throws *return  */
     public void agregarAuto(Auto a) {
         autos.add(a);
     }
@@ -223,7 +223,7 @@ public class GestorDeClases {
         pilotos.remove(p);
     }
 
-    // GETTERS & SETTERS.
+    /** GETTERS & SETTERS. */
     public ArrayList<Auto> getAutos() {
         return autos;
     }

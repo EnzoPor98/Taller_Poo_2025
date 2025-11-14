@@ -11,7 +11,7 @@ public class Persona {
     private String apellido;
     private Pais pais;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto * @param * @throws *return   */ 
     public Persona() {
         dni = "";
         nombre = "";
@@ -19,7 +19,7 @@ public class Persona {
         pais = null;
     }
 
-    /** constructor parametrizado   */ 
+    /** constructor parametrizado  * @param * @throws *return  */ 
     public Persona(String dni, String nombre, String apellido, Pais pais) {
         this.dni = dni;
         this.nombre = nombre;
@@ -27,7 +27,7 @@ public class Persona {
         this.pais = pais;
     }
 
-    /** GETTERS & SETTERS */
+    /** GETTERS & SETTERS * @param * @throws *return */
     public String getDni() {
         return dni;
     }

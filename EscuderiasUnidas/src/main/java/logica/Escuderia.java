@@ -18,7 +18,7 @@ public class Escuderia {
     private Pais pais;
     
     
-    /** constructor por defecto   */ 
+    /** constructor por defecto * @param * @throws *return   */ 
     public Escuderia (){
         this.nombre = "x";
         pilotosEscuderia = new ArrayList<>();
@@ -27,7 +27,7 @@ public class Escuderia {
         this.pais = null;
     }
 
-/** constructor parametrizado   */ 
+/** constructor parametrizado  * @param * @throws *return  */ 
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
         pilotosEscuderia = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Escuderia {
         this.pais = pais;
     }
     
-    /**metodos agregar */
+    /**metodos agregar * @param * @throws *return */
     public void agregarAuto(Auto a)throws DatoInvalidoException{
        if(a== null ){
             throw new DatoInvalidoException("Se necesita un auto.");
@@ -70,7 +70,7 @@ public class Escuderia {
     
     
     
- /**metodos sett */
+ /**metodos sett * @param * @throws *return */
     public void setNombre(String nombre)throws DatoInvalidoException{
        if(nombre== null || nombre.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un nombre.");
@@ -86,7 +86,7 @@ public class Escuderia {
     }
     
     
-/**metodos gett */  
+/**metodos gett * @param * @throws *return  */  
     public String getNombre(){
         return nombre;
     }

@@ -19,7 +19,7 @@ public class Pais {
     private ArrayList<Carrera> carreras;
     private ArrayList<Persona> personas;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto * @param * @throws *return  */ 
     public Pais (){
         this.idPais = 0;
         this.nombre = "x";
@@ -33,7 +33,7 @@ public class Pais {
     
     
     
-/** constructor parametrizado   */ 
+/** constructor parametrizado * @param * @throws *return   */ 
     public Pais (int idPais, String nombre, String descripcion){
         this.idPais = idPais;
         this.nombre = nombre;
@@ -44,7 +44,7 @@ public class Pais {
         personas= new ArrayList<>();
     }
     
-/**metodos agregar */
+/**metodos agregar * @param * @throws *return */
 public void agregarPersonas(Persona a) throws DatoInvalidoException{
        if(a == null ){
             throw new DatoInvalidoException("Se necesitan personas.");
@@ -69,7 +69,7 @@ public void agregarEscuderia(Escuderia a) throws DatoInvalidoException{
        }
     escuderias.add(a);
 }  
-/**metodos sett */
+/**metodos sett  * @param * @throws *return */
     public void setIdPais(int idPais) throws DatoInvalidoException{
        if(idPais < 0 ){
             throw new DatoInvalidoException("Se necesita un id del pais.");
@@ -90,7 +90,7 @@ public void agregarEscuderia(Escuderia a) throws DatoInvalidoException{
     }
     
     
-/**metodos gett */ 
+/**metodos gett * @param * @throws *return  */ 
     public int getIdPais(){
         return idPais;
     }

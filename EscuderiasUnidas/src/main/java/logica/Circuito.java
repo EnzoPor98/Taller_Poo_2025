@@ -16,7 +16,7 @@ public class Circuito {
     private ArrayList<Carrera> carreras;
     private Pais pais;
     
-    /** constructor por defecto   */ 
+    /** constructor por defecto * @param * @throws *return   */ 
     public Circuito ( ){
         this.nombre = "x";
         this.longitud = 0;
@@ -25,7 +25,7 @@ public class Circuito {
     }
     
     
-/** constructor parametrizado   */ 
+/** constructor parametrizado   * @param * @throws *return */ 
     public Circuito ( String nombre , int longitud, Pais pais){
         this.nombre = nombre;
         this.longitud = longitud;
@@ -33,11 +33,11 @@ public class Circuito {
         this.pais = pais;
     }
     
- /**metodos agregar */
+ /**metodos agregar * @param * @throws *return */
     public void agregarCarrera(Carrera a){
         carreras.add(a);
     }
-/** metodos sett  */ 
+/** metodos sett  * @param * @throws *return  */ 
     public void setNombre(String nombre)throws DatoInvalidoException{
        if(nombre== null || nombre.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un nombre.");
@@ -59,7 +59,7 @@ public class Circuito {
     }
     
     
-/** metodos gett  */  
+/** metodos gett  * @param * @throws *return */  
     public Pais getPais(){
         return pais;
     }
