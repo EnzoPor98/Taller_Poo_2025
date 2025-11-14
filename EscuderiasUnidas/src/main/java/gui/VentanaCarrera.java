@@ -398,7 +398,7 @@ public class VentanaCarrera extends javax.swing.JFrame {
                 if (p != null) {
                     boolean encontrado = false;
                     for (AutoPiloto ap : p.getAutoPiloto()) {
-                        if (ap.getPiloto() == p && ap.getFechaAsignacion().compareTo(fecha) > 0) {
+                        if (ap.getPiloto() == p && ap.getFechaAsignacion().compareTo(fecha) >= 0) {
                             carrera.agregarAutoPilotoParticipante(ap);
                             encontrado = true;
                             mostrarParticipantes();
