@@ -22,7 +22,7 @@ public class GestorDeClases {
     private ArrayList<Pais> paises;
     private ArrayList<Piloto> pilotos;
 
-     /** constructor por defecto  * @param * @throws *return  */ 
+     /** constructor por defecto */ 
     public GestorDeClases() {
         autos = new ArrayList<>();
         carreras = new ArrayList<>();
@@ -33,15 +33,27 @@ public class GestorDeClases {
         pilotos = new ArrayList<>();
     }
 
-    /**  METODOS DE LISTAS.* @param * @throws *return  */
+       /**  
+        * agrega un auto
+        * @param a Auto que se va a gregar
+       */
     public void agregarAuto(Auto a) {
         autos.add(a);
     }
 
+    /**
+     * Elimina un auto de la lista.
+     * @param a Auto que se desea eliminar.
+     */
     public void eliminarAuto(Auto a) {
         autos.remove(a);
     }
 
+    /**
+     * Busca un auto por modelo.
+     * @param modelo Modelo del auto buscado.
+     * @return Auto encontrado o null si no existe.
+     */
     public Auto buscarAuto(String modelo) {
         Auto a = new Auto();
 
@@ -61,22 +73,43 @@ public class GestorDeClases {
         }
     }
 
+        /**
+     * Agrega una carrera.
+     * @param c Carrera que se desea agregar.
+     */
     public void agregarCarrera(Carrera c) {
         carreras.add(c);
     }
 
+    /**
+     * Elimina una carrera.
+     * @param c Carrera a eliminar.
+     */
     public void eliminarCarrera(Carrera c) {
         carreras.remove(c);
     }
 
+     /**
+     * Agrega un circuito.
+     * @param c Circuito que se desea agregar.
+     */
     public void agregarCircuito(Circuito c) {
         circuitos.add(c);
     }
 
+    /**
+     * Elimina un circuito.
+     * @param c Circuito a eliminar.
+     */
     public void eliminarCircuito(Circuito c) {
         circuitos.remove(c);
     }
-
+    /**
+     * Busca una carrera según fecha y hora.
+     * @param d Fecha de realización.
+     * @param h Hora de realización.
+     * @return Carrera encontrada o null.
+     */
     public Carrera buscarCarrera(String d, String h) {
         Carrera c = new Carrera();
 
@@ -96,6 +129,11 @@ public class GestorDeClases {
         }
     }
 
+    /**
+     * Busca un circuito por nombre.
+     * @param nombre Nombre del circuito.
+     * @return Circuito encontrado o null.
+     */
     public Circuito buscarCircuito(String nombre) {
         Circuito c = new Circuito();
 
@@ -115,14 +153,27 @@ public class GestorDeClases {
         }
     }
 
+    /**
+     * Agrega una escudería.
+     * @param e Escudería a agregar.
+     */
     public void agregarEscuderia(Escuderia e) {
         escuderias.add(e);
     }
 
+    /**
+     * Elimina una escudería.
+     * @param e Escudería a eliminar.
+     */
     public void eliminarEscuderia(Escuderia e) {
         escuderias.remove(e);
     }
 
+    /**
+     * Busca una escudería por nombre.
+     * @param nombre Nombre de la escudería.
+     * @return Escudería encontrada o null.
+     */
     public Escuderia buscarEscuderia(String nombre) {
         Escuderia e = new Escuderia();
 
@@ -142,22 +193,43 @@ public class GestorDeClases {
         }
     }
 
+    /**
+     * Agrega un mecánico.
+     * @param m Mecánico a agregar.
+     */
     public void agregarMecanico(Mecanico m) {
         mecanicos.add(m);
     }
 
+    /**
+     * Elimina un mecánico.
+     * @param m Mecánico a eliminar.
+     */
     public void eliminarMecanico(Mecanico m) {
         mecanicos.remove(m);
     }
 
+    /**
+     * Agrega un país.
+     * @param p País a agregar.
+     */
     public void agregarPais(Pais p) {
         paises.add(p);
     }
 
+    /**
+     * Elimina un país.
+     * @param p País a eliminar.
+     */
     public void eliminarPais(Pais p) {
         paises.remove(p);
     }
 
+    /**
+     * Busca un país por ID.
+     * @param id ID del país.
+     * @return País encontrado o null.
+     */
     public Pais buscarPais(int id) {
         Pais p = new Pais();
 
@@ -176,11 +248,20 @@ public class GestorDeClases {
             return null;
         }
     }
-
+    
+    /**
+     * Agrega un piloto.
+     * @param p Piloto a agregar.
+     */
     public void agregarPiloto(Piloto p) {
         pilotos.add(p);
     }
 
+    /**
+     * Busca un piloto por DNI.
+     * @param dni DNI del piloto.
+     * @return Piloto encontrado o null.
+     */
     public Piloto buscarPiloto(String dni) {
         Piloto p = new Piloto();
 
@@ -200,6 +281,11 @@ public class GestorDeClases {
         }
     }
 
+    /**
+     * Busca un mecánico por DNI.
+     * @param dni DNI del mecánico.
+     * @return Mecánico encontrado o null.
+     */
     public Mecanico buscarMecanico(String dni) {
         Mecanico m = new Mecanico();
 
@@ -219,11 +305,14 @@ public class GestorDeClases {
         }
     }
 
+    /**
+     * Elimina un piloto.
+     * @param p Piloto a eliminar.
+     */
     public void eliminarPiloto(Piloto p) {
         pilotos.remove(p);
     }
 
-    /** GETTERS & SETTERS. */
     public ArrayList<Auto> getAutos() {
         return autos;
     }

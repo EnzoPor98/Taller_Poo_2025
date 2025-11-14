@@ -18,7 +18,11 @@ public class Escuderia {
     private Pais pais;
     
     
-    /** constructor por defecto * @param * @throws *return   */ 
+ 
+    /**
+     * Constructor por defecto.
+     * Inicializa los valores base y las listas vacías.
+     */
     public Escuderia (){
         this.nombre = "x";
         pilotosEscuderia = new ArrayList<>();
@@ -27,7 +31,13 @@ public class Escuderia {
         this.pais = null;
     }
 
-/** constructor parametrizado  * @param * @throws *return  */ 
+
+    /**
+     * Constructor parametrizado.
+     *
+     * @param nombre Nombre de la escudería.
+     * @param pais País de origen de la escudería.
+     */
     public Escuderia (String nombre, Pais pais){
         this.nombre = nombre;
         pilotosEscuderia = new ArrayList<>();
@@ -36,41 +46,79 @@ public class Escuderia {
         this.pais = pais;
     }
     
-    /**metodos agregar * @param * @throws *return */
+    /**
+     * Agrega un auto a la escudería.
+     *
+     * @param a Auto a agregar.
+     * @throws DatoInvalidoException Si el auto es nulo.
+     */
     public void agregarAuto(Auto a)throws DatoInvalidoException{
        if(a== null ){
             throw new DatoInvalidoException("Se necesita un auto.");
        }
         autos.add(a);
     }
+    /**
+     * Elimina un auto de la escudería.
+     *
+     * @param a Auto a eliminar.
+     */
     public void borrarAuto(Auto a) {
         autos.remove(a);
     }
+    /**
+     * Agrega un mecánico a la escudería.
+     *
+     * @param m Mecánico a agregar.
+     * @throws DatoInvalidoException Si el mecánico es nulo.
+     */
     public void agregarMecanico(Mecanico a)throws DatoInvalidoException{
        if(a== null ){
             throw new DatoInvalidoException("Se necesita un mecanico.");
        }
         mecanicos.add(a);
     }
+    
+    /**
+     * Elimina un mecánico de la escudería.
+     *
+     * @param m Mecánico a eliminar.
+     */
     public void borrarMecanico(Mecanico m) {
         mecanicos.remove(m);
     }
+    /**
+     * Agrega una asignación piloto–escudería.
+     *
+     * @param pe PilotoEscuderia a agregar.
+     * @throws DatoInvalidoException Si el objeto es nulo.
+     */
     public void agregarPilotoEscuderia(PilotoEscuderia pe) throws DatoInvalidoException{
        if(pe == null ){
             throw new DatoInvalidoException("Se necesita un piloto.");
        }
         pilotosEscuderia.add(pe);
     }
+    /**
+     * Elimina una asignación piloto–escudería.
+     *
+     * @param pe PilotoEscuderia a eliminar.
+     */
     public void borrarPilotoEscuderia(PilotoEscuderia pe) {
         pilotosEscuderia.remove(pe);
     }
+    /** @return Lista de autos de la escudería. */
     public ArrayList<Auto> getAutos() {
         return autos;
     }
-    
-    
-    
- /**metodos sett * @param * @throws *return */
+
+ 
+    /**
+     * Establece el nombre de la escudería.
+     *
+     * @param nombre Nombre a asignar.
+     * @throws DatoInvalidoException Si es nulo o vacío.
+     */
     public void setNombre(String nombre)throws DatoInvalidoException{
        if(nombre== null || nombre.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un nombre.");
@@ -78,6 +126,12 @@ public class Escuderia {
         this.nombre = nombre;
     }
     
+    /**
+     * Establece el país de la escudería.
+     *
+     * @param pais País a asignar.
+     * @throws DatoInvalidoException Si es nulo.
+     */
     public void setPais(Pais pais)throws DatoInvalidoException{
        if(pais== null ){
             throw new DatoInvalidoException("Se necesita un pais.");
@@ -86,18 +140,21 @@ public class Escuderia {
     }
     
     
-/**metodos gett * @param * @throws *return  */  
+/** @return Nombre de la escudería. */
     public String getNombre(){
         return nombre;
     }
+    /** @return Lista de pilotos asignados a la escudería. */
     public ArrayList<PilotoEscuderia> getPilotoEscuderia() {
         return pilotosEscuderia;
     }
     
+    /** @return País de origen de la escudería. */
     public Pais getPais(){
         return pais; 
     }
     
+    /** @return Lista de mecánicos de la escudería. */
     public ArrayList<Mecanico> getMecanicos(){
         return mecanicos;
     }

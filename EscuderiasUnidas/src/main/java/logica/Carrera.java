@@ -19,7 +19,7 @@ public class Carrera {
     private ArrayList<AutoPiloto> autoPiloto;
     private Resultado resultado;
     
-    /** constructor por defecto  * @param * @throws *return  */ 
+    /** constructor por defecto    */ 
      public Carrera (){
         this.fechaRealizacion = "x";
         this.horaRealizacion = "x";
@@ -30,7 +30,16 @@ public class Carrera {
         autoPiloto = new ArrayList<>();
     }
     
-/** constructor parametrizado  * @param * @throws *return  */ 
+
+     /**
+     * Constructor parametrizado.
+     *
+     * @param fechaRealizacion Fecha de la carrera (formato yyyy/MM/dd).
+     * @param horaRealizacion Hora de la carrera (formato HH:mm).
+     * @param numeroVueltas Cantidad de vueltas de la carrera.
+     * @param circuito Circuito donde se realiza la carrera.
+     * @param pais País donde se realiza la carrera.
+     */
     public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas, Circuito circuito, Pais pais ){
         this.fechaRealizacion = fechaRealizacion;
         this.horaRealizacion = horaRealizacion;
@@ -39,7 +48,13 @@ public class Carrera {
         this.pais = pais;
         autoPiloto = new ArrayList<>();
     }
- /**metodos agregar * @param * @throws *return  */
+
+    /**
+     * Agrega un participante (AutoPiloto) a la carrera.
+     * Valida que no exista otro AutoPiloto con el mismo auto.
+     *
+     * @param a Participante AutoPiloto a agregar.
+     */
   public void agregarAutoPilotoParticipante(AutoPiloto a){
      try{
          if(a == null){
@@ -57,20 +72,38 @@ public class Carrera {
      }
   }  
    
-/** metodos sett  * @param * @throws *return */
+
+  /**
+     * Establece el circuito donde se realiza la carrera.
+     *
+     * @param circuito Circuito a asignar.
+     * @throws DatoInvalidoException Si el circuito es nulo.
+     */
     public void setCircuito(Circuito circuito) throws DatoInvalidoException{
        if(circuito == null ){
             throw new DatoInvalidoException("Se necesita un circuito para la carrera.");
        }
         this.circuito = circuito;
     }
+    /**
+     * Establece el país donde se realiza la carrera.
+     *
+     * @param pais País a asignar.
+     * @throws DatoInvalidoException Si el país es nulo.
+     */
     public void setPais(Pais pais)throws DatoInvalidoException{
        if(pais == null ){
             throw new DatoInvalidoException("Se necesita un pais para la carrera.");
        }
         this.pais = pais;
     }
-    
+    /**
+     * Establece la fecha de realización.
+     *
+     * @param fechaRealizacion Fecha (formato yyyy/MM/dd).
+     * @throws DatoInvalidoException Si está vacía.
+     * @throws FormatoIncorrectoException Si no respeta el formato.
+     */
     public void setFechaRealizacion(String fechaRealizacion)throws DatoInvalidoException, FormatoIncorrectoException{
        if(fechaRealizacion== null || fechaRealizacion.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita un fecha para la carrera");
@@ -79,6 +112,13 @@ public class Carrera {
        }
         this.fechaRealizacion = fechaRealizacion;
     }
+    /**
+     * Establece la hora de realización.
+     *
+     * @param horaRealizacion Hora (formato HH:mm).
+     * @throws DatoInvalidoException Si está vacía.
+     * @throws FormatoIncorrectoException Si no respeta el formato.
+     */
     public void sethoraRealizacion(String horaRealizacion)throws DatoInvalidoException, FormatoIncorrectoException{
        if( horaRealizacion== null ||  horaRealizacion.trim().isEmpty()){
             throw new DatoInvalidoException("Se necesita una hora para la carrera");
@@ -87,6 +127,12 @@ public class Carrera {
        }
         this.horaRealizacion = horaRealizacion;
     }
+    /**
+     * Establece la cantidad de vueltas.
+     *
+     * @param numeroVueltas Cantidad de vueltas.
+     * @throws DatoInvalidoException Si el número es negativo.
+     */
      public void setNumeroVueltas(int numeroVueltas)throws DatoInvalidoException{
        if( numeroVueltas < 0){
             throw new DatoInvalidoException("La carrena no puede tener vueltas negativas");
@@ -94,8 +140,7 @@ public class Carrera {
         this.numeroVueltas = numeroVueltas;
     }
     
-    
-/** metodos gett * @param * @throws *return */    
+
      public Circuito getCircuito(){
          return circuito;
      }
@@ -116,6 +161,11 @@ public class Carrera {
          return autoPiloto;
      } 
 
+      /**
+     * Retorna la lista de participantes formateada en un String.
+     *
+     * @return Lista de participantes o mensaje "No hay participantes".
+     */
      public String mostrarParticipantes() {
     if (autoPiloto.isEmpty()) {
         return "No hay participantes";
@@ -146,6 +196,12 @@ public class Carrera {
         return resultado;
     }
 
+    /**
+     * Establece el resultado de la carrera.
+     *
+     * @param resultado Resultado a asignar.
+     * @throws DatoInvalidoException Si el resultado es nulo.
+     */
     public void setResultado(Resultado resultado)throws DatoInvalidoException{
        if( resultado== null ){
             throw new DatoInvalidoException("El resultado no puede estar vacio.");

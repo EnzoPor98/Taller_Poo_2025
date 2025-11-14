@@ -17,7 +17,7 @@ public class Auto {
     private Escuderia escuderia;
     private  ArrayList<AutoPiloto> pilotos;
     
-     /** constructor por defecto * @param * @throws *return */ 
+     /** constructor por defecto */ 
     public Auto() {
         modelo = "x";
         motor = "x";
@@ -27,7 +27,12 @@ public class Auto {
     }
     
     
-/** constructor parametrizado  * @param * @throws *return  */ 
+/**
+     * Constructor parametrizado.
+     * @param modelo Modelo del auto.
+     * @param motor Motor del auto.
+     * @param escuderia Escudería a la que pertenece el auto.
+     */ 
     public Auto (String modelo, String motor , Escuderia escuderia){
         this.modelo = modelo;
         this.motor = motor;
@@ -35,19 +40,31 @@ public class Auto {
         pilotos = new ArrayList<>();
     }
     
-/**metodos agregar  * @param * @throws *return  */
+/**
+     * Agrega una relación Auto-Piloto al auto.
+     * @param a Objeto AutoPiloto que se desea agregar.
+     * @throws DatoInvalidoException Si la relación es nula.
+     */
     public void agregarAutoPiloto(AutoPiloto a)throws DatoInvalidoException{
         if(a == null){
         throw new DatoInvalidoException("El auto debe tener un piloto.");  
         }
         pilotos.add(a);
     }
-    
+
+    /**
+     * Elimina una relación Auto-Piloto del auto.
+     * @param ap AutoPiloto a eliminar.
+     */
     public void borrarPiloto(AutoPiloto ap){
         pilotos.remove(ap);
     }
 
-    /**metodos sett * @param * @throws *return */
+    /**
+     * Establece el modelo del auto.
+     * @param modelo Nuevo modelo.
+     * @throws DatoInvalidoException Si el modelo es vacío o nulo.
+     */
     public void setModelo(String modelo)throws DatoInvalidoException{
        if(modelo == null || modelo.trim().isEmpty()){
             throw new DatoInvalidoException("El modelo del auto no puede estar vacío.");
@@ -60,6 +77,11 @@ public class Auto {
        }
     this.motor = motor;
 }
+    /**
+     * Asigna la escudería del auto.
+     * @param escuderia Escudería a asignar.
+     * @throws DatoInvalidoException Si la escudería es nula.
+     */
     public void setEscuderia(Escuderia escuderia)throws DatoInvalidoException{
        if(escuderia == null){
             throw new DatoInvalidoException("El auto debe pertenecer a una escuderia.");
@@ -67,8 +89,7 @@ public class Auto {
         this.escuderia = escuderia;
     }
     
-    
-/**metodos gett  * @param * @throws *return */  
+
     public String getModelo(){
         return modelo;
     }
