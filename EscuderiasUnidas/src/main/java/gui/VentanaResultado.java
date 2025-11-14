@@ -20,7 +20,6 @@ public class VentanaResultado extends javax.swing.JFrame {
         this.gc = gc;
         this.carrera = carrera;
         this.resultado = carrera.getResultado();
-        this.lista = new ArrayList<AutoPiloto>();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -54,7 +53,8 @@ public class VentanaResultado extends javax.swing.JFrame {
         Object[] fila = new Object[modelo.getColumnCount()];
 
         modelo.setRowCount(0);
-        for (int i = 0; i < 10; i++) {
+        int size = resultado.getParticipantes().size();
+        for (int i = 0; i < size; i++) {
             fila[0] = i + 1;
             fila[1] = resultado.getParticipantes().get(i).getAuto().getEscuderia().getNombre();
             fila[2] = resultado.getParticipantes().get(i).getPiloto().getNombreCompleto();
@@ -236,11 +236,12 @@ public class VentanaResultado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void confirmarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmarResultadoBtnActionPerformed
-        if (resultado.getParticipantes().size() != 10
-                && resultado.getVueltas().size() != 10) {
+        if (resultado.getParticipantes().size() == 10
+                && resultado.getVueltas().size() == 10) {
             try {
                 carrera.setResultado(resultado);
                 resultado.actualizarDatosPilotos();
+                this.setVisible(false);
             } catch (DatoInvalidoException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMensaje());
             }
@@ -251,7 +252,8 @@ public class VentanaResultado extends javax.swing.JFrame {
 
     private void eliminarResultadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarResultadoBtnActionPerformed
         try {
-            carrera.setResultado(new Resultado());
+            resultado = new Resultado();
+            carrera.setResultado(resultado);
             cargarTabla();
         } catch (DatoInvalidoException ex) {
             JOptionPane.showMessageDialog(null, ex.getMensaje());
@@ -259,19 +261,24 @@ public class VentanaResultado extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarResultadoBtnActionPerformed
 
     private void agregarPilotoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarPilotoBtnActionPerformed
-        try {
-            String vuelta = vueltaTxt.getText();
-            if (!vuelta.matches("\\d{2}:\\d{2}:\\d{2}")) {
-                throw new FormatoIncorrectoException();
+        if (resultado.getParticipantes().size() == 10 && resultado.getVueltas().size() == 10) {
+            JOptionPane.showMessageDialog(null, "Solo pueden agregarse 10 resultados.");
+        } else {
+            try {
+                String vuelta = vueltaTxt.getText();
+                if (!vuelta.matches("\\d{2}:\\d{2}:\\d{2}")) {
+                    throw new FormatoIncorrectoException();
+                }
+                int indice = pilotosBox.getSelectedIndex();
+                AutoPiloto ap = carrera.getAutoPiloto().get(indice);
+                resultado.agregarParticipante(ap);
+                resultado.agregarVuelta(vuelta);
+                cargarTabla();
+            } catch (DatoInvalidoException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMensaje());
+            } catch (FormatoIncorrectoException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMensaje());
             }
-            int indice = pilotosBox.getSelectedIndex() - 1;
-            resultado.agregarParticipante(resultado.getCarrera().getAutoPiloto().get(indice));
-            resultado.agregarVuelta(vuelta);
-            cargarTabla();
-        } catch (DatoInvalidoException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMensaje());
-        } catch (FormatoIncorrectoException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMensaje());
         }
     }//GEN-LAST:event_agregarPilotoBtnActionPerformed
 
@@ -281,9 +288,10 @@ public class VentanaResultado extends javax.swing.JFrame {
             if (!index.matches("\\d+")) {
                 throw new FormatoIncorrectoException();
             }
+
             int indice = Integer.parseInt(index);
-            resultado.borrarParticipante(indice);
-            resultado.borrarVuelta(indice);
+            resultado.borrarParticipante(indice - 1);
+            resultado.borrarVuelta(indice - 1);
             cargarTabla();
         } catch (FormatoIncorrectoException ex) {
             JOptionPane.showMessageDialog(null, ex.getMensaje());
