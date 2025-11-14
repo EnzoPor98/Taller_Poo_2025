@@ -394,6 +394,14 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
             String desdeFecha = JOptionPane.showInputDialog("Ingrese fecha de inicio:");
             String hastaFecha = JOptionPane.showInputDialog("Ingrese fecha de fin:");
+
+            for (PilotoEscuderia x : piloto.getEscuderias()) {
+                if (desdeFecha.compareTo(x.getHastaFecha()) <= 0
+                        && x.getDesdeFecha().compareTo(hastaFecha) <= 0) {
+                    throw new DatoInvalidoException("El piloto ya pertenece a una escuderia en esas fechas.");
+                }
+            }
+
             String nombre = JOptionPane.showInputDialog("Ingrese nombre de la escuderia:");
             Escuderia escuderia = gc.buscarEscuderia(nombre);
 
@@ -464,7 +472,7 @@ public class VentanaPiloto extends javax.swing.JFrame {
 
             piloto.agregarAuto(ap);
             auto.agregarAutoPiloto(ap);
-            
+
             mostrarAutos();
         } catch (DatoInvalidoException ex) {
             JOptionPane.showMessageDialog(null, ex.getMensaje());

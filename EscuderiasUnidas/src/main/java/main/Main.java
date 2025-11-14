@@ -7,9 +7,9 @@ import gui.VentanaInicio;
 import servicie.GestorDeClases;
 
 public class Main {
-
+    
     public static void main(String args[]) {
-
+        
         try {
             GestorDeClases gc = new GestorDeClases();
 
@@ -27,25 +27,25 @@ public class Main {
             circuito.setLongitud(500);
             circuito.setPais(pais);
             pais.agregarCircuito(circuito);
-
+            
             Circuito circuito2 = new Circuito();
             circuito2.setNombre("CircuitoUruguayo");
             circuito2.setLongitud(800);
             circuito2.setPais(pais2);
             pais2.agregarCircuito(circuito2);
-
+            
             Circuito circuito3 = new Circuito();
             circuito3.setNombre("CircuitoParaguayo");
             circuito3.setLongitud(250);
             circuito3.setPais(pais3);
             pais3.agregarCircuito(circuito3);
-
+            
             Circuito circuito4 = new Circuito();
             circuito4.setNombre("CircuitoBrasilero");
             circuito4.setLongitud(980);
             circuito4.setPais(pais4);
             pais4.agregarCircuito(circuito4);
-
+            
             Circuito circuito5 = new Circuito();
             circuito5.setNombre("CircuitoChileno");
             circuito5.setLongitud(100);
@@ -57,22 +57,22 @@ public class Main {
             escuderia.setNombre("EscuderiaArgentina");
             escuderia.setPais(pais);
             pais.agregarEscuderia(escuderia);
-
+            
             Escuderia escuderia2 = new Escuderia();
             escuderia2.setNombre("EscuderiaUruguaya");
             escuderia2.setPais(pais2);
             pais2.agregarEscuderia(escuderia2);
-
+            
             Escuderia escuderia3 = new Escuderia();
             escuderia3.setNombre("EscuderiaParaguaya");
             escuderia3.setPais(pais3);
             pais3.agregarEscuderia(escuderia3);
-
+            
             Escuderia escuderia4 = new Escuderia();
             escuderia4.setNombre("EscuderiaBrasilera");
             escuderia4.setPais(pais4);
             pais4.agregarEscuderia(escuderia4);
-
+            
             Escuderia escuderia5 = new Escuderia();
             escuderia5.setNombre("EscuderiaChilena");
             escuderia5.setPais(pais5);
@@ -82,43 +82,43 @@ public class Main {
             Mecanico mecanico = new Mecanico();
             mecanico.setDni("11222333");
             mecanico.setNombre("Enzo");
-            mecanico.setApellido("Portillo 1");
+            mecanico.setApellido("Portillo");
             mecanico.setPais(pais);
             mecanico.setEspecialidad(Especialidad.ELECTRONICA);
             mecanico.setAñosExperiencia(4);
             pais.agregarPersonas(mecanico);
-
+            
             Mecanico mecanico2 = new Mecanico();
             mecanico2.setDni("22333444");
-            mecanico2.setNombre("Ariel");
+            mecanico2.setNombre("Enzo");
             mecanico2.setApellido("Portillo");
             mecanico2.setPais(pais2);
             mecanico2.setEspecialidad(Especialidad.MOTOR);
             mecanico2.setAñosExperiencia(2);
             pais2.agregarPersonas(mecanico2);
-
+            
             Mecanico mecanico3 = new Mecanico();
             mecanico3.setDni("33444555");
             mecanico3.setNombre("Enzo");
-            mecanico3.setApellido("Portillo 3");
+            mecanico3.setApellido("Portillo");
             mecanico3.setPais(pais3);
             mecanico3.setEspecialidad(Especialidad.CHASIS);
             mecanico3.setAñosExperiencia(4);
             pais3.agregarPersonas(mecanico3);
-
+            
             Mecanico mecanico4 = new Mecanico();
             mecanico4.setDni("44555666");
             mecanico4.setNombre("Enzo");
-            mecanico4.setApellido("Portillo 4");
+            mecanico4.setApellido("Portillo");
             mecanico4.setPais(pais4);
             mecanico4.setEspecialidad(Especialidad.NEUMUMATICOS);
             mecanico4.setAñosExperiencia(4);
             pais4.agregarPersonas(mecanico4);
-
+            
             Mecanico mecanico5 = new Mecanico();
             mecanico5.setDni("55666777");
             mecanico5.setNombre("Enzo");
-            mecanico5.setApellido("Portillo 5");
+            mecanico5.setApellido("Portillo");
             mecanico5.setPais(pais5);
             mecanico5.setEspecialidad(Especialidad.ELECTRONICA);
             mecanico5.setAñosExperiencia(4);
@@ -130,55 +130,55 @@ public class Main {
             auto.setMotor("motor1");
             auto.setEscuderia(escuderia);
             escuderia.agregarAuto(auto);
-
+            
             Auto auto2 = new Auto();
             auto2.setModelo("modelo2");
             auto2.setMotor("motor2");
             auto2.setEscuderia(escuderia);
             escuderia.agregarAuto(auto2);
-
+            
             Auto auto3 = new Auto();
             auto3.setModelo("modelo3");
             auto3.setMotor("motor3");
             auto3.setEscuderia(escuderia2);
             escuderia2.agregarAuto(auto3);
-
+            
             Auto auto4 = new Auto();
             auto4.setModelo("modelo4");
             auto4.setMotor("motor4");
             auto4.setEscuderia(escuderia2);
             escuderia2.agregarAuto(auto4);
-
+            
             Auto auto5 = new Auto();
             auto5.setModelo("modelo5");
             auto5.setMotor("motor5");
             auto5.setEscuderia(escuderia3);
             escuderia3.agregarAuto(auto5);
-
+            
             Auto auto6 = new Auto();
             auto6.setModelo("modelo6");
             auto6.setMotor("motor6");
             auto6.setEscuderia(escuderia3);
             escuderia3.agregarAuto(auto6);
-
+            
             Auto auto7 = new Auto();
             auto7.setModelo("modelo7");
             auto7.setMotor("motor7");
             auto7.setEscuderia(escuderia4);
             escuderia4.agregarAuto(auto7);
-
+            
             Auto auto8 = new Auto();
             auto8.setModelo("modelo8");
             auto8.setMotor("motor8");
             auto8.setEscuderia(escuderia4);
             escuderia4.agregarAuto(auto8);
-
+            
             Auto auto9 = new Auto();
             auto9.setModelo("modelo9");
             auto9.setMotor("motor9");
             auto9.setEscuderia(escuderia5);
             escuderia5.agregarAuto(auto9);
-
+            
             Auto auto10 = new Auto();
             auto10.setModelo("modelo10");
             auto10.setMotor("motor10");
@@ -189,86 +189,86 @@ public class Main {
             Piloto piloto = new Piloto();
             piloto.setDni("66777888");
             piloto.setNombre("Ezequiel");
-            piloto.setApellido("Romero 1");
+            piloto.setApellido("Romero");
             piloto.setPais(pais);
             pais.agregarPersonas(piloto);
-
+            
             Piloto piloto2 = new Piloto();
             piloto2.setDni("77888999");
             piloto2.setNombre("Ezequiel");
-            piloto2.setApellido("Romero 2");
+            piloto2.setApellido("Romero");
             piloto2.setPais(pais);
             pais.agregarPersonas(piloto2);
-
+            
             Piloto piloto3 = new Piloto();
             piloto3.setDni("88999000");
             piloto3.setNombre("Ezequiel");
-            piloto3.setApellido("Romero 3");
+            piloto3.setApellido("Romero");
             piloto3.setPais(pais2);
             pais2.agregarPersonas(piloto3);
-
+            
             Piloto piloto4 = new Piloto();
             piloto4.setDni("00111222");
             piloto4.setNombre("Ezequiel");
-            piloto4.setApellido("Romero 4");
+            piloto4.setApellido("Romero");
             piloto4.setPais(pais2);
             pais2.agregarPersonas(piloto4);
-
+            
             Piloto piloto5 = new Piloto();
             piloto5.setDni("99888777");
             piloto5.setNombre("Ezequiel");
-            piloto5.setApellido("Romero 5");
+            piloto5.setApellido("Romero");
             piloto5.setPais(pais3);
             pais3.agregarPersonas(piloto5);
-
+            
             Piloto piloto6 = new Piloto();
             piloto6.setDni("88777666");
             piloto6.setNombre("Ezequiel");
-            piloto6.setApellido("Romero 6");
+            piloto6.setApellido("Romero");
             piloto6.setPais(pais3);
             pais3.agregarPersonas(piloto6);
-
+            
             Piloto piloto7 = new Piloto();
             piloto7.setDni("77666555");
             piloto7.setNombre("Ezequiel");
-            piloto7.setApellido("Romero 7");
+            piloto7.setApellido("Romero");
             piloto7.setPais(pais4);
             pais4.agregarPersonas(piloto7);
-
+            
             Piloto piloto8 = new Piloto();
             piloto8.setDni("66555444");
             piloto8.setNombre("Ezequiel");
-            piloto8.setApellido("Romero 8");
+            piloto8.setApellido("Romero");
             piloto8.setPais(pais4);
             pais4.agregarPersonas(piloto8);
-
+            
             Piloto piloto9 = new Piloto();
             piloto9.setDni("55444333");
             piloto9.setNombre("Ezequiel");
-            piloto9.setApellido("Romero 9");
+            piloto9.setApellido("Romero");
             piloto9.setPais(pais5);
             pais5.agregarPersonas(piloto9);
-
+            
             Piloto piloto10 = new Piloto();
             piloto10.setDni("44333222");
             piloto10.setNombre("Ezequiel");
-            piloto10.setApellido("Romero 10");
+            piloto10.setApellido("Romero");
             piloto10.setPais(pais5);
             pais5.agregarPersonas(piloto10);
 
             // RELACION MECANICO-ESCUDERIA.
             mecanico.agregarEscuderia(escuderia);
             escuderia.agregarMecanico(mecanico);
-
+            
             mecanico2.agregarEscuderia(escuderia2);
             escuderia2.agregarMecanico(mecanico2);
-
+            
             mecanico3.agregarEscuderia(escuderia3);
             escuderia3.agregarMecanico(mecanico3);
-
+            
             mecanico4.agregarEscuderia(escuderia4);
             escuderia4.agregarMecanico(mecanico4);
-
+            
             mecanico5.agregarEscuderia(escuderia5);
             escuderia5.agregarMecanico(mecanico5);
 
@@ -280,7 +280,7 @@ public class Main {
             pe.setHastaFecha("2025/12/13");
             piloto.agregarEscuderia(pe);
             escuderia.agregarPilotoEscuderia(pe);
-
+            
             PilotoEscuderia pe2 = new PilotoEscuderia();
             pe2.setPiloto(piloto2);
             pe2.setEscuderia(escuderia);
@@ -288,7 +288,7 @@ public class Main {
             pe2.setHastaFecha("2025/12/13");
             piloto2.agregarEscuderia(pe2);
             escuderia.agregarPilotoEscuderia(pe2);
-
+            
             PilotoEscuderia pe3 = new PilotoEscuderia();
             pe3.setPiloto(piloto3);
             pe3.setEscuderia(escuderia2);
@@ -296,7 +296,7 @@ public class Main {
             pe3.setHastaFecha("2025/12/13");
             piloto3.agregarEscuderia(pe3);
             escuderia2.agregarPilotoEscuderia(pe3);
-
+            
             PilotoEscuderia pe4 = new PilotoEscuderia();
             pe4.setPiloto(piloto4);
             pe4.setEscuderia(escuderia2);
@@ -304,7 +304,7 @@ public class Main {
             pe4.setHastaFecha("2025/12/13");
             piloto4.agregarEscuderia(pe4);
             escuderia2.agregarPilotoEscuderia(pe4);
-
+            
             PilotoEscuderia pe5 = new PilotoEscuderia();
             pe5.setPiloto(piloto5);
             pe5.setEscuderia(escuderia3);
@@ -312,7 +312,7 @@ public class Main {
             pe5.setHastaFecha("2025/12/13");
             piloto5.agregarEscuderia(pe5);
             escuderia3.agregarPilotoEscuderia(pe5);
-
+            
             PilotoEscuderia pe6 = new PilotoEscuderia();
             pe6.setPiloto(piloto6);
             pe6.setEscuderia(escuderia3);
@@ -320,7 +320,7 @@ public class Main {
             pe6.setHastaFecha("2025/12/13");
             piloto6.agregarEscuderia(pe6);
             escuderia3.agregarPilotoEscuderia(pe6);
-
+            
             PilotoEscuderia pe7 = new PilotoEscuderia();
             pe7.setPiloto(piloto7);
             pe7.setEscuderia(escuderia4);
@@ -328,7 +328,7 @@ public class Main {
             pe7.setHastaFecha("2025/12/13");
             piloto7.agregarEscuderia(pe7);
             escuderia4.agregarPilotoEscuderia(pe7);
-
+            
             PilotoEscuderia pe8 = new PilotoEscuderia();
             pe8.setPiloto(piloto8);
             pe8.setEscuderia(escuderia4);
@@ -336,7 +336,7 @@ public class Main {
             pe8.setHastaFecha("2025/12/13");
             piloto8.agregarEscuderia(pe8);
             escuderia4.agregarPilotoEscuderia(pe8);
-
+            
             PilotoEscuderia pe9 = new PilotoEscuderia();
             pe9.setPiloto(piloto9);
             pe9.setEscuderia(escuderia5);
@@ -344,7 +344,7 @@ public class Main {
             pe9.setHastaFecha("2025/12/13");
             piloto9.agregarEscuderia(pe9);
             escuderia5.agregarPilotoEscuderia(pe9);
-
+            
             PilotoEscuderia pe10 = new PilotoEscuderia();
             pe10.setPiloto(piloto10);
             pe10.setEscuderia(escuderia5);
@@ -360,63 +360,63 @@ public class Main {
             ap.setFechaAsignacion("2025/11/13");
             auto.agregarAutoPiloto(ap);
             piloto.agregarAuto(ap);
-
+            
             AutoPiloto ap2 = new AutoPiloto();
             ap2.setAuto(auto2);
             ap2.setPiloto(piloto2);
             ap2.setFechaAsignacion("2025/11/13");
             auto2.agregarAutoPiloto(ap2);
             piloto2.agregarAuto(ap2);
-
+            
             AutoPiloto ap3 = new AutoPiloto();
             ap3.setAuto(auto3);
             ap3.setPiloto(piloto3);
             ap3.setFechaAsignacion("2025/11/13");
             auto3.agregarAutoPiloto(ap3);
             piloto3.agregarAuto(ap3);
-
+            
             AutoPiloto ap4 = new AutoPiloto();
             ap4.setAuto(auto4);
             ap4.setPiloto(piloto4);
             ap4.setFechaAsignacion("2025/11/13");
             auto4.agregarAutoPiloto(ap4);
             piloto4.agregarAuto(ap4);
-
+            
             AutoPiloto ap5 = new AutoPiloto();
             ap5.setAuto(auto5);
             ap5.setPiloto(piloto5);
             ap5.setFechaAsignacion("2025/11/13");
             auto5.agregarAutoPiloto(ap5);
             piloto5.agregarAuto(ap5);
-
+            
             AutoPiloto ap6 = new AutoPiloto();
             ap6.setAuto(auto6);
             ap6.setPiloto(piloto6);
             ap6.setFechaAsignacion("2025/11/13");
             auto6.agregarAutoPiloto(ap6);
             piloto6.agregarAuto(ap6);
-
+            
             AutoPiloto ap7 = new AutoPiloto();
             ap7.setAuto(auto7);
             ap7.setPiloto(piloto7);
             ap7.setFechaAsignacion("2025/11/13");
             auto7.agregarAutoPiloto(ap7);
             piloto7.agregarAuto(ap7);
-
+            
             AutoPiloto ap8 = new AutoPiloto();
             ap8.setAuto(auto8);
             ap8.setPiloto(piloto8);
             ap8.setFechaAsignacion("2025/11/13");
             auto8.agregarAutoPiloto(ap8);
             piloto8.agregarAuto(ap8);
-
+            
             AutoPiloto ap9 = new AutoPiloto();
             ap9.setAuto(auto9);
             ap9.setPiloto(piloto9);
             ap9.setFechaAsignacion("2025/11/13");
             auto9.agregarAutoPiloto(ap9);
             piloto9.agregarAuto(ap9);
-
+            
             AutoPiloto ap10 = new AutoPiloto();
             ap10.setAuto(auto10);
             ap10.setPiloto(piloto10);
@@ -448,35 +448,38 @@ public class Main {
             Resultado resultado = carrera.getResultado();
             resultado.agregarParticipante(ap);
             resultado.agregarVuelta("01:05:52");
-
+            
             resultado.agregarParticipante(ap7);
             resultado.agregarVuelta("01:12:45");
-
+            
             resultado.agregarParticipante(ap3);
             resultado.agregarVuelta("01:14:07");
-
+            
             resultado.agregarParticipante(ap4);
             resultado.agregarVuelta("01:21:10");
-
+            
             resultado.agregarParticipante(ap5);
             resultado.agregarVuelta("01:27:32");
-
+            
             resultado.agregarParticipante(ap8);
             resultado.agregarVuelta("01:33:44");
-
+            
             resultado.agregarParticipante(ap9);
             resultado.agregarVuelta("01:37:19");
-
+            
             resultado.agregarParticipante(ap10);
             resultado.agregarVuelta("01:49:28");
-
+            
             resultado.agregarParticipante(ap6);
             resultado.agregarVuelta("01:56:55");
-
+            
             resultado.agregarParticipante(ap2);
             resultado.agregarVuelta("01:58:03");
-
+            
             resultado.actualizarDatosPilotos();
+            
+            carrera.setResultado(resultado);
+            resultado.setCarrera(carrera);
 
             // ********** CARGAMOS LOS DATOS DE PRUEBA **********//
             gc.agregarPais(pais);
@@ -520,12 +523,14 @@ public class Main {
             gc.agregarPiloto(piloto9);
             gc.agregarPiloto(piloto10);
             gc.agregarCarrera(carrera);
-
+            
             VentanaInicio ventana = new VentanaInicio(gc);
         } catch (DatoInvalidoException ex) {
             System.out.println(ex.getMensaje());
+            ex.printStackTrace();
         } catch (FormatoIncorrectoException ex) {
             System.out.println(ex.getMensaje());
+            ex.printStackTrace();
         }
     }
 }

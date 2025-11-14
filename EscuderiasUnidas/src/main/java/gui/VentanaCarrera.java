@@ -421,14 +421,18 @@ public class VentanaCarrera extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarParticipanteBtnActionPerformed
 
     private void eliminarParticipanteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarParticipanteBtnActionPerformed
-        String v = JOptionPane.showInputDialog(
-                "Lista de participantes:" + carrera.mostrarParticipantes() + "\n"
-                + "Ingresa el indice del participante que deseas eliminar."
-        );
-        int valor = Integer.parseInt(v);
-        valor--;
-        carrera.getAutoPiloto().remove(valor);
-        mostrarParticipantes();
+        if (carrera.getAutoPiloto().size() != 0) {
+            String v = JOptionPane.showInputDialog(
+                    "Lista de participantes:" + carrera.mostrarParticipantes() + "\n"
+                    + "Ingresa el indice del participante que deseas eliminar."
+            );
+            int valor = Integer.parseInt(v);
+            valor--;
+            carrera.getAutoPiloto().remove(valor);
+            mostrarParticipantes();
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay participantes.");
+        }
     }//GEN-LAST:event_eliminarParticipanteBtnActionPerformed
 
     private void mostrarParticipantesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarParticipantesBtnActionPerformed
