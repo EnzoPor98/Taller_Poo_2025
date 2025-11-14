@@ -13,7 +13,7 @@ public class Mecanico extends Persona {
     private int añosExperiencia;
     private ArrayList<Escuderia> escuderias;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto  * @param * @throws *return  */ 
     public Mecanico() {
         super();
         especialidad = null;
@@ -21,7 +21,7 @@ public class Mecanico extends Persona {
         escuderias = new ArrayList<Escuderia>();
     }
 
-    /** constructor parametrizado   */ 
+    /** constructor parametrizado  * @param * @throws *return  */ 
     public Mecanico(String dni, String nombre, String apellido, Pais pais, Especialidad especialidad,
             int añosExperiencia) {
         super(dni, nombre, apellido, pais);
@@ -30,7 +30,7 @@ public class Mecanico extends Persona {
         escuderias = new ArrayList<Escuderia>();
     }
 
-    /**metodos agregar */
+    /**metodos agregar * @param * @throws *return */
     public void agregarEscuderia(Escuderia e) throws DatoInvalidoException{
        if(e == null ){
             throw new DatoInvalidoException("Se necesita una escuderia.");
@@ -42,7 +42,7 @@ public class Mecanico extends Persona {
         escuderias.remove(e);
     }
 
-    /**GETTERS & SETTERS. */
+    /**GETTERS & SETTERS. * @param * @throws *return  */
     public Especialidad getEspecialidad() {
         return especialidad;
     }

@@ -12,7 +12,7 @@ public class PilotoEscuderia {
     private Piloto piloto;
     private Escuderia escuderia;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto  * @param * @throws *return  */ 
     public PilotoEscuderia() {
         desdeFecha = "";
         hastaFecha = "";
@@ -20,7 +20,7 @@ public class PilotoEscuderia {
         escuderia = null;
     }
 
-    /** constructor parametrizado   */ 
+    /** constructor parametrizado  * @param * @throws *return  */ 
     public PilotoEscuderia(String desdeFecha, String hastaFecha, Piloto piloto, Escuderia escuderia) {
         this.desdeFecha = desdeFecha;
         this.hastaFecha = hastaFecha;
@@ -28,7 +28,7 @@ public class PilotoEscuderia {
         this.escuderia = escuderia;
     }
 
-    /** GETTERS & SETTERS. */
+    /** GETTERS & SETTERS. * @param * @throws *return */
     public String getDesdeFecha() {
         return desdeFecha;
     }

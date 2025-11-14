@@ -17,7 +17,7 @@ public class Auto {
     private Escuderia escuderia;
     private  ArrayList<AutoPiloto> pilotos;
     
-     /** constructor por defecto   */ 
+     /** constructor por defecto * @param * @throws *return */ 
     public Auto() {
         modelo = "x";
         motor = "x";
@@ -27,7 +27,7 @@ public class Auto {
     }
     
     
-/** constructor parametrizado   */ 
+/** constructor parametrizado  * @param * @throws *return  */ 
     public Auto (String modelo, String motor , Escuderia escuderia){
         this.modelo = modelo;
         this.motor = motor;
@@ -35,7 +35,7 @@ public class Auto {
         pilotos = new ArrayList<>();
     }
     
-/**metodos agregar */
+/**metodos agregar  * @param * @throws *return  */
     public void agregarAutoPiloto(AutoPiloto a)throws DatoInvalidoException{
         if(a == null){
         throw new DatoInvalidoException("El auto debe tener un piloto.");  
@@ -47,7 +47,7 @@ public class Auto {
         pilotos.remove(ap);
     }
 
-    /**metodos sett */
+    /**metodos sett * @param * @throws *return */
     public void setModelo(String modelo)throws DatoInvalidoException{
        if(modelo == null || modelo.trim().isEmpty()){
             throw new DatoInvalidoException("El modelo del auto no puede estar vacío.");
@@ -68,7 +68,7 @@ public class Auto {
     }
     
     
-/**metodos gett */  
+/**metodos gett  * @param * @throws *return */  
     public String getModelo(){
         return modelo;
     }

@@ -18,7 +18,7 @@ public class Piloto extends Persona {
     private ArrayList<PilotoEscuderia> escuderias;
     private ArrayList<AutoPiloto> autos;
 
-     /** constructor por defecto   */ 
+     /** constructor por defecto   * @param * @throws *return */ 
     public Piloto() {
         super();
         numeroCompetencia = 0;
@@ -30,7 +30,7 @@ public class Piloto extends Persona {
         autos = new ArrayList<AutoPiloto>();
     }
 
-    /** constructor parametrizado   */ 
+    /** constructor parametrizado * @param * @throws *return   */ 
     public Piloto(String dni, String nombre, String apellido, Pais pais, int numeroCompetencia, int victorias,
             int polePosition, int vueltasRapidas, int podios) {
         super(dni, nombre, apellido, pais);
@@ -43,7 +43,7 @@ public class Piloto extends Persona {
         autos = new ArrayList<AutoPiloto>();
     }
 
-    /** METODOS PARA CONTADORES. */
+    /** METODOS PARA CONTADORES. * @param * @throws *return */
     public void sumarCompetencia() {
         numeroCompetencia++;
     }
@@ -60,7 +60,7 @@ public class Piloto extends Persona {
         podios++;
     }
 
-    /** LISTA DE ESCUDERIAS */
+    /** LISTA DE ESCUDERIAS * @param * @throws *return */
     public void agregarEscuderia(PilotoEscuderia pe) {
         escuderias.add(pe);
     }
@@ -69,7 +69,7 @@ public class Piloto extends Persona {
         escuderias.remove(pe);
     }
 
-    /** LISTA DE AUTOS */
+    /** LISTA DE AUTOS * @param * @throws *return */
     public void agregarAuto(AutoPiloto ap) {
         autos.add(ap);
     }
@@ -78,7 +78,7 @@ public class Piloto extends Persona {
         autos.remove(ap);
     }
 
-    /** GETTERS & SETTERS */
+    /** GETTERS & SETTERS * @param * @throws *return  */
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }

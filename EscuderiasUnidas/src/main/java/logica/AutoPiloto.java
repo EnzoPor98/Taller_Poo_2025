@@ -15,14 +15,14 @@ public class AutoPiloto {
     private Piloto piloto;
     private ArrayList<Carrera> carreras;
 
-    /** constructor por defecto   */ 
+    /** constructor por defecto  * @param * @throws *return  */ 
     public AutoPiloto() {
         fechaAsignacion = "";
         auto = null;
         piloto = null;
         carreras = new ArrayList<Carrera>();
     }
-    /** constructor parametrizado   */ 
+    /** constructor parametrizado * @param * @throws *return    */ 
     public AutoPiloto(String fechaAsignacion, Auto auto, Piloto piloto) {
         this.fechaAsignacion = fechaAsignacion;
         this.auto = auto;
@@ -30,7 +30,7 @@ public class AutoPiloto {
         this.carreras = new ArrayList<Carrera>();
     }
 
-    /**metodos agregar */
+    /**metodos agregar * @param * @throws *return */
     public void agregarCarrera(Carrera c) throws DatoInvalidoException {
          if(c == null){
         throw new DatoInvalidoException("El debe haber un piloto y un auto para la carrera.");  
@@ -42,7 +42,7 @@ public class AutoPiloto {
         carreras.remove(c);
     }
 
-    /**metodos sett y gett */
+    /**metodos sett y gett * @param * @throws *return */
     public String getFechaAsignacion() {
         return fechaAsignacion;
     }

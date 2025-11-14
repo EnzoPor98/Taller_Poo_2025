@@ -19,7 +19,7 @@ public class Carrera {
     private ArrayList<AutoPiloto> autoPiloto;
     private Resultado resultado;
     
-    /** constructor por defecto   */ 
+    /** constructor por defecto  * @param * @throws *return  */ 
      public Carrera (){
         this.fechaRealizacion = "x";
         this.horaRealizacion = "x";
@@ -30,7 +30,7 @@ public class Carrera {
         autoPiloto = new ArrayList<>();
     }
     
-/** constructor parametrizado   */ 
+/** constructor parametrizado  * @param * @throws *return  */ 
     public Carrera (String fechaRealizacion, String horaRealizacion , int numeroVueltas, Circuito circuito, Pais pais ){
         this.fechaRealizacion = fechaRealizacion;
         this.horaRealizacion = horaRealizacion;
@@ -39,7 +39,7 @@ public class Carrera {
         this.pais = pais;
         autoPiloto = new ArrayList<>();
     }
- /**metodos agregar */
+ /**metodos agregar * @param * @throws *return  */
   public void agregarAutoPilotoParticipante(AutoPiloto a){
      try{
          if(a == null){
@@ -57,7 +57,7 @@ public class Carrera {
      }
   }  
    
-/** metodos sett */
+/** metodos sett  * @param * @throws *return */
     public void setCircuito(Circuito circuito) throws DatoInvalidoException{
        if(circuito == null ){
             throw new DatoInvalidoException("Se necesita un circuito para la carrera.");
@@ -95,7 +95,7 @@ public class Carrera {
     }
     
     
-/** metodos gett */    
+/** metodos gett * @param * @throws *return */    
      public Circuito getCircuito(){
          return circuito;
      }
