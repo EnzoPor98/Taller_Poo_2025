@@ -5,8 +5,7 @@
 package exceptions;
 
 /**
- *
- * @author Gaston PC
+ * Representa una exception. 
  */
 public class FormatoIncorrectoException extends Exception {
 

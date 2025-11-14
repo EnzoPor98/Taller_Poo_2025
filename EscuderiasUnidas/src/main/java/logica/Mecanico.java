@@ -2,14 +2,18 @@ package logica;
 
 import java.util.ArrayList;
 import exceptions.*;
-
+/**
+ * Representa un Mecanico dentro del campeonato. 
+ * Almacena especialidad, añosExperiencia
+ * y la lista de escuderias.
+ */
 public class Mecanico extends Persona {
 
     private Especialidad especialidad;
     private int añosExperiencia;
     private ArrayList<Escuderia> escuderias;
 
-    // CONSTRUCTORES.
+    /** constructor por defecto   */ 
     public Mecanico() {
         super();
         especialidad = null;
@@ -17,6 +21,7 @@ public class Mecanico extends Persona {
         escuderias = new ArrayList<Escuderia>();
     }
 
+    /** constructor parametrizado   */ 
     public Mecanico(String dni, String nombre, String apellido, Pais pais, Especialidad especialidad,
             int añosExperiencia) {
         super(dni, nombre, apellido, pais);
@@ -25,7 +30,7 @@ public class Mecanico extends Persona {
         escuderias = new ArrayList<Escuderia>();
     }
 
-    // LISTA DE ESCUDERIAS.
+    /**metodos agregar */
     public void agregarEscuderia(Escuderia e) throws DatoInvalidoException{
        if(e == null ){
             throw new DatoInvalidoException("Se necesita una escuderia.");
@@ -37,7 +42,7 @@ public class Mecanico extends Persona {
         escuderias.remove(e);
     }
 
-    // GETTERS & SETTERS.
+    /**GETTERS & SETTERS. */
     public Especialidad getEspecialidad() {
         return especialidad;
     }

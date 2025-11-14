@@ -2,6 +2,12 @@ package logica;
 
 import java.util.ArrayList;
 import exceptions.*;
+
+/**
+ * Representa un AutoPiloto . 
+ * Almacena fechaAsignacion, auto,piloto
+ * y la lista de carreras.
+ */
 public class AutoPiloto {
 
     private String fechaAsignacion;
@@ -9,14 +15,14 @@ public class AutoPiloto {
     private Piloto piloto;
     private ArrayList<Carrera> carreras;
 
-    // CONSTRUCTORES.
+    /** constructor por defecto   */ 
     public AutoPiloto() {
         fechaAsignacion = "";
         auto = null;
         piloto = null;
         carreras = new ArrayList<Carrera>();
     }
-
+    /** constructor parametrizado   */ 
     public AutoPiloto(String fechaAsignacion, Auto auto, Piloto piloto) {
         this.fechaAsignacion = fechaAsignacion;
         this.auto = auto;
@@ -24,7 +30,7 @@ public class AutoPiloto {
         this.carreras = new ArrayList<Carrera>();
     }
 
-    // LISTA DE CARRERAS.
+    /**metodos agregar */
     public void agregarCarrera(Carrera c) throws DatoInvalidoException {
          if(c == null){
         throw new DatoInvalidoException("El debe haber un piloto y un auto para la carrera.");  
@@ -36,7 +42,7 @@ public class AutoPiloto {
         carreras.remove(c);
     }
 
-    // GETTERS & SETTERS.
+    /**metodos sett y gett */
     public String getFechaAsignacion() {
         return fechaAsignacion;
     }

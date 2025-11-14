@@ -6,8 +6,9 @@ package logica;
 import java.util.*;
 import exceptions.*;
 /**
- *
- * @author Gaston PC
+ * Representa un Pais dentro del campeonato. 
+ * Almacena idpais, nombre, descripcion
+ * y la lista de circuitos, escuderias, carreras, personas
  */
 public class Pais {
     private int idPais;
@@ -18,6 +19,7 @@ public class Pais {
     private ArrayList<Carrera> carreras;
     private ArrayList<Persona> personas;
 
+    /** constructor por defecto   */ 
     public Pais (){
         this.idPais = 0;
         this.nombre = "x";
@@ -31,7 +33,7 @@ public class Pais {
     
     
     
-// constructor parametrizado    
+/** constructor parametrizado   */ 
     public Pais (int idPais, String nombre, String descripcion){
         this.idPais = idPais;
         this.nombre = nombre;
@@ -42,7 +44,7 @@ public class Pais {
         personas= new ArrayList<>();
     }
     
-//metodo agregar
+/**metodos agregar */
 public void agregarPersonas(Persona a) throws DatoInvalidoException{
        if(a == null ){
             throw new DatoInvalidoException("Se necesitan personas.");
@@ -67,7 +69,7 @@ public void agregarEscuderia(Escuderia a) throws DatoInvalidoException{
        }
     escuderias.add(a);
 }  
-//metodos sett
+/**metodos sett */
     public void setIdPais(int idPais) throws DatoInvalidoException{
        if(idPais < 0 ){
             throw new DatoInvalidoException("Se necesita un id del pais.");
@@ -88,7 +90,7 @@ public void agregarEscuderia(Escuderia a) throws DatoInvalidoException{
     }
     
     
-// metodos gett    
+/**metodos gett */ 
     public int getIdPais(){
         return idPais;
     }

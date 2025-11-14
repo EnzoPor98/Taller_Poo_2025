@@ -1,6 +1,12 @@
 package logica;
 import exceptions.*;
 import java.util.ArrayList;
+/**
+ * Representa un Piloto dentro del campeonato. 
+ * Almacena numeroCompetencia, victorias, polePosition, vueltasRapidas, podios
+ * y la lista de escuderias , autos.
+ */
+
 
 public class Piloto extends Persona {
 
@@ -12,7 +18,7 @@ public class Piloto extends Persona {
     private ArrayList<PilotoEscuderia> escuderias;
     private ArrayList<AutoPiloto> autos;
 
-    // CONSTRUCTORES.
+     /** constructor por defecto   */ 
     public Piloto() {
         super();
         numeroCompetencia = 0;
@@ -24,6 +30,7 @@ public class Piloto extends Persona {
         autos = new ArrayList<AutoPiloto>();
     }
 
+    /** constructor parametrizado   */ 
     public Piloto(String dni, String nombre, String apellido, Pais pais, int numeroCompetencia, int victorias,
             int polePosition, int vueltasRapidas, int podios) {
         super(dni, nombre, apellido, pais);
@@ -36,7 +43,7 @@ public class Piloto extends Persona {
         autos = new ArrayList<AutoPiloto>();
     }
 
-    // METODOS PARA CONTADORES.
+    /** METODOS PARA CONTADORES. */
     public void sumarCompetencia() {
         numeroCompetencia++;
     }
@@ -53,7 +60,7 @@ public class Piloto extends Persona {
         podios++;
     }
 
-    // LISTA DE ESCUDERIAS.
+    /** LISTA DE ESCUDERIAS */
     public void agregarEscuderia(PilotoEscuderia pe) {
         escuderias.add(pe);
     }
@@ -62,7 +69,7 @@ public class Piloto extends Persona {
         escuderias.remove(pe);
     }
 
-    // LISTA DE AUTOS.
+    /** LISTA DE AUTOS */
     public void agregarAuto(AutoPiloto ap) {
         autos.add(ap);
     }
@@ -71,7 +78,7 @@ public class Piloto extends Persona {
         autos.remove(ap);
     }
 
-    // GETTERS & SETTERS.
+    /** GETTERS & SETTERS */
     public int getNumeroCompetencia() {
         return numeroCompetencia;
     }

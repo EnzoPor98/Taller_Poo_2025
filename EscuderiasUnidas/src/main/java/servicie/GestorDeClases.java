@@ -8,7 +8,10 @@ import logica.Escuderia;
 import logica.Mecanico;
 import logica.Pais;
 import logica.Piloto;
-
+/**
+ * Representa una base de datos del campeonato. 
+ * crea varias listas utilizadas para el funcionamiento y menejo del programa
+ */
 public class GestorDeClases {
 
     private ArrayList<Auto> autos;
@@ -19,6 +22,7 @@ public class GestorDeClases {
     private ArrayList<Pais> paises;
     private ArrayList<Piloto> pilotos;
 
+     /** constructor por defecto   */ 
     public GestorDeClases() {
         autos = new ArrayList<>();
         carreras = new ArrayList<>();
@@ -29,7 +33,7 @@ public class GestorDeClases {
         pilotos = new ArrayList<>();
     }
 
-    // METODOS DE LISTAS.
+    /**  METODOS DE LISTAS. */
     public void agregarAuto(Auto a) {
         autos.add(a);
     }

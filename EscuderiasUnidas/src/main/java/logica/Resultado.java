@@ -7,8 +7,9 @@ package logica;
 import java.util.ArrayList;
 import exceptions.*;
 /**
- *
- * @author Gaston PC
+ * Representa los Resultados dentro del campeonato. 
+ * Almacena carrera
+ * y la lista de participantes, vueltas.
  */
 public class Resultado {
 
@@ -16,6 +17,7 @@ public class Resultado {
     private ArrayList<AutoPiloto> participantes;
     private ArrayList<String> vueltas;
 
+    /** constructor por defecto   */ 
     public Resultado() {
         this.participantes = new ArrayList<AutoPiloto>();
         this.vueltas = new ArrayList<String>();
@@ -44,7 +46,7 @@ public class Resultado {
         ap.getPiloto().sumarVueltasRapidas();
     }
 
-    // METODOS DE LISTAS.
+    /** METODOS DE LISTAS.*/
     public void agregarParticipante(AutoPiloto ap) throws DatoInvalidoException{
        if(  ap == null ){
             throw new DatoInvalidoException("Se necesita el participante.");
@@ -67,7 +69,7 @@ public class Resultado {
         vueltas.remove(index);
     }
 
-    // GETTERS & SETTERS.
+    /** GETTERS & SETTERS. */
     public ArrayList<AutoPiloto> getParticipantes() {
         return participantes;
     }

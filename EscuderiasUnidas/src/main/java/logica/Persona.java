@@ -1,5 +1,9 @@
 package logica;
 import exceptions.*;
+/**
+ * Representa una Persona. 
+ * Almacena nombre , dni, apellido, pais
+ */
 public class Persona {
 
     private String dni;
@@ -7,7 +11,7 @@ public class Persona {
     private String apellido;
     private Pais pais;
 
-    // CONSTRUCTORES.
+    /** constructor por defecto   */ 
     public Persona() {
         dni = "";
         nombre = "";
@@ -15,6 +19,7 @@ public class Persona {
         pais = null;
     }
 
+    /** constructor parametrizado   */ 
     public Persona(String dni, String nombre, String apellido, Pais pais) {
         this.dni = dni;
         this.nombre = nombre;
@@ -22,7 +27,7 @@ public class Persona {
         this.pais = pais;
     }
 
-    // GETTERS & SETTERS.
+    /** GETTERS & SETTERS */
     public String getDni() {
         return dni;
     }

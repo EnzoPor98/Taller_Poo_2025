@@ -1,5 +1,10 @@
 package logica;
 import exceptions.*;
+/**
+ * Representa un PilotoEscuderia.
+ * Almacena desdeFecha, hastaFecha
+ * y la lista de escuderia.
+ */
 
 public class PilotoEscuderia {
     private String desdeFecha;
@@ -7,7 +12,7 @@ public class PilotoEscuderia {
     private Piloto piloto;
     private Escuderia escuderia;
 
-    // CONSTRUCTORES.
+    /** constructor por defecto   */ 
     public PilotoEscuderia() {
         desdeFecha = "";
         hastaFecha = "";
@@ -15,6 +20,7 @@ public class PilotoEscuderia {
         escuderia = null;
     }
 
+    /** constructor parametrizado   */ 
     public PilotoEscuderia(String desdeFecha, String hastaFecha, Piloto piloto, Escuderia escuderia) {
         this.desdeFecha = desdeFecha;
         this.hastaFecha = hastaFecha;
@@ -22,7 +28,7 @@ public class PilotoEscuderia {
         this.escuderia = escuderia;
     }
 
-    // GETTERS & SETTERS.
+    /** GETTERS & SETTERS. */
     public String getDesdeFecha() {
         return desdeFecha;
     }
